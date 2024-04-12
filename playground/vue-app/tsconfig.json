@@ -1,0 +1,4 @@
+{
+  "extends": "@minko-fe/tsconfig/tsconfig.app.json",
+  "exclude": ["dist"]
+}

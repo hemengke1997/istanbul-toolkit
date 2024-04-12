@@ -1,0 +1,10 @@
+{
+  "extends": "@minko-fe/tsconfig/tsconfig.project",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules/*", "dist/*", "./src/**/*.svelte", "./src/components/*"]
+}

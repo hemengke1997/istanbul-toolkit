@@ -1,0 +1,50 @@
+{
+  "name": "istanbul-widget-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "istanbul tools",
+  "type": "module",
+  "keywords": [
+    "istanbul"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemengke1997/istanbul-widget.git"
+  },
+  "author": "hemengke <https://github.com/hemengke1997>",
+  "scripts": {
+    "dev": "turbo dev --filter=\"./packages/*\"",
+    "build": "turbo build --filter=\"./packages/*\"",
+    "lint": "turbo lint --filter=\"./packages/*\"",
+    "commitlint": "commitlint -e",
+    "up": "taze -I -w",
+    "bump": "changeset",
+    "version": "changeset version && changeset tag",
+    "report": "nyc report --excludeAfterRemap=false"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^18.6.1",
+    "@minko-fe/commitlint-config": "^2.0.7",
+    "@minko-fe/eslint-config": "^2.2.2",
+    "@minko-fe/prettier-config": "^2.2.0",
+    "@minko-fe/tsconfig": "^2.0.8",
+    "conventional-changelog-cli": "^4.1.0",
+    "eslint": "^8.57.0",
+    "nyc": "^15.1.0",
+    "simple-git-hooks": "^2.11.1",
+    "taze": "^0.11.4",
+    "tsup": "^6.7.0",
+    "turbo": "^1.13.0",
+    "typescript": "^5.4.3"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npm run commitlint",
+    "pre-commit": "npm run lint"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
