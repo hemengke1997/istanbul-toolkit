@@ -1,8 +1,8 @@
 {
-  "name": "istanbul-widget-monorepo",
+  "name": "istanbul-toolkit",
   "version": "0.0.0",
   "private": true,
-  "description": "istanbul tools",
+  "description": "istanbul toolkit",
   "type": "module",
   "keywords": [
     "istanbul"
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hemengke1997/istanbul-widget.git"
+    "url": "git+https://github.com/hemengke1997/istanbul-toolkit.git"
   },
   "author": "hemengke <https://github.com/hemengke1997>",
   "scripts": {

@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "main": "./dist/istanbul-widget.min.js",
   "module": "./dist/istanbul-widget.esm.js",
