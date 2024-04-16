@@ -8,6 +8,13 @@ import '@/styles/global.css'
 const default_interval = 60
 const default_min_interval = 10
 
+export const enum WIDGET_STORAGE {
+  ENABLE_AUTO_REPORT = 'enable_auto_report',
+  REPORT_INTERVAL = 'report_interval',
+  REPORT_ON_PAGELEAVE = 'report_on_pageleave',
+  REPORTER = 'reporter',
+}
+
 export class IstanbulWidget {
   public version: string = __VERSION__
   public isInited: boolean = false
@@ -114,10 +121,10 @@ export class IstanbulWidget {
         reporter: '',
       }
 
-      const enable_auto_report = getStorage('enable_auto_report', originData.enable_auto_report)
-      const report_interval = getStorage('report_interval', originData.report_interval)
-      const report_on_pageleave = getStorage('report_on_pageleave', originData.report_on_pageleave)
-      const reporter = getStorage('reporter', originData.reporter)
+      const enable_auto_report = getStorage(WIDGET_STORAGE.ENABLE_AUTO_REPORT, originData.enable_auto_report)
+      const report_interval = getStorage(WIDGET_STORAGE.REPORT_INTERVAL, originData.report_interval)
+      const report_on_pageleave = getStorage(WIDGET_STORAGE.REPORT_ON_PAGELEAVE, originData.report_on_pageleave)
+      const reporter = getStorage(WIDGET_STORAGE.REPORTER, originData.reporter)
 
       const setConfigToLocal = (data: Config) => {
         Object.keys(data).forEach((key) => {

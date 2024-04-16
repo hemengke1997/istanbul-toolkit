@@ -17,6 +17,7 @@
     "dev": "turbo dev --filter=\"./packages/*\"",
     "build": "turbo build --filter=\"./packages/*\"",
     "lint": "turbo lint --filter=\"./packages/*\"",
+    "prepare": "simple-git-hooks",
     "commitlint": "commitlint -e",
     "up": "taze -I -w",
     "bump": "changeset",
