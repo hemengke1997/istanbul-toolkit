@@ -82,7 +82,7 @@ function Draggable(props: DraggableProps) {
 
   return (
     <div ref={draggableRef} className={'iw-w-fit iw-pointer-events-auto'}>
-      <div className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-bg-[#525252] iw-p-2 iw-text-xs iw-shadow'>
+      <div className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-bg-background iw-p-2 iw-text-xs iw-shadow'>
         {children}
         <div ref={handleRef} className='iw-icon-[iconamoon--move-fill] iw-cursor-move iw-text-lg iw-text-white'></div>
       </div>
