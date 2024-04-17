@@ -9,6 +9,10 @@ export default defineConfig((env) => ({
     istanbulWidget({
       enabled: !(env.mode === 'production'),
       istanbulWidgetConfig: {
+        defaultPosition: {
+          x: 0,
+          y: 100,
+        },
         report: {
           async onAction(coverage) {
             window.__report(coverage)

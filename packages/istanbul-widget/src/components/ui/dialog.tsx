@@ -37,7 +37,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "iw-fixed iw-left-[50%] iw-top-[50%] iw-z-50 iw-grid iw-w-[80%] iw-max-w-lg iw-translate-x-[-50%] iw-translate-y-[-50%] iw-gap-4 iw-border iw-bg-background iw-p-6 iw-shadow-lg iw-duration-200 data-[state=open]:iw-animate-in data-[state=closed]:iw-animate-out data-[state=closed]:iw-fade-out-0 data-[state=open]:iw-fade-in-0 data-[state=closed]:iw-zoom-out-95 data-[state=open]:iw-zoom-in-95 data-[state=closed]:iw-slide-out-to-left-1/2 data-[state=closed]:iw-slide-out-to-top-[48%] data-[state=open]:iw-slide-in-from-left-1/2 data-[state=open]:iw-slide-in-from-top-[48%] iw-rounded-lg",
+        "iw-fixed iw-left-[50%] iw-top-[50%] iw-z-50 iw-grid iw-w-[80%] iw-max-w-lg iw-translate-x-[-50%] iw-translate-y-[-50%] iw-space-4 iw-border iw-bg-background iw-p-6 iw-shadow-lg iw-duration-200 data-[state=open]:iw-animate-in data-[state=closed]:iw-animate-out data-[state=closed]:iw-fade-out-0 data-[state=open]:iw-fade-in-0 data-[state=closed]:iw-zoom-out-95 data-[state=open]:iw-zoom-in-95 data-[state=closed]:iw-slide-out-to-left-1/2 data-[state=closed]:iw-slide-out-to-top-[48%] data-[state=open]:iw-slide-in-from-left-1/2 data-[state=open]:iw-slide-in-from-top-[48%] iw-rounded-lg",
         className
       )}
       {...props}

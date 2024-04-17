@@ -21,6 +21,10 @@ export class IstanbulWidget {
   public option: Required<IstanbulWidgetOptions> = {
     theme: 'dark',
     target: document.body,
+    defaultPosition: {
+      x: 0,
+      y: 0,
+    },
     onReady: () => {},
     report: {
       auto: {
@@ -84,8 +88,8 @@ export class IstanbulWidget {
 
   private _initComponent() {
     if (!$.one(`#${ISTANBUL_WIDGET_ID}`)) {
-      const btnX = getStorage('btn_x') * 1
-      const btnY = getStorage('btn_y') * 1
+      const btnX = getStorage('btn_x', this.option.defaultPosition.x) * 1
+      const btnY = getStorage('btn_y', this.option.defaultPosition.y) * 1
 
       let target: HTMLElement = document.body
       if (typeof this.option.target === 'string') {
@@ -138,6 +142,10 @@ export class IstanbulWidget {
         position: {
           x: btnX,
           y: btnY,
+        },
+        defaultPosition: {
+          x: this.option.defaultPosition.x!,
+          y: this.option.defaultPosition.y!,
         },
         show: true,
         min_internal: autoObj.minInterval!,

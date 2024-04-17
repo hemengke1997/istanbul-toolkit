@@ -57,6 +57,10 @@ type CoreProps = {
     x: number
     y: number
   }
+  defaultPosition: {
+    x: number
+    y: number
+  }
   show: boolean
   min_internal: number
   onConfigChanged: (c: Config) => void
@@ -69,6 +73,7 @@ type CoreProps = {
 function Core(props: CoreProps) {
   const {
     position,
+    defaultPosition,
     show,
     min_internal,
     onConfigChanged,
@@ -222,8 +227,8 @@ function Core(props: CoreProps) {
         )}
       >
         <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
-          <Draggable position={position}>
-            <div className='iw-flex iw-gap-x-2'>
+          <Draggable position={position} defaultPosition={defaultPosition}>
+            <div className='iw-flex iw-space-x-2'>
               <Button size='sm' onClick={debouncedReport}>
                 上报
               </Button>
@@ -240,8 +245,8 @@ function Core(props: CoreProps) {
               <DialogTitle>上报设置</DialogTitle>
             </DialogHeader>
 
-            <div className='iw-flex iw-flex-col iw-gap-3 iw-py-2'>
-              <div className='iw-flex iw-items-center iw-gap-4'>
+            <div className='iw-flex iw-flex-col iw-space-y-3 iw-py-4'>
+              <div className='iw-flex iw-items-center iw-space-x-4'>
                 <Label className={'iw-whitespace-nowrap iw-flex-none'}>
                   上报人 {requireReporter && <span className={'iw-text-red-600'}>*</span>}
                 </Label>
@@ -254,7 +259,7 @@ function Core(props: CoreProps) {
                   onChange={(e) => setDynamicConfig({ reporter: e.target.value })}
                 ></Input>
               </div>
-              <div className='iw-flex iw-items-center iw-gap-4'>
+              <div className='iw-flex iw-items-center iw-space-x-4'>
                 <Label>自动上报</Label>
                 <Switch
                   checked={dynamicConfig.enable_auto_report}
@@ -262,7 +267,7 @@ function Core(props: CoreProps) {
                 />
               </div>
               {dynamicConfig.enable_auto_report && (
-                <div className='iw-flex iw-items-center iw-gap-4'>
+                <div className='iw-flex iw-items-center iw-space-x-4'>
                   <Label className='iw-whitespace-nowrap'>自动上报间隔</Label>
                   <Input
                     type='number'
@@ -273,7 +278,7 @@ function Core(props: CoreProps) {
                   />
                 </div>
               )}
-              <div className='iw-flex iw-items-center iw-gap-4'>
+              <div className='iw-flex iw-items-center iw-space-x-4'>
                 <Label>离开页面时上报</Label>
                 <Switch
                   checked={dynamicConfig.report_on_pageleave}
@@ -282,7 +287,7 @@ function Core(props: CoreProps) {
               </div>
             </div>
 
-            <DialogFooter className={'iw-gap-y-2'}>
+            <DialogFooter className={'iw-flex'}>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant='destructive'>重置设置</Button>
@@ -316,6 +321,7 @@ function Core(props: CoreProps) {
                 onClick={() => {
                   onSubmit(dynamicConfig)
                 }}
+                className={'iw-mb-2'}
               >
                 保存
               </Button>

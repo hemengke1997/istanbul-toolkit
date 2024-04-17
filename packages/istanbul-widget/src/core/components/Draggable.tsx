@@ -1,3 +1,4 @@
+import { useUpdateEffect } from '@minko-fe/react-hook'
 import { useDraggable } from '@neodrag/react'
 import { type PropsWithChildren, memo, useEffect, useRef, useState } from 'react'
 import { setStorage } from '@/utils/tool'
@@ -7,10 +8,14 @@ type DraggableProps = PropsWithChildren<{
     x: number
     y: number
   }
+  defaultPosition: {
+    x: number
+    y: number
+  }
 }>
 
 function Draggable(props: DraggableProps) {
-  const { children, position: positionProp } = props
+  const { children, position: positionProp, defaultPosition } = props
 
   const draggableRef = useRef<HTMLDivElement>(null)
   const handleRef = useRef<HTMLDivElement>(null)
@@ -42,16 +47,21 @@ function Draggable(props: DraggableProps) {
     if (x + btn.offsetWidth > docWidth) {
       x = docWidth - btn.offsetWidth
     }
+
     if (y + btn.offsetHeight > docHeight) {
       y = docHeight - btn.offsetHeight
     }
 
     if (x < 0) {
-      x = 0
+      x = defaultPosition.x
     }
 
     if (y >= docHeight - btn.offsetHeight) {
       y = docHeight - btn.offsetHeight - 20
+    }
+
+    if (y < 0) {
+      y = defaultPosition.y
     }
 
     return [x, y]
@@ -64,7 +74,7 @@ function Draggable(props: DraggableProps) {
     }
   }, [draggableRef.current])
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     const { x, y } = position
     setStorage('btn_x', `${x}`)
     setStorage('btn_y', `${y}`)
@@ -72,7 +82,7 @@ function Draggable(props: DraggableProps) {
 
   return (
     <div ref={draggableRef} className={'iw-w-fit iw-pointer-events-auto'}>
-      <div className='iw-flex iw-items-center iw-gap-x-2 iw-rounded-md iw-bg-neutral-600 iw-p-2 iw-text-xs iw-shadow'>
+      <div className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-bg-[#525252] iw-p-2 iw-text-xs iw-shadow'>
         {children}
         <div ref={handleRef} className='iw-icon-[iconamoon--move-fill] iw-cursor-move iw-text-lg iw-text-white'></div>
       </div>

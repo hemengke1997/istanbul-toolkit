@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "main": "./dist/istanbul-widget.min.js",
   "module": "./dist/istanbul-widget.esm.js",
@@ -37,7 +37,9 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.24.4",
     "@iconify/tailwind": "^0.1.4",
+    "@rollup/plugin-babel": "^6.0.4",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",

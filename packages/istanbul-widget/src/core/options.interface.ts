@@ -8,6 +8,17 @@ export interface IstanbulWidgetOptions {
    */
   target?: string | HTMLElement
   /**
+   * 按钮默认位置
+   * @default
+   * ```js
+   * { x: 0, y: 0 }
+   * ```
+   */
+  defaultPosition?: {
+    x?: number
+    y?: number
+  }
+  /**
    * 插件就绪时回调
    */
   onReady?: () => void

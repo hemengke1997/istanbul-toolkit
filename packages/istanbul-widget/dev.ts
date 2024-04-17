@@ -1,6 +1,10 @@
 import IstanbulWidget from './src/istanbul-widget'
 
 new IstanbulWidget({
+  defaultPosition: {
+    x: 20,
+    y: 100,
+  },
   report: {
     onAction: async (coverage) => {
       console.log('上报', coverage)

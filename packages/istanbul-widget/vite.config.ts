@@ -1,8 +1,9 @@
+import { babel } from '@rollup/plugin-babel'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { visualizer as rollupVisualizer } from 'rollup-plugin-visualizer'
 import { minify } from 'terser'
-import { type PluginOption, defineConfig } from 'vite'
+import { type BuildOptions, type PluginOption, defineConfig } from 'vite'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import dts from 'vite-plugin-dts'
 import pkg from './package.json'
@@ -22,6 +23,7 @@ function visualizer() {
 function minifyBundles(): PluginOption {
   return {
     name: 'minifyBundles',
+    enforce: 'post',
     async generateBundle(_, bundle) {
       for (const key in bundle) {
         if (bundle[key].type === 'chunk' && key.endsWith('.js')) {
@@ -73,7 +75,22 @@ export default defineConfig((env) => {
       rollupOptions: {
         treeshake: true,
         input: undefined,
-      },
+        plugins: [
+          babel({
+            extensions: ['.js', '.ts', '.tsx'],
+            babelHelpers: 'bundled',
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: false,
+                  targets: 'defaults',
+                },
+              ],
+            ],
+          }),
+        ],
+      } as BuildOptions['rollupOptions'],
     },
   }
 })
