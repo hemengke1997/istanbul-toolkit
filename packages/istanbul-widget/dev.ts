@@ -2,7 +2,7 @@ import IstanbulWidget from './src/istanbul-widget'
 
 new IstanbulWidget({
   defaultPosition: {
-    x: 0,
+    x: -100,
     y: 100,
   },
   report: {

@@ -10,6 +10,7 @@ type DraggableProps = PropsWithChildren<{
   defaultPosition: Position
   dragOptions: DragOptions
   float: IstanbulWidgetOptions['float']
+  className?: string
 }>
 
 const IOS_SAFE_AREA = 20
@@ -22,7 +23,7 @@ const bounds = {
 }
 
 function Draggable(props: DraggableProps) {
-  const { children, position: positionProp, defaultPosition, dragOptions, float } = props
+  const { children, position: positionProp, defaultPosition, dragOptions, float, className } = props
 
   const handleRef = useRef<HTMLDivElement>(null)
   const draggableRef = useRef<HTMLDivElement>(null)
@@ -64,22 +65,31 @@ function Draggable(props: DraggableProps) {
     },
   })
 
+  const getDocSize = useMemoizedFn(() => {
+    const docWidth = Math.max(document.documentElement.offsetWidth, window.innerWidth)
+    const docHeight = Math.max(document.documentElement.offsetHeight, window.innerHeight)
+    return {
+      docWidth,
+      docHeight,
+    }
+  })
+
   const fixFloatPosition = useMemoizedFn((position: Position) => {
     if (float) {
       float.offsetX ??= 0
       const { x, y } = position
-      const windowWidth = window.innerWidth
+      const { docWidth } = getDocSize()
       const w = handleRef.current!.getBoundingClientRect().width
-      const newX = x + w / 2 > windowWidth / 2 ? windowWidth - w - float.offsetX : float.offsetX
-      const newY = y <= bounds.top ? bounds.top : y
+      let newX = docWidth && x + w / 2 > docWidth / 2 ? docWidth - w - float.offsetX : float.offsetX
+      newX = Math.max(newX, float.offsetX)
+      const newY = Math.max(y, bounds.top)
       return { x: newX, y: newY }
     }
     return position
   })
 
   const getButtonSafeAreaXY = useMemoizedFn((x: number, y: number) => {
-    const docWidth = Math.max(document.documentElement.offsetWidth, window.innerWidth)
-    const docHeight = Math.max(document.documentElement.offsetHeight, window.innerHeight)
+    const { docWidth, docHeight } = getDocSize()
 
     const btn = draggableRef.current!
     if (x + btn.offsetWidth > docWidth) {
@@ -91,15 +101,15 @@ function Draggable(props: DraggableProps) {
     }
 
     if (x < 0) {
-      x = defaultPosition.x
+      x = Math.max(defaultPosition.x, bounds.left)
     }
 
     if (y >= docHeight - btn.offsetHeight) {
-      y = docHeight - btn.offsetHeight - IOS_SAFE_AREA
+      y = docHeight - btn.offsetHeight - bounds.bottom
     }
 
     if (y < 0) {
-      y = defaultPosition.y
+      y = Math.max(defaultPosition.y, bounds.top)
     }
 
     return [x, y]
@@ -123,7 +133,9 @@ function Draggable(props: DraggableProps) {
       ref={draggableRef}
       className={cn('iw-w-fit iw-pointer-events-auto', !dragging ? 'iw-transition-transform' : '')}
     >
-      <div ref={handleRef}>{children}</div>
+      <div ref={handleRef} className={className}>
+        {children}
+      </div>
     </div>
   )
 }

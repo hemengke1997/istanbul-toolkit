@@ -236,6 +236,7 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
                 },
               }}
               float={float}
+              className='iw-rounded-full iw-overflow-hidden'
             >
               <PopoverTrigger
                 asChild
@@ -246,15 +247,14 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
                   }
                 }}
               >
-                <div className='iw-rounded-full iw-overflow-hidden'>
-                  <div
-                    className='iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2'
-                    style={{
-                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                    }}
-                  >
-                    <div className='iw-icon-[vscode-icons--file-type-testjs] iw-w-full iw-h-full iw-cursor-pointer'></div>
-                  </div>
+                <div
+                  className='iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2'
+                  style={{
+                    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+                  }}
+                  id='istanbul-widget-icon'
+                >
+                  <div className='iw-icon-[vscode-icons--file-type-testjs] iw-w-full iw-h-full iw-cursor-pointer'></div>
                 </div>
               </PopoverTrigger>
             </Draggable>
