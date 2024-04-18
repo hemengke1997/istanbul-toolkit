@@ -1,7 +1,6 @@
 import { toNumber } from '@minko-fe/lodash-pro'
 import { useDebounceFn, useSetState, useUpdateEffect } from '@minko-fe/react-hook'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import ReactDOM from 'react-dom/client'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +16,7 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Switch } from '@/components/ui/switch'
 import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
@@ -24,43 +24,16 @@ import { cn } from '@/components/utils'
 import { $ } from '@/utils/query'
 import { ISTANBUL_WIDGET_ID } from '@/utils/tool'
 import Draggable from './components/Draggable'
-import { type Config, type IstanbulWidgetOptions } from './options.interface'
+import { type Config, type IstanbulWidgetOptions, type Position } from './options.interface'
 
-export type CompInstance = {
-  destroy: () => void
-  update: (newProps: CoreProps) => void
-}
-
-export function render({ target, ...coreProps }: { target: HTMLElement } & CoreProps): CompInstance {
-  const container = document.createElement('div')
-  container.id = ISTANBUL_WIDGET_ID
-  target.appendChild(container)
-  const reactRoot = ReactDOM.createRoot(container)
-  reactRoot.render(<Core {...coreProps} />)
-
-  return {
-    destroy() {
-      reactRoot.unmount()
-    },
-    update(newProps: CoreProps) {
-      reactRoot.render(<Core {...coreProps} {...newProps} />)
-    },
-  }
-}
-
-type CoreProps = {
+export type IstanbulWidgetProps = {
   theme: IstanbulWidgetOptions['theme']
+  float: IstanbulWidgetOptions['float']
   onAction: IstanbulWidgetOptions['report']['onAction']
   beforeAction?: IstanbulWidgetOptions['report']['beforeAction']
   afterAction?: IstanbulWidgetOptions['report']['afterAction']
-  position: {
-    x: number
-    y: number
-  }
-  defaultPosition: {
-    x: number
-    y: number
-  }
+  position: Position
+  defaultPosition: Position
   show: boolean
   min_internal: number
   onConfigChanged: (c: Config) => void
@@ -70,7 +43,7 @@ type CoreProps = {
   requireReporter: boolean
 }
 
-function Core(props: CoreProps) {
+export default function IstanbulWidget(props: IstanbulWidgetProps) {
   const {
     position,
     defaultPosition,
@@ -85,6 +58,7 @@ function Core(props: CoreProps) {
     afterAction,
     theme,
     requireReporter,
+    float,
   } = props
 
   const { toast } = useToast()
@@ -218,6 +192,8 @@ function Core(props: CoreProps) {
     }
   }, [])
 
+  const dragging = useRef<boolean>(false)
+
   return (
     <>
       <div
@@ -227,20 +203,64 @@ function Core(props: CoreProps) {
         )}
       >
         <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
-          <Draggable position={position} defaultPosition={defaultPosition}>
-            <div className='iw-flex iw-space-x-2'>
-              <Button size='sm' onClick={debouncedReport}>
-                上报
-              </Button>
-              <DialogTrigger asChild>
-                <Button size={'sm'} variant={'secondary'}>
-                  设置
-                </Button>
-              </DialogTrigger>
+          <Popover>
+            <div>
+              <Draggable
+                position={position}
+                defaultPosition={defaultPosition}
+                dragOptions={{
+                  onDrag() {
+                    dragging.current = true
+                  },
+                  onDragEnd() {
+                    const t = setTimeout(() => {
+                      dragging.current = false
+                      clearTimeout(t)
+                    }, 60)
+                  },
+                }}
+                float={float}
+              >
+                <PopoverTrigger
+                  asChild
+                  onClick={(e) => {
+                    if (dragging.current) {
+                      e.preventDefault()
+                      return
+                    }
+                  }}
+                >
+                  <div
+                    className='iw-rounded-full iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2'
+                    style={{
+                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                    }}
+                  >
+                    <div className='iw-icon-[vscode-icons--file-type-testjs] iw-w-full iw-h-full iw-cursor-pointer'></div>
+                  </div>
+                </PopoverTrigger>
+              </Draggable>
             </div>
-          </Draggable>
+            <PopoverContent sideOffset={2}>
+              <div className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-p-2 iw-text-xs iw-shadow'>
+                <PopoverClose asChild>
+                  <Button size='sm' onClick={debouncedReport} data-state='closed'>
+                    上报
+                  </Button>
+                </PopoverClose>
 
-          <DialogContent>
+                <PopoverClose asChild>
+                  <DialogTrigger asChild>
+                    <Button size={'sm'} variant={'secondary'}>
+                      设置
+                    </Button>
+                  </DialogTrigger>
+                </PopoverClose>
+              </div>
+              <PopoverArrow />
+            </PopoverContent>
+          </Popover>
+          <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
             <DialogHeader>
               <DialogTitle>上报设置</DialogTitle>
             </DialogHeader>
@@ -295,7 +315,9 @@ function Core(props: CoreProps) {
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>确认重置？</AlertDialogTitle>
-                    <AlertDialogDescription>恢复默认设置</AlertDialogDescription>
+                    <AlertDialogDescription>
+                      <div className={'iw-my-3'}>恢复默认设置</div>
+                    </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>取消</AlertDialogCancel>

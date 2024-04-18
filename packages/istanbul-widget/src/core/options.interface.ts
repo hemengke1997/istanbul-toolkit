@@ -1,12 +1,20 @@
 export interface IstanbulWidgetOptions {
   /**
    * 主题色
+   * @default 'dark'
    */
   theme?: 'light' | 'dark'
   /**
    * 挂载DOM
+   * @default document.body
    */
   target?: string | HTMLElement
+  /**
+   * 按钮悬浮
+   */
+  float?: {
+    offset?: number
+  }
   /**
    * 按钮默认位置
    * @default
@@ -45,23 +53,32 @@ export interface IstanbulWidgetOptions {
       | {
           /**
            * 自动上报间隔
+           * @default 60
            */
           interval?: number
           /**
            * 最小间隔时间
+           * @default 60
            */
           minInterval?: number
         }
       | boolean
     /**
      * 离开页面时是否提交一次上报
+     * @default true
      */
     onLeavePage?: boolean
     /**
      * 是否需要填写上报人
+     * @default false
      */
     requireReporter?: boolean
   }
+}
+
+export type Position = {
+  x: number
+  y: number
 }
 
 export type Config = {

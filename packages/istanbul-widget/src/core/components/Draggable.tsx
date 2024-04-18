@@ -1,34 +1,56 @@
 import { useUpdateEffect } from '@minko-fe/react-hook'
-import { useDraggable } from '@neodrag/react'
+import { type DragOptions, useDraggable } from '@neodrag/react'
 import { type PropsWithChildren, memo, useEffect, useRef, useState } from 'react'
+import { cn } from '@/components/utils'
 import { setStorage } from '@/utils/tool'
+import { type IstanbulWidgetOptions, type Position } from '../options.interface'
 
 type DraggableProps = PropsWithChildren<{
-  position: {
-    x: number
-    y: number
-  }
-  defaultPosition: {
-    x: number
-    y: number
-  }
+  position: Position
+  defaultPosition: Position
+  dragOptions: DragOptions
+  float: IstanbulWidgetOptions['float']
 }>
 
 function Draggable(props: DraggableProps) {
-  const { children, position: positionProp, defaultPosition } = props
+  const { children, position: positionProp, defaultPosition, dragOptions, float } = props
 
-  const draggableRef = useRef<HTMLDivElement>(null)
   const handleRef = useRef<HTMLDivElement>(null)
+  const draggableRef = useRef<HTMLDivElement>(null)
+
+  const [dragging, setDragging] = useState(false)
+
   const [position, setPosition] = useState({
     x: positionProp.x || 0,
     y: positionProp.y || 0,
   })
 
   useDraggable(draggableRef, {
+    ...dragOptions,
     position,
     handle: handleRef,
-    onDrag: ({ offsetX, offsetY }) => {
+    onDragStart(data) {
+      setDragging(true)
+      dragOptions.onDragStart?.(data)
+    },
+    onDrag: (data) => {
+      const { offsetX, offsetY } = data
       setPosition({ x: offsetX, y: offsetY })
+      dragOptions.onDrag?.(data)
+    },
+    onDragEnd(data) {
+      setDragging(false)
+
+      if (float) {
+        float.offset ??= 0
+        const { offsetX, offsetY } = data
+        const windowWidth = window.innerWidth
+        const w = handleRef.current!.getBoundingClientRect().width
+        const newPosition = offsetX + w / 2 > windowWidth / 2 ? windowWidth - w - float.offset : float.offset
+        setPosition({ x: newPosition, y: offsetY })
+      }
+
+      dragOptions.onDragEnd?.(data)
     },
     axis: 'both',
     bounds: {
@@ -81,11 +103,11 @@ function Draggable(props: DraggableProps) {
   }, [position])
 
   return (
-    <div ref={draggableRef} className={'iw-w-fit iw-pointer-events-auto'}>
-      <div className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-bg-background iw-p-2 iw-text-xs iw-shadow'>
-        {children}
-        <div ref={handleRef} className='iw-icon-[iconamoon--move-fill] iw-cursor-move iw-text-lg iw-text-white'></div>
-      </div>
+    <div
+      ref={draggableRef}
+      className={cn('iw-w-fit iw-pointer-events-auto', !dragging ? 'iw-transition-transform' : '')}
+    >
+      <div ref={handleRef}>{children}</div>
     </div>
   )
 }

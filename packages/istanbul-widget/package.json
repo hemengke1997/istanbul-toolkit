@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "type": "module",
   "main": "./dist/istanbul-widget.min.js",
   "module": "./dist/istanbul-widget.esm.js",
@@ -16,7 +16,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@iconify-json/iconamoon": "^1.1.4",
+    "@iconify-json/vscode-icons": "^1.1.33",
     "@minko-fe/lodash-pro": "^0.2.4",
     "@minko-fe/react-hook": "^0.2.7",
     "@neodrag/react": "^2.0.3",
@@ -24,6 +24,7 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.5",
@@ -32,6 +33,7 @@
     "destr": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.6",
     "tailwind-merge": "^2.2.2",
     "tailwind-variants": "^0.2.1",
     "tailwindcss-animate": "^1.0.7"

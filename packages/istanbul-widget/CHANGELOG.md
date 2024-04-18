@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.1.0
+
+### Minor Changes
+
+- feat: float mode
+
 ## 1.0.3
 
 ### Patch Changes

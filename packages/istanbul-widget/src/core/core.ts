@@ -1,12 +1,12 @@
 import { deepMerge, isBoolean, isFunction, isObject } from '@minko-fe/lodash-pro'
 import { $ } from '@/utils/query'
 import { ISTANBUL_WIDGET_ID, getStorage, setStorage } from '@/utils/tool'
-import { type CompInstance, render } from './IstanbulWidget'
 import { type Config, type IstanbulWidgetOptions } from './options.interface.js'
+import { type CompInstance, render } from './render'
 import '@/styles/global.css'
 
 const default_interval = 60
-const default_min_interval = 10
+const default_min_interval = 60
 
 export const enum WIDGET_STORAGE {
   ENABLE_AUTO_REPORT = 'enable_auto_report',
@@ -21,6 +21,9 @@ export class IstanbulWidget {
   public option: Required<IstanbulWidgetOptions> = {
     theme: 'dark',
     target: document.body,
+    float: {
+      offset: 8,
+    },
     defaultPosition: {
       x: 0,
       y: 0,
@@ -164,6 +167,7 @@ export class IstanbulWidget {
         afterAction,
         beforeAction,
         requireReporter: requireReporter!,
+        float: this.option.float,
       })
     }
   }
