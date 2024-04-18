@@ -22,7 +22,7 @@ export class IstanbulWidget {
     theme: 'dark',
     target: document.body,
     float: {
-      offset: 8,
+      offsetX: 8,
     },
     defaultPosition: {
       x: 0,

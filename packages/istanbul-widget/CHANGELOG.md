@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.1.1
+
+### Patch Changes
+
+- fix: float btn style
+
 ## 1.1.0
 
 ### Minor Changes

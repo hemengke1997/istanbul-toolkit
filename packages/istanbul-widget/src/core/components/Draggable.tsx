@@ -1,4 +1,4 @@
-import { useUpdateEffect } from '@minko-fe/react-hook'
+import { useMemoizedFn, useUpdateEffect } from '@minko-fe/react-hook'
 import { type DragOptions, useDraggable } from '@neodrag/react'
 import { type PropsWithChildren, memo, useEffect, useRef, useState } from 'react'
 import { cn } from '@/components/utils'
@@ -11,6 +11,15 @@ type DraggableProps = PropsWithChildren<{
   dragOptions: DragOptions
   float: IstanbulWidgetOptions['float']
 }>
+
+const IOS_SAFE_AREA = 20
+
+const bounds = {
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: IOS_SAFE_AREA,
+}
 
 function Draggable(props: DraggableProps) {
   const { children, position: positionProp, defaultPosition, dragOptions, float } = props
@@ -41,27 +50,34 @@ function Draggable(props: DraggableProps) {
     onDragEnd(data) {
       setDragging(false)
 
-      if (float) {
-        float.offset ??= 0
-        const { offsetX, offsetY } = data
-        const windowWidth = window.innerWidth
-        const w = handleRef.current!.getBoundingClientRect().width
-        const newPosition = offsetX + w / 2 > windowWidth / 2 ? windowWidth - w - float.offset : float.offset
-        setPosition({ x: newPosition, y: offsetY })
-      }
+      const { offsetX, offsetY } = data
+      setPosition(fixFloatPosition({ x: offsetX, y: offsetY }))
 
       dragOptions.onDragEnd?.(data)
     },
     axis: 'both',
-    bounds: {
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 20,
+    bounds,
+    recomputeBounds: {
+      dragStart: true,
+      drag: false,
+      dragEnd: true,
     },
   })
 
-  const getButtonSafeAreaXY = (x: number, y: number) => {
+  const fixFloatPosition = useMemoizedFn((position: Position) => {
+    if (float) {
+      float.offsetX ??= 0
+      const { x, y } = position
+      const windowWidth = window.innerWidth
+      const w = handleRef.current!.getBoundingClientRect().width
+      const newX = x + w / 2 > windowWidth / 2 ? windowWidth - w - float.offsetX : float.offsetX
+      const newY = y <= bounds.top ? bounds.top : y
+      return { x: newX, y: newY }
+    }
+    return position
+  })
+
+  const getButtonSafeAreaXY = useMemoizedFn((x: number, y: number) => {
     const docWidth = Math.max(document.documentElement.offsetWidth, window.innerWidth)
     const docHeight = Math.max(document.documentElement.offsetHeight, window.innerHeight)
 
@@ -79,7 +95,7 @@ function Draggable(props: DraggableProps) {
     }
 
     if (y >= docHeight - btn.offsetHeight) {
-      y = docHeight - btn.offsetHeight - 20
+      y = docHeight - btn.offsetHeight - IOS_SAFE_AREA
     }
 
     if (y < 0) {
@@ -87,12 +103,12 @@ function Draggable(props: DraggableProps) {
     }
 
     return [x, y]
-  }
+  })
 
   useEffect(() => {
     if (draggableRef.current) {
       const [x, y] = getButtonSafeAreaXY(position.x, position.y)
-      setPosition({ x, y })
+      setPosition(fixFloatPosition({ x, y }))
     }
   }, [draggableRef.current])
 

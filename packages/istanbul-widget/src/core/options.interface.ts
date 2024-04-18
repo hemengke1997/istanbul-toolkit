@@ -13,7 +13,7 @@ export interface IstanbulWidgetOptions {
    * 按钮悬浮
    */
   float?: {
-    offset?: number
+    offsetX?: number
   }
   /**
    * 按钮默认位置
@@ -37,15 +37,15 @@ export interface IstanbulWidgetOptions {
     /**
      * 上报前触发
      */
-    beforeAction?: () => Promise<void> | void
+    beforeAction?: (coverage: any, config: Config) => Promise<void> | void
     /**
      * 上报方法
      */
-    onAction: (coverage: any) => Promise<void> | void
+    onAction: (coverage: any, config: Config) => Promise<void> | void
     /**
      * 上报后触发
      */
-    afterAction?: () => Promise<void> | void
+    afterAction?: (coverage: any, config: Config) => Promise<void> | void
     /**
      * 自动上报
      */

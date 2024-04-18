@@ -1,5 +1,5 @@
 import { toNumber } from '@minko-fe/lodash-pro'
-import { useDebounceFn, useSetState, useUpdateEffect } from '@minko-fe/react-hook'
+import { useDebounceFn, useMemoizedFn, useSetState, useUpdateEffect } from '@minko-fe/react-hook'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import {
   AlertDialog,
@@ -63,6 +63,7 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
 
   const { toast } = useToast()
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [popoverOpen, setPopoverOpen] = useState(false)
 
   // 静态表单值
   const staticConfig = useRef<Config>(config)
@@ -70,7 +71,7 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
   // 动态表单值
   const [dynamicConfig, setDynamicConfig] = useSetState<Config>(config)
 
-  const onSubmit = (data: Config) => {
+  const onSubmit = useMemoizedFn((data: Config) => {
     const { enable_auto_report, report_interval, reporter } = data
     if (requireReporter && !reporter) {
       return toast({
@@ -91,30 +92,37 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
     toast({
       description: '设置保存成功',
     })
-  }
+  })
 
   const { run: debouncedReport, flush: report } = useDebounceFn(
-    async (showToast = true) => {
+    async (showToast: boolean = true) => {
       // before report
-      await beforeAction?.()
+      await beforeAction?.(window.__coverage__, staticConfig.current)
       try {
         if (requireReporter && !staticConfig.current.reporter) {
           console.warn('[istanbul-widget]: 请填写上报人')
+          showToast &&
+            toast({
+              description: '请在设置中填写上报人',
+              variant: 'destructive',
+            })
+          return
         }
-        await onAction(window.__coverage__)
+        await onAction(window.__coverage__, staticConfig.current)
         showToast &&
           toast({
             description: '上报成功',
           })
       } catch (e) {
-        toast({
-          description: '上报失败，请打开控制台查看原因',
-          variant: 'destructive',
-        })
+        showToast &&
+          toast({
+            description: '上报失败，请打开控制台查看原因',
+            variant: 'destructive',
+          })
         console.error('[istanbul-widget]: report error', e)
       } finally {
         // after report
-        await afterAction?.()
+        await afterAction?.(window.__coverage__, staticConfig.current)
       }
     },
     {
@@ -167,13 +175,19 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
     }
   }, [])
 
+  let dialogOpenTimer: number
   useUpdateEffect(() => {
     if (!dialogOpen) {
-      const timer = setTimeout(() => {
+      dialogOpenTimer = window.setTimeout(() => {
         setDynamicConfig(staticConfig.current)
-        clearTimeout(timer)
+        clearTimeout(dialogOpenTimer)
         // animation end
       }, 150)
+    } else {
+      dialogOpenTimer && clearTimeout(dialogOpenTimer)
+    }
+    return () => {
+      dialogOpenTimer && clearTimeout(dialogOpenTimer)
     }
   }, [dialogOpen])
 
@@ -202,49 +216,52 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
           'iw-fixed iw-z-[49] iw-right-0 iw-top-0 iw-left-0 iw-bottom-0 iw-pointer-events-none',
         )}
       >
-        <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
-          <Popover>
-            <div>
-              <Draggable
-                position={position}
-                defaultPosition={defaultPosition}
-                dragOptions={{
-                  onDrag() {
-                    dragging.current = true
-                  },
-                  onDragEnd() {
-                    const t = setTimeout(() => {
-                      dragging.current = false
-                      clearTimeout(t)
-                    }, 60)
-                  },
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+            <Draggable
+              position={position}
+              defaultPosition={defaultPosition}
+              dragOptions={{
+                onDragStart() {
+                  setPopoverOpen(false)
+                },
+                onDrag() {
+                  dragging.current = true
+                },
+                onDragEnd() {
+                  const t = setTimeout(() => {
+                    dragging.current = false
+                    clearTimeout(t)
+                  }, 60)
+                },
+              }}
+              float={float}
+            >
+              <PopoverTrigger
+                asChild
+                onClick={(e) => {
+                  if (dragging.current) {
+                    e.preventDefault()
+                    return
+                  }
                 }}
-                float={float}
               >
-                <PopoverTrigger
-                  asChild
-                  onClick={(e) => {
-                    if (dragging.current) {
-                      e.preventDefault()
-                      return
-                    }
-                  }}
-                >
+                <div className='iw-rounded-full iw-overflow-hidden'>
                   <div
-                    className='iw-rounded-full iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2'
+                    className='iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2'
                     style={{
                       backgroundColor: 'rgba(0, 0, 0, 0.3)',
                     }}
                   >
                     <div className='iw-icon-[vscode-icons--file-type-testjs] iw-w-full iw-h-full iw-cursor-pointer'></div>
                   </div>
-                </PopoverTrigger>
-              </Draggable>
-            </div>
+                </div>
+              </PopoverTrigger>
+            </Draggable>
             <PopoverContent sideOffset={2}>
               <div className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-p-2 iw-text-xs iw-shadow'>
                 <PopoverClose asChild>
-                  <Button size='sm' onClick={debouncedReport} data-state='closed'>
+                  <Button size='sm' onClick={() => debouncedReport()}>
                     上报
                   </Button>
                 </PopoverClose>
