@@ -8,6 +8,7 @@ import { $ } from 'execa'
 import { type Request, type Response } from 'express'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
+import { type CoverageMap, createCoverageMap } from 'istanbul-lib-coverage'
 import path from 'node:path'
 import * as querystring from 'node:querystring'
 import { parse } from 'node-html-parser'
@@ -58,14 +59,14 @@ export function render(req: Request, res: Response, coveragePath: CoveragePath) 
 
   if (!(coverage && Object.keys(coverage).length > 0)) {
     res.setHeader('Content-type', 'text/plain')
-    return res.end('No coverage information has been collected') //TODO: make this a fancy HTML report
+    return res.end('No coverage information has been collected')
   }
 
   const coverageRenderResult = createCoverage(coveragePath)
 
   const indexHtmlPath = `${process.cwd()}/coverage/${coveragePath.ns}/${coveragePath.v}/index.html`
 
-  if (!fs.existsSync('/fdsa')) {
+  if (!fs.existsSync(indexHtmlPath)) {
     return res.json({ res: coverageRenderResult })
   }
 
@@ -111,10 +112,14 @@ export function mergeClientCoverage(coverageObj: any, coveragePath: CoveragePath
   if (!coverageObj || !coveragePath) {
     return
   }
-  Object.keys(coverageObj).forEach((filePath) => {
-    const added = coverageObj[filePath]
-    Coverage.set(coveragePath, filePath, added)
-  })
+
+  const original = Coverage.get(coveragePath)
+  const added = coverageObj
+
+  const result: CoverageMap = createCoverageMap(original || {})
+  result.merge(added)
+
+  Coverage.set(coveragePath, '', result)
 }
 
 export function resetCoverageObject(coveragePath?: CoveragePath) {

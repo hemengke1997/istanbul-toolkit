@@ -163,7 +163,7 @@ export function createHandler(opts?: { resetOnGet: boolean }) {
       () => {
         core.Coverage.clearAssets()
       },
-      60 * 60 * 1000,
+      60 * 60 * 24 * 1000, // 24小时清除
     )
 
     const p = {

@@ -32,10 +32,12 @@ const istanbulWidget = new IstanbulWidget({
 interface IstanbulWidgetOptions {
   /**
    * 主题色
+   * @default 'dark'
    */
   theme?: 'light' | 'dark'
   /**
-   * 挂载DOM，默认挂载到 body 上
+   * 挂载DOM
+   * @default document.body
    */
   target?: string | HTMLElement
   /**
@@ -77,6 +79,7 @@ interface IstanbulWidgetOptions {
     afterAction?: (coverage: any, config: Config) => Promise<void> | void
     /**
      * 自动上报
+     * @default false
      */
     auto?:
       | {
@@ -94,7 +97,7 @@ interface IstanbulWidgetOptions {
       | boolean
     /**
      * 离开页面时是否提交一次上报
-     * @default true
+     * @default false
      */
     onLeavePage?: boolean
     /**
@@ -104,4 +107,5 @@ interface IstanbulWidgetOptions {
     requireReporter?: boolean
   }
 }
+
 ```

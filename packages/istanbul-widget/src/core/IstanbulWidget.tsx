@@ -207,6 +207,7 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
   }, [])
 
   const dragging = useRef<boolean>(false)
+  const [dragPos, setDragPos] = useState<Position>({ x: 0, y: 0 })
 
   return (
     <>
@@ -222,17 +223,22 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
               position={position}
               defaultPosition={defaultPosition}
               dragOptions={{
-                onDragStart() {
+                onDragStart({ offsetX, offsetY }) {
                   setPopoverOpen(false)
+                  setDragPos({ x: offsetX, y: offsetY })
                 },
-                onDrag() {
-                  dragging.current = true
+                onDrag({ offsetX, offsetY }) {
+                  const dragX = Math.abs(dragPos.x - offsetX)
+                  const dragY = Math.abs(dragPos.y - offsetY)
+                  if (dragX >= 5 || dragY > 5) {
+                    dragging.current = true
+                  }
                 },
                 onDragEnd() {
                   const t = setTimeout(() => {
                     dragging.current = false
                     clearTimeout(t)
-                  }, 60)
+                  }, 100)
                 },
               }}
               float={float}
@@ -248,13 +254,13 @@ export default function IstanbulWidget(props: IstanbulWidgetProps) {
                 }}
               >
                 <div
-                  className='iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2'
+                  className='iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2 iw-cursor-pointer'
                   style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.25)',
                   }}
                   id='istanbul-widget-icon'
                 >
-                  <div className='iw-icon-[vscode-icons--file-type-testjs] iw-w-full iw-h-full iw-cursor-pointer'></div>
+                  <div className='iw-icon-[vscode-icons--file-type-testjs] iw-w-full iw-h-full'></div>
                 </div>
               </PopoverTrigger>
             </Draggable>

@@ -30,10 +30,7 @@ export class IstanbulWidget {
     },
     onReady: () => {},
     report: {
-      auto: {
-        interval: default_interval,
-        minInterval: default_min_interval,
-      },
+      auto: false,
       onAction: () => {},
       afterAction: () => {},
       beforeAction: () => {},
@@ -119,6 +116,10 @@ export class IstanbulWidget {
       const autoObj: IstanbulWidgetOptions['report']['auto'] = {
         interval: isBoolean(auto) ? default_interval : auto?.interval || default_interval,
         minInterval: isBoolean(auto) ? default_min_interval : auto?.minInterval || default_min_interval,
+      }
+
+      if (autoObj.interval! < autoObj.minInterval!) {
+        console.error('[istanbul-widget] internal must grater than minInterval')
       }
 
       const originData: Config = {

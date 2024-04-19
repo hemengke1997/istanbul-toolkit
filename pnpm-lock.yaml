@@ -80,6 +80,9 @@ importers:
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
+      istanbul-lib-coverage:
+        specifier: ^3.2.2
+        version: 3.2.2
       node-html-parser:
         specifier: ^6.1.13
         version: 6.1.13
@@ -114,6 +117,9 @@ importers:
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
+      '@types/istanbul-lib-coverage':
+        specifier: ^2.0.6
+        version: 2.0.6
       '@types/node':
         specifier: ^20.11.30
         version: 20.12.5
@@ -4000,6 +4006,10 @@ packages:
 
   /@types/http-errors@2.0.4:
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
+    dev: true
+
+  /@types/istanbul-lib-coverage@2.0.6:
+    resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
     dev: true
 
   /@types/js-cookie@2.2.7:

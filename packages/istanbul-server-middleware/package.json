@@ -1,6 +1,6 @@
 {
   "name": "istanbul-server-middleware",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "files": [
     "dist",
     "ecosystem.config.js"
@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "tsup src/index.ts --watch --onSuccess 'tsx dev'",
     "build": "tsup",
-    "start": "pm2 start --no-daemon"
+    "start": "pm2 start --no-daemon",
+    "debug": "nyc --all report --reporter=html"
   },
   "dependencies": {
     "@minko-fe/lodash-pro": "^0.2.4",
@@ -22,6 +23,7 @@
     "express": "^4.19.2",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
+    "istanbul-lib-coverage": "^3.2.2",
     "node-html-parser": "^6.1.13",
     "nyc": "^15.1.0",
     "pm2": "^5.3.1",
@@ -35,6 +37,7 @@
     "@types/express": "^4.17.21",
     "@types/express-serve-static-core": "^4.19.0",
     "@types/fs-extra": "^11.0.4",
+    "@types/istanbul-lib-coverage": "^2.0.6",
     "@types/node": "^20.11.30"
   }
 }

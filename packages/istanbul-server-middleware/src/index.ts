@@ -22,7 +22,7 @@ function getLocalIP() {
 }
 
 function startServer(opts?: ServerOptions) {
-  const { port = 8988, enableIP = false } = opts || {}
+  const { port = 3000, enableIP = false } = opts || {}
 
   const app = express()
 

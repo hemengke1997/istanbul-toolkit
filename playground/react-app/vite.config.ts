@@ -17,10 +17,14 @@ export default defineConfig((env) => ({
           async onAction(coverage) {
             window.__report(coverage)
           },
+          auto: false,
+          onLeavePage: false,
         },
       },
+      fullReport: true,
     }),
   ],
+
   server: {
     host: true,
   },

@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.2.0
+
+### Minor Changes
+
+- update!: change default config
+
 ## 1.1.2
 
 ### Patch Changes

@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite'
-import { isFunction, isObject } from '@minko-fe/lodash-pro'
+import { isArray, isFunction, isObject, set } from '@minko-fe/lodash-pro'
 import { type IstanbulWidgetOptions } from 'istanbul-widget'
 import { execSync } from 'node:child_process'
 import { createRequire } from 'node:module'
@@ -15,8 +15,14 @@ type VitePluginIstanbulWidgetOptions = {
   entry?: string
   /**
    * 是否开启插件
+   * @default false
    */
   enabled?: boolean
+  /**
+   * 全量上报
+   * @default true
+   */
+  fullReport?: boolean
   /**
    * vite-plugin-istanbul 配置
    */
@@ -36,13 +42,19 @@ function getCommitId() {
 }
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
-  let { enabled = false, entry = 'src/main.{ts,tsx}', istanbulPluginConfig, istanbulWidgetConfig } = opts || {}
+  let {
+    entry = 'src/main.{ts,tsx}',
+    enabled = false,
+    fullReport = true,
+    istanbulPluginConfig,
+    istanbulWidgetConfig,
+  } = opts || {}
 
   if (!enabled) return undefined
 
   return [
     {
-      name: 'vite:plugin-istanbul-widget:config',
+      name: 'vite:plugin-istanbul-widget:config:pre',
       enforce: 'pre',
       config(c) {
         if (!c.build?.sourcemap) {
@@ -63,6 +75,37 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
               filesOnly: true,
             })
           )?.[0]
+        }
+      },
+    },
+    {
+      name: 'vite:plugin-istanbul-widget:config:post',
+      enforce: 'post',
+      config(c) {
+        if (fullReport) {
+          const manualChunks = (id: string) => {
+            const CSS_LANGS_RE = /\.(css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/
+            const isCSSRequest = (request: string): boolean => CSS_LANGS_RE.test(request)
+            if (isCSSRequest(id)) return
+            if (id.includes('node_modules')) {
+              return 'vendor'
+            } else if (id.startsWith(process.cwd())) {
+              return 'source'
+            }
+          }
+
+          const output = c.build?.rollupOptions?.output
+          if (output) {
+            if (isArray(output)) {
+              output.forEach((_, index) => {
+                set(c, `build.rollupOptions.output[${index}].manualChunks`, manualChunks)
+              })
+            } else {
+              set(c, 'build.rollupOptions.output.manualChunks', manualChunks)
+            }
+          } else {
+            set(c, 'build.rollupOptions.output.manualChunks', manualChunks)
+          }
         }
       },
     },

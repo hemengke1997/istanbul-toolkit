@@ -48,6 +48,7 @@ export interface IstanbulWidgetOptions {
     afterAction?: (coverage: any, config: Config) => Promise<void> | void
     /**
      * 自动上报
+     * @default false
      */
     auto?:
       | {
@@ -65,7 +66,7 @@ export interface IstanbulWidgetOptions {
       | boolean
     /**
      * 离开页面时是否提交一次上报
-     * @default true
+     * @default false
      */
     onLeavePage?: boolean
     /**
