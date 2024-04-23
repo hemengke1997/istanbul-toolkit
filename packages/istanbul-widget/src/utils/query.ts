@@ -9,6 +9,16 @@ const $ = {
     }
   },
 
+  ensureEl(selector: string | HTMLElement, defaultEl?: HTMLElement) {
+    let target!: HTMLElement
+    if (typeof selector === 'string') {
+      target = document.querySelector(selector)! || defaultEl
+    } else if (selector instanceof HTMLElement) {
+      target = selector
+    }
+    return target
+  },
+
   all(selector: string, contextElement: Element | Document = document) {
     try {
       const nodeList = <NodeListOf<HTMLElement>>contextElement.querySelectorAll(selector)

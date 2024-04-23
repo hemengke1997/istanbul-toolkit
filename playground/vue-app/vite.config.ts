@@ -9,9 +9,17 @@ export default defineConfig((env) => ({
     istanbulWidget({
       enabled: !(env.mode === 'production'),
       istanbulWidgetConfig: {
-        report: {
-          async onAction(coverage) {
-            window.__report(coverage)
+        plugin: {
+          report: {
+            async onReport(coverage: any) {
+              await window.__report(coverage)
+            },
+          },
+          setting: {
+            autoReport: false,
+            onLeavePage: true,
+            requireReporter: true,
+            text: '!设置文案!',
           },
         },
       },

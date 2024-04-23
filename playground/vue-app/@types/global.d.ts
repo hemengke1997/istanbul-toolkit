@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    __report: (coverage: any) => void
+    __report: (coverage: any) => Promise<void>
   }
 }
 

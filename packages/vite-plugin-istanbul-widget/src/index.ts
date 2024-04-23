@@ -1,11 +1,12 @@
 import type { Plugin } from 'vite'
-import { isArray, isFunction, isObject, set } from '@minko-fe/lodash-pro'
+import { isArray, set } from '@minko-fe/lodash-pro'
 import { type IstanbulWidgetOptions } from 'istanbul-widget'
 import { execSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import glob from 'tiny-glob'
 import istanbul, { type IstanbulPluginOptions } from 'vite-plugin-istanbul'
+import serialize from '../serialize'
 
 type VitePluginIstanbulWidgetOptions = {
   /**
@@ -59,7 +60,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       config(c) {
         if (!c.build?.sourcemap) {
           c.build ??= {}
-          c.build.sourcemap = 'inline'
+          c.build.sourcemap = 'hidden'
         }
         return {
           define: {
@@ -78,10 +79,17 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         }
       },
     },
+
+    istanbul({
+      ...istanbulPluginConfig,
+      forceBuildInstrument: enabled,
+    }),
     {
       name: 'vite:plugin-istanbul-widget:config:post',
       enforce: 'post',
       config(c) {
+        c.build ??= {}
+        c.build.sourcemap = false
         if (fullReport) {
           const manualChunks = (id: string) => {
             const CSS_LANGS_RE = /\.(css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/
@@ -120,10 +128,10 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
             'istanbul-widget.esm.js',
           )
 
+          // TODO: suuport plugin
           const code = `
             import IstanbulWidget from "${istanbulWidgetPath}";
-            new IstanbulWidget(${parseIstanbulWidgetOptions(istanbulWidgetConfig)});
-
+            new IstanbulWidget(${serialize(istanbulWidgetConfig)});
             ${source}`
 
           return {
@@ -137,40 +145,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         }
       },
     },
-    istanbul({
-      ...istanbulPluginConfig,
-      forceBuildInstrument: enabled,
-    }),
   ] as Plugin[]
 }
 
 export default istanbulWidget
-
-const parseIstanbulWidgetOptions = (config: Record<string, any>) => {
-  const parse = (config: Record<string, any> | undefined) => {
-    if (!config) return ''
-
-    return Object.keys(config).reduce((code, key) => {
-      const value = config[key]
-
-      if (isFunction(value)) {
-        if (/^[(f]/.test(value.toString())) {
-          code += `${key}: ${value},`
-          return code
-        } else {
-          code += `${value},`
-          return code
-        }
-      }
-
-      if (isObject(value)) {
-        code += `${key}: {${parse(value)}},`
-        return code
-      }
-
-      code += `${key}: ${JSON.stringify(config[key])},`
-      return code
-    }, '')
-  }
-  return `{${parse(config)}}`
-}

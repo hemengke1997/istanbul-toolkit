@@ -20,7 +20,7 @@
     "prepare": "simple-git-hooks",
     "commitlint": "commitlint -e",
     "up": "taze -I -w",
-    "bump": "changeset",
+    "changeset": "changeset",
     "version": "changeset version && changeset tag",
     "report": "nyc report --excludeAfterRemap=false"
   },
@@ -37,7 +37,7 @@
     "nyc": "^15.1.0",
     "simple-git-hooks": "^2.11.1",
     "taze": "^0.11.4",
-    "tsup": "^6.7.0",
+    "tsup": "^8.0.2",
     "turbo": "^1.13.0",
     "typescript": "^5.4.3"
   },

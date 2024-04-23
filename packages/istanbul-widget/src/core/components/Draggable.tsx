@@ -1,15 +1,14 @@
-import { useMemoizedFn, useUpdateEffect } from '@minko-fe/react-hook'
+import { max } from '@minko-fe/lodash-pro'
+import { useLocalStorageState, useMemoizedFn } from '@minko-fe/react-hook'
 import { type DragOptions, useDraggable } from '@neodrag/react'
 import { type PropsWithChildren, memo, useEffect, useRef, useState } from 'react'
 import { cn } from '@/components/utils'
-import { setStorage } from '@/utils/tool'
-import { type IstanbulWidgetOptions, type Position } from '../options.interface'
+import { ISTANBUL_WIDGET_ID } from '@/utils/tool'
+import Context from '../Context'
+import { type Position } from '../options.interface'
 
 type DraggableProps = PropsWithChildren<{
-  position: Position
-  defaultPosition: Position
   dragOptions: DragOptions
-  float: IstanbulWidgetOptions['float']
   className?: string
 }>
 
@@ -23,16 +22,20 @@ const bounds = {
 }
 
 function Draggable(props: DraggableProps) {
-  const { children, position: positionProp, defaultPosition, dragOptions, float, className } = props
+  const { children, dragOptions, className } = props
+
+  const { defaultPosition, float } = Context.usePicker(['defaultPosition', 'float'])
 
   const handleRef = useRef<HTMLDivElement>(null)
   const draggableRef = useRef<HTMLDivElement>(null)
 
   const [dragging, setDragging] = useState(false)
 
-  const [position, setPosition] = useState({
-    x: positionProp.x || 0,
-    y: positionProp.y || 0,
+  const [position, setPosition] = useLocalStorageState(`${ISTANBUL_WIDGET_ID}_position`, {
+    defaultValue: {
+      x: defaultPosition?.x || 0,
+      y: defaultPosition?.y || 0,
+    },
   })
 
   useDraggable(draggableRef, {
@@ -66,8 +69,8 @@ function Draggable(props: DraggableProps) {
   })
 
   const getDocSize = useMemoizedFn(() => {
-    const docWidth = Math.max(document.documentElement.offsetWidth, window.innerWidth)
-    const docHeight = Math.max(document.documentElement.offsetHeight, window.innerHeight)
+    const docWidth = max([document.documentElement.offsetWidth, window.innerWidth])!
+    const docHeight = max([document.documentElement.offsetHeight, window.innerHeight])!
     return {
       docWidth,
       docHeight,
@@ -81,8 +84,8 @@ function Draggable(props: DraggableProps) {
       const { docWidth } = getDocSize()
       const w = handleRef.current!.getBoundingClientRect().width
       let newX = docWidth && x + w / 2 > docWidth / 2 ? docWidth - w - float.offsetX : float.offsetX
-      newX = Math.max(newX, float.offsetX)
-      const newY = Math.max(y, bounds.top)
+      newX = max([newX, float.offsetX])!
+      const newY = max([y, bounds.top])!
       return { x: newX, y: newY }
     }
     return position
@@ -101,7 +104,7 @@ function Draggable(props: DraggableProps) {
     }
 
     if (x < 0) {
-      x = Math.max(defaultPosition.x, bounds.left)
+      x = max([defaultPosition?.x, bounds.left])!
     }
 
     if (y >= docHeight - btn.offsetHeight) {
@@ -109,7 +112,7 @@ function Draggable(props: DraggableProps) {
     }
 
     if (y < 0) {
-      y = Math.max(defaultPosition.y, bounds.top)
+      y = max([defaultPosition?.y, bounds.top])!
     }
 
     return [x, y]
@@ -117,16 +120,10 @@ function Draggable(props: DraggableProps) {
 
   useEffect(() => {
     if (draggableRef.current) {
-      const [x, y] = getButtonSafeAreaXY(position.x, position.y)
+      const [x, y] = getButtonSafeAreaXY(position!.x, position!.y)
       setPosition(fixFloatPosition({ x, y }))
     }
   }, [draggableRef.current])
-
-  useUpdateEffect(() => {
-    const { x, y } = position
-    setStorage('btn_x', `${x}`)
-    setStorage('btn_y', `${y}`)
-  }, [position])
 
   return (
     <div

@@ -1,4 +1,4 @@
-function report(coverage: any) {
+async function report(coverage: any) {
   const reponame = 'vue-app'
   fetch(`http://localhost:3000/${reponame}/coverage/client`, {
     body: JSON.stringify(coverage),
