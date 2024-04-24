@@ -1,3 +1,4 @@
+import { isFunction } from '@minko-fe/lodash-pro'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { $ } from '@/utils/query'
@@ -38,7 +39,7 @@ export class IstanbulWidgetReactPlugin<T extends {} = {}> extends IstanbulWidget
   public registerEvents() {
     const properties = Object.getOwnPropertyNames(IstanbulWidgetReactPlugin.prototype)
 
-    const onMethods = properties.filter((name) => name.startsWith('on') && typeof this[name] === 'function')
+    const onMethods = properties.filter((name) => name.startsWith('on') && isFunction(this[name]))
 
     onMethods.forEach((methodName) => {
       this[methodName].call(this)

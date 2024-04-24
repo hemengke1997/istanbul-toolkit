@@ -102,7 +102,7 @@ const common = (option: Options): Options => ({
 })
 
 const esmBundle: Options = {
-  format: ['esm'],
+  format: 'esm',
   entry: {
     'istanbul-widget.esm': 'src/istanbul-widget.ts',
   },
@@ -120,9 +120,9 @@ const esmBundle: Options = {
 
 const iife: Options = {
   injectStyle: true,
-  format: ['iife'],
+  format: 'iife',
   entry: {
-    'istanbul-widget.min': 'src/istanbul-widget.ts',
+    'istanbul-widget.min': 'src/istanbul-widget.iife.ts',
   },
   esbuildOptions(options) {
     if (!options.logOverride) {
@@ -131,6 +131,7 @@ const iife: Options = {
     options.logOverride!['empty-import-meta'] = 'silent'
   },
   dts: false,
+  minify: true,
 }
 
 const esmBundleless: Options = {
@@ -138,7 +139,7 @@ const esmBundleless: Options = {
   dts: {
     entry: getEntry('src/**/*.{ts,tsx}'),
   },
-  format: ['esm'],
+  format: 'esm',
   outDir: 'dist/es',
   outExtension: () => ({ js: '.js' }),
   esbuildPlugins: [fileSuffixPlugin('esm')],

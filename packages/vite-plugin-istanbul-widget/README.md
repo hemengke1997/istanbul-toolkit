@@ -42,23 +42,29 @@ export default defineConfig((env) => ({
 
 ```ts
 type VitePluginIstanbulWidgetOptions = {
-    /**
-     * 入口文件，默认读取 src/main.{ts,tsx}
-     * @default 'src/main.{ts,tsx}'
-     */
-    entry?: string;
-    /**
-     * 是否开启插件
-     */
-    enabled?: boolean;
-    /**
-     * vite-plugin-istanbul 配置
-     */
-    istanbulPluginConfig?: IstanbulPluginOptions;
-    /**
-     * istanbul-widget 配置
-     * @description false 时则关闭 istanbulWidget 控件
-     */
-    istanbulWidgetConfig: IstanbulWidgetOptions | false;
+  /**
+   * 入口文件
+   * @default 'src/main.{ts,tsx}'
+   */
+  entry?: string
+  /**
+   * 是否开启插件
+   * @default false
+   */
+  enabled?: boolean
+  /**
+   * 全量上报
+   * @default true
+   */
+  fullReport?: boolean
+  /**
+   * vite-plugin-istanbul 配置
+   */
+  istanbulPluginConfig?: IstanbulPluginOptions
+  /**
+   * istanbul-widget 配置
+   * @description false 则关闭 istanbul-widget 控件
+   */
+  istanbulWidgetConfig: IstanbulWidgetOptions | false
 }
 ```

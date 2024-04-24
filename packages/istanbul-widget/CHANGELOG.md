@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.3.2
+
+### Patch Changes
+
+- iife: mount the istanbul instance on Window
+
 ## 1.3.1
 
 ### Patch Changes

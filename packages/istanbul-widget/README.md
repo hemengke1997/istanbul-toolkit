@@ -4,13 +4,13 @@
 
 如果你使用vite作为开发框架，推荐使用 `vite-plugin-istanbul-widget`
 
-## 安装
+## 上手
+
+### 方法一：使用 npm
 
 ```bash
 npm install istanbul-widget
 ```
-
-## 使用
 
 ```ts
 import { IstanbulWidget } from 'istanbul-widget'
@@ -25,6 +25,17 @@ const istanbulWidget = new IstanbulWidget({
   },
 })
 ```
+
+### 方法二：使用CDN直接插入到HTML
+
+```html
+<script src="https://unpkg.com/istanbul-widget@latest/dist/istanbul-widget.min.js"></script>
+<script>
+  // 默认会挂载到 `window.IstanbulWidget` 上
+  var istanbulWidget = new window.IstanbulWidget();
+</script>
+```
+
 
 ## 配置项
 

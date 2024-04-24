@@ -8,7 +8,7 @@ import glob from 'tiny-glob'
 import istanbul, { type IstanbulPluginOptions } from 'vite-plugin-istanbul'
 import serialize from '../serialize'
 
-type VitePluginIstanbulWidgetOptions = {
+export type VitePluginIstanbulWidgetOptions = {
   /**
    * 入口文件
    * @default 'src/main.{ts,tsx}'
