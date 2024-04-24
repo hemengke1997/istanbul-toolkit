@@ -70,7 +70,7 @@ const common = (option: Options): Options => ({
   outExtension: () => ({ js: '.js' }),
   outDir: 'dist',
   minify: !option.watch,
-  target: ['es3'],
+  target: 'es3',
   define: {
     '__VERSION__': JSON.stringify(pkg.version),
     'process.env.NODE_ENV': JSON.stringify(option.watch ? 'development' : 'production'),
