@@ -14,15 +14,22 @@ npm install vite-plugin-istanbul-widget --save-dev
 import { defineConfig } from 'vite'
 import { istanbulWidget } from 'vite-plugin-istanbul-widget'
 
-// https://vitejs.dev/config/
+// example
 export default defineConfig((env) => ({
   plugins: [
     istanbulWidget({
-      enabled: !(env.mode === 'production'),
+      enabled: env.mode === 'test',
       istanbulWidgetConfig: {
-        report: {
-          async onAction(coverage) {
-            window.__report(coverage)
+        plugin: {
+          report: {
+            async onReport(coverage: any) {
+              await window.__report(coverage)
+            },
+          },
+          setting: {
+            autoReport: false,
+            onLeavePage: true,
+            requireReporter: true,
           },
         },
       },
@@ -50,7 +57,8 @@ type VitePluginIstanbulWidgetOptions = {
     istanbulPluginConfig?: IstanbulPluginOptions;
     /**
      * istanbul-widget 配置
+     * @description false 时则关闭 istanbulWidget 控件
      */
-    istanbulWidgetConfig: IstanbulWidgetOptions;
+    istanbulWidgetConfig: IstanbulWidgetOptions | false;
 }
 ```

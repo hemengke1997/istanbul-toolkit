@@ -136,7 +136,6 @@ export type Position = {
 export type PluginType = {
   id: string
   name: string
-  content?: HTMLElement
 }
 
 export type PluginName = Exclude<IstanbulWidgetOptions['defaultPlugins'], undefined>[number]

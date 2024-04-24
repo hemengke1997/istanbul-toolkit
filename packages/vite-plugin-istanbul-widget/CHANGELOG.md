@@ -1,5 +1,13 @@
 # vite-plugin-istanbul-widget
 
+## 1.3.1
+
+### Patch Changes
+
+- fix: ssr
+- Updated dependencies
+  - istanbul-widget@1.3.1
+
 ## 1.3.0
 
 ### Minor Changes

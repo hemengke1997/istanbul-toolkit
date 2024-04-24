@@ -70,10 +70,34 @@ const common = (option: Options): Options => ({
   outExtension: () => ({ js: '.js' }),
   outDir: 'dist',
   minify: !option.watch,
-  target: 'es3',
+  target: ['es3'],
   define: {
     '__VERSION__': JSON.stringify(pkg.version),
     'process.env.NODE_ENV': JSON.stringify(option.watch ? 'development' : 'production'),
+  },
+  esbuildOptions(options, ...args) {
+    option.esbuildOptions?.(options, ...args)
+
+    // css 兼容处理
+    // https://esbuild.github.io/api/#supported
+    const cssUnSupported = [
+      'color-functions',
+      'gradient-double-position',
+      'gradient-interpolation',
+      'gradient-midpoints',
+      'hwb',
+      'hex-rgba',
+      'inline-style',
+      'inset-property',
+      'is-pseudo-class',
+      'modern-rgb-hsl',
+      'nesting',
+      'rebecca-purple',
+    ]
+    options.supported ??= {}
+    cssUnSupported.forEach((css) => {
+      options.supported![css] = false
+    })
   },
 })
 
@@ -89,7 +113,7 @@ const esmBundle: Options = {
   },
   banner() {
     return {
-      js: `import './istanbul-widget.esm.css'`,
+      js: `import './istanbul-widget.esm.css';`,
     }
   },
 }

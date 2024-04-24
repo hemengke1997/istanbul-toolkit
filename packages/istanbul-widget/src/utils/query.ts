@@ -114,7 +114,4 @@ const $ = {
   },
 }
 
-/**
- * export
- */
 export { $ }

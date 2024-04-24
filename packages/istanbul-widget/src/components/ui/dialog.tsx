@@ -3,7 +3,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Cross2Icon } from "@radix-ui/react-icons"
 
 import { cn } from "@/components/utils"
-import { ISTANBUL_WIDGET_ID } from '@/utils/tool'
+import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 
 const Dialog = DialogPrimitive.Root
 

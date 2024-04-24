@@ -20,6 +20,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
-    "vite-plugin-istanbul-widget": "workspace:*"
+    "vite-plugin-istanbul-widget": "workspace:*",
+    "vite-plugin-public-typescript": "^2.3.0"
   }
 }

@@ -6,7 +6,6 @@ function MyPlugin() {
 }
 
 // 自定义插件
-
 const myPlugin = new IstanbulWidget.IstanbulWidgetReactPlugin('my_plugin', 'My Plugin', MyPlugin)
 
 myPlugin.event.on('init', () => {
@@ -19,12 +18,14 @@ const istanbulWidget = new IstanbulWidget({
     y: 100,
   },
   plugin: {
+    // 上报按钮
     report: {
       onReport(coverage) {
         console.log('上报', coverage)
         throw new Error('上报失败')
       },
     },
+    // 设置插件
     setting: {
       requireReporter: true,
     },

@@ -38,6 +38,9 @@ export default defineConfig((env) => ({
       fullReport: true,
     }),
   ],
+  build: {
+    minify: false,
+  },
   server: {
     host: true,
   },

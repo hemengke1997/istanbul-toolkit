@@ -57,55 +57,38 @@ interface IstanbulWidgetOptions {
     x?: number
     y?: number
   }
+
   /**
-   * 插件就绪时回调
+   * 控件就绪时回调
    */
   onReady?: () => void
-  /**
-   * 上报相关配置
-   */
-  report: {
-    /**
-     * 上报前触发
-     */
-    beforeAction?: (coverage: any, config: Config) => Promise<void> | void
-    /**
-     * 上报方法
-     */
-    onAction: (coverage: any, config: Config) => Promise<void> | void
-    /**
-     * 上报后触发
-     */
-    afterAction?: (coverage: any, config: Config) => Promise<void> | void
-    /**
-     * 自动上报
-     * @default false
-     */
-    auto?:
-      | {
-          /**
-           * 自动上报间隔
-           * @default 60
-           */
-          interval?: number
-          /**
-           * 最小间隔时间
-           * @default 60
-           */
-          minInterval?: number
-        }
-      | boolean
-    /**
-     * 离开页面时是否提交一次上报
-     * @default false
-     */
-    onLeavePage?: boolean
-    /**
-     * 是否需要填写上报人
-     * @default false
-     */
-    requireReporter?: boolean
-  }
-}
 
+  /**
+   * 默认开启的插件
+   */
+  defaultPlugins?: ('setting' | 'buttonGroup')[]
+
+  /**
+   * 插件设置
+   */
+  plugin?: {
+    /**
+     * 上报插件（核心）
+     */
+    report: ReportOptions
+    /**
+     * 设置插件
+     */
+    setting?: SettingOptions
+    /**
+     * button组插件
+     * @description 内置暴露了一组按钮插件，方便扩展
+     */
+    buttonGroup?: ButtonGroupOptions
+  }
+  /**
+   * 插件顺序
+   */
+  pluginOrder?: (PluginName | string)[]
+}
 ```

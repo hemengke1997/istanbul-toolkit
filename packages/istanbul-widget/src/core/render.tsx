@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import { ISTANBUL_WIDGET_ID } from '@/utils/tool'
+import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import Context, { type InitialWidgetProps } from './Context'
 import IstanbulWidget from './IstanbulWidget'
 import { type PluginType } from './options.interface'

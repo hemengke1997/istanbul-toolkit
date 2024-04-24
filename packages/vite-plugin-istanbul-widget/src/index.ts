@@ -30,8 +30,9 @@ type VitePluginIstanbulWidgetOptions = {
   istanbulPluginConfig?: IstanbulPluginOptions
   /**
    * istanbul-widget 配置
+   * @description false 则关闭 istanbul-widget 控件
    */
-  istanbulWidgetConfig: IstanbulWidgetOptions
+  istanbulWidgetConfig: IstanbulWidgetOptions | false
 }
 
 function getCommitId() {
@@ -90,7 +91,8 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       config(c) {
         c.build ??= {}
         c.build.sourcemap = false
-        if (fullReport) {
+
+        if (fullReport && !c.build.ssr) {
           const manualChunks = (id: string) => {
             const CSS_LANGS_RE = /\.(css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/
             const isCSSRequest = (request: string): boolean => CSS_LANGS_RE.test(request)
@@ -121,7 +123,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       name: 'vite:plugin-istanbul-widget',
       enforce: 'post',
       transform(source, id) {
-        if (entry === id) {
+        if (istanbulWidgetConfig !== false && entry === id) {
           const require = createRequire(import.meta.url)
           const istanbulWidgetPath = path.join(
             path.dirname(require.resolve('istanbul-widget')),

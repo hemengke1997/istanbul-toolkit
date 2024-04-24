@@ -3,7 +3,7 @@ import { useLocalStorageState, useMemoizedFn } from '@minko-fe/react-hook'
 import { type DragOptions, useDraggable } from '@neodrag/react'
 import { type PropsWithChildren, memo, useEffect, useRef, useState } from 'react'
 import { cn } from '@/components/utils'
-import { ISTANBUL_WIDGET_ID } from '@/utils/tool'
+import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import Context from '../Context'
 import { type Position } from '../options.interface'
 
