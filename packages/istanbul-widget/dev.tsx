@@ -14,7 +14,7 @@ myPlugin.event.on('init', () => {
 
 const istanbulWidget = new IstanbulWidget({
   defaultPosition: {
-    x: -100,
+    x: 0,
     y: 100,
   },
   plugin: {

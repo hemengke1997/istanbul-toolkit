@@ -1,18 +1,17 @@
 {
   "name": "istanbul-widget",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "type": "module",
   "files": [
     "**"
   ],
-  "main": "./dist/istanbul-widget.min.js",
+  "main": "./dist/istanbul-widget.esm.js",
   "module": "./dist/es/istanbul-widget.js",
   "types": "./dist/istanbul-widget.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/istanbul-widget.d.ts",
-      "require": "./dist/istanbul-widget.min.js",
       "import": "./dist/es/istanbul-widget.js"
     },
     "./components": {

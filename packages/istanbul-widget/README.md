@@ -16,12 +16,30 @@ npm install istanbul-widget
 import { IstanbulWidget } from 'istanbul-widget'
 
 const istanbulWidget = new IstanbulWidget({
-  report: {
-    onAction: async (coverage, config) => {
-      console.log('上报', coverage, config)
-      // 在这里你可以调用上报接口
-      // 如果接口报错，请在此抛出错误: throw new Error("你的错误信息")
+  defaultPosition: {
+    x: 0,
+    y: 100,
+  },
+  plugin: {
+    // 上报按钮
+    report: {
+      onReport(coverage) {
+        console.log('上报', coverage)
+        // throw new Error('上报失败') // 你可以控制失败的逻辑
+      },
     },
+    // 设置插件
+    setting: {
+      requireReporter: true,
+    },
+    buttonGroup: [
+      {
+        text: '自定义按钮',
+        onClick(...args) {
+          console.log(...args)
+        },
+      },
+    ],
   },
 })
 ```
@@ -35,7 +53,6 @@ const istanbulWidget = new IstanbulWidget({
   var istanbulWidget = new window.IstanbulWidget();
 </script>
 ```
-
 
 ## 配置项
 
@@ -53,10 +70,11 @@ interface IstanbulWidgetOptions {
   target?: string | HTMLElement
   /**
    * 按钮悬浮
+   * @description false 则关闭悬浮
    */
   float?: {
     offsetX?: number
-  }
+  } | false
   /**
    * 按钮默认位置
    * @default
@@ -103,3 +121,15 @@ interface IstanbulWidgetOptions {
   pluginOrder?: (PluginName | string)[]
 }
 ```
+
+
+## 截图
+
+### 入口按钮
+![入口](./screenshots/entry.png)
+
+### 深色主题
+![深色主题](./screenshots/dark.png)
+
+### 浅色主题
+![浅色主题](./screenshots/light.png)

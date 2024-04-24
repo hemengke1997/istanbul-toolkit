@@ -1,7 +1,6 @@
-async function report(coverage: any, ...args: any[]) {
+async function report(coverage: any) {
   const reponame = 'react-app'
-  console.log(args, 'args')
-  await fetch(`http://localhost:3000/${reponame}/coverage/client?v=temp_git_commit_id`, {
+  await fetch(`http://localhost:3000/${reponame}/coverage/client?v=${__GIT_COMMIT_ID__}`, {
     body: JSON.stringify(coverage),
     method: 'POST',
     headers: {

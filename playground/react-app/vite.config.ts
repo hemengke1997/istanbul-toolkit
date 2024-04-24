@@ -23,7 +23,6 @@ export default defineConfig((env) => ({
             autoReport: false,
             onLeavePage: true,
             requireReporter: true,
-            text: '!设置文案!',
           },
           buttonGroup: [
             {

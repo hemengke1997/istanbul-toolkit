@@ -13,10 +13,17 @@ export interface IstanbulWidgetOptions {
   target?: string | HTMLElement
   /**
    * 按钮悬浮
+   * @description false 则关闭悬浮
+   * @default
+   * ```js
+   * { offsetX: 8 }
+   * ```
    */
-  float?: {
-    offsetX?: number
-  }
+  float?:
+    | {
+        offsetX?: number
+      }
+    | false
   /**
    * 按钮默认位置
    * @default
@@ -36,6 +43,8 @@ export interface IstanbulWidgetOptions {
 
   /**
    * 默认开启的插件
+   * @default
+   * ['setting', 'buttonGroup']
    */
   defaultPlugins?: ('setting' | 'buttonGroup')[]
 
