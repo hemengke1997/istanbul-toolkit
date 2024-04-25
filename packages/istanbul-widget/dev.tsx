@@ -1,15 +1,24 @@
 import { Button } from './src/components/ui'
 import { IstanbulWidget } from './src/istanbul-widget'
 
-function MyPlugin() {
-  return <Button size={'sm'}>this is my Plugin</Button>
+function ReactPlugin() {
+  return <Button size={'sm'}>this is react Plugin</Button>
 }
 
-// 自定义插件
-const myPlugin = new IstanbulWidget.IstanbulWidgetReactPlugin('my_plugin', 'My Plugin', MyPlugin)
+// 自定义react插件
+const reactPlugin = new IstanbulWidget.IstanbulWidgetReactPlugin('react_plugin', 'React Plugin', ReactPlugin)
 
-myPlugin.event.on('init', () => {
-  console.log('my plugin inited')
+reactPlugin.on('init', () => {
+  console.log('react plugin inited')
+})
+
+// 自定义html插件
+const htmlEl = document.createElement('div')
+htmlEl.innerHTML = 'this is html plugin'
+const htmlPlugin = new IstanbulWidget.IstanbulWidgetPlugin('html_plugin', 'HTML Plugin', htmlEl)
+
+htmlPlugin.on('init', () => {
+  console.log('html plugin inited')
 })
 
 const istanbulWidget = new IstanbulWidget({
@@ -44,6 +53,9 @@ const istanbulWidget = new IstanbulWidget({
       },
     ],
   },
+  pluginOrder: ['report', 'react_plugin', 'html_plugin', 'buttonGroup', 'setting'],
+  debug: true,
 })
 
-istanbulWidget.addPlugin(myPlugin)
+istanbulWidget.addPlugin(reactPlugin)
+istanbulWidget.addPlugin(htmlPlugin)

@@ -70,6 +70,11 @@ export interface IstanbulWidgetOptions {
    * 插件顺序
    */
   pluginOrder?: (PluginName | string)[]
+  /**
+   * 打印调试信息
+   * @default false
+   */
+  debug?: boolean
 }
 
 export type ReportParams = {
@@ -145,6 +150,8 @@ export type Position = {
 export type PluginType = {
   id: string
   name: string
+  domID: string
+  htmlElement?: HTMLElement
 }
 
 export type PluginName = Exclude<IstanbulWidgetOptions['defaultPlugins'], undefined>[number]

@@ -9,7 +9,7 @@ const $ = {
     }
   },
 
-  ensureEl(selector: string | HTMLElement, defaultEl?: HTMLElement) {
+  queryEl(selector: string | HTMLElement, defaultEl?: HTMLElement) {
     let target!: HTMLElement
     if (typeof selector === 'string') {
       target = document.querySelector(selector)! || defaultEl

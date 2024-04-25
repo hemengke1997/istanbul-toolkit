@@ -1,13 +1,11 @@
-import { isFunction } from '@minko-fe/lodash-pro'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { $ } from '@/utils/query'
+import { IstanbulWidget } from '../core'
+import { type PluginType } from '../options.interface'
 import { IstanbulWidgetPlugin } from './IstanbulWidgetPlugin'
 
-export type IstanbulWidgetReactPluginProps = {
-  id: string
-  name: string
-}
+export type IstanbulWidgetReactPluginProps = {} & PluginType
 
 export class IstanbulWidgetReactPlugin<T extends {} = {}> extends IstanbulWidgetPlugin {
   private _root!: ReactDOM.Root
@@ -32,51 +30,32 @@ export class IstanbulWidgetReactPlugin<T extends {} = {}> extends IstanbulWidget
     public initialProps?: T,
   ) {
     super(id, name)
-
-    this.registerEvents()
   }
 
-  public registerEvents() {
-    const properties = Object.getOwnPropertyNames(IstanbulWidgetReactPlugin.prototype)
-
-    const onMethods = properties.filter((name) => name.startsWith('on') && isFunction(this[name]))
-
-    onMethods.forEach((methodName) => {
-      this[methodName].call(this)
-    })
-  }
-
-  protected onReady() {
-    this.event.on('ready', () => {
-      this.isReady = true
-    })
-  }
-
-  protected onRender() {
-    this.event.on('render', (callback) => {
-      const domNode = document.createElement('div')
-      const root = ReactDOM.createRoot(domNode)
+  onRender() {
+    this.on('render', () => {
+      const el = document.createElement('div')
+      const root = ReactDOM.createRoot(el)
       root.render(
         React.createElement(this.Component, {
           ...((this.initialProps || {}) as T),
           id: this.id,
           name: this.name,
+          domID: this.domID,
         }),
       )
       this._root = root
-      const target = $.ensureEl(`#${this.id}`)
-      target.appendChild(domNode)
 
-      callback?.({
-        root,
-        domNode,
-      })
+      const target = $.queryEl(`#${this.domID}`)
+      target.appendChild(el)
+
+      // react式插入dom，不需要回调
     })
   }
 
   destory() {
     if (!this._root) {
-      console.warn('[istanbul-widget]: init component first')
+      IstanbulWidget.logger.warn('[istanbul-widget]: init component first')
     } else {
       this._root.unmount()
     }

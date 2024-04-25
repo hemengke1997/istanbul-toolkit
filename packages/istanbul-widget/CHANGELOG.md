@@ -1,5 +1,18 @@
 # istanbul-widget
 
+## 1.4.0
+
+### Minor Changes
+
+- feat
+
+  - debug mode
+  - html+dom plugin
+
+- refactor
+
+  - istanbulWidget.event.on ===> istanbulWidget.on
+
 ## 1.3.3
 
 ### Patch Changes

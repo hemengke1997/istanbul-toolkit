@@ -1,6 +1,7 @@
 import { useDebounceFn, useLatest, useSetState } from '@minko-fe/react-hook'
 import { createContainer } from 'context-state'
 import { useToast } from '@/components/ui'
+import { IstanbulWidget } from './core'
 import { type IstanbulWidgetOptions, type PluginName, type PluginType, type ReportParams } from './options.interface'
 
 export type InitialWidgetProps = IstanbulWidgetOptions & {
@@ -59,7 +60,7 @@ function useContext(initialValues: InitialWidgetProps) {
             description: '上报失败，请打开控制台查看原因',
             variant: 'destructive',
           })
-        console.error('[istanbul-widget]:', e)
+        IstanbulWidget.logger.error('[istanbul-widget]:', e)
       } finally {
         // after report
         await Promise.all(reportActions.after.map(async (action) => await action.fn(latestParams)))

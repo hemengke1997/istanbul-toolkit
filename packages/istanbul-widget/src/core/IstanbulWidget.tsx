@@ -78,7 +78,7 @@ export default function IstanbulWidget() {
                 style={{
                   backgroundColor: 'rgba(0, 0, 0, 0.25)',
                 }}
-                id='__iw-icon'
+                id={`${ISTANBUL_WIDGET_ID}__icon`}
               >
                 <div className='iw-icon-[vscode-icons--file-type-testjs] iw-w-full iw-h-full'></div>
               </div>
@@ -88,12 +88,15 @@ export default function IstanbulWidget() {
           <PopoverContent sideOffset={2}>
             <div
               className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-p-2 iw-text-xs iw-shadow'
-              id={`${ISTANBUL_WIDGET_ID}_popover`}
+              id={`${ISTANBUL_WIDGET_ID}__popover`}
             >
               {Object.entries(pluginList).map(([_, plugin]) => {
                 return (
                   <PopoverClose asChild key={plugin.id}>
-                    <div id={plugin.id}></div>
+                    <div
+                      id={plugin.domID}
+                      ref={(el) => el && plugin.htmlElement && el.appendChild(plugin.htmlElement)}
+                    />
                   </PopoverClose>
                 )
               })}
