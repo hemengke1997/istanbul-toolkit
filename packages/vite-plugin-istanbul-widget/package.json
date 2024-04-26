@@ -9,7 +9,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./astro": {
+      "types": "./astro.d.ts",
+      "require": "./dist/astro.cjs",
+      "import": "./dist/astro.js",
+      "default": "./dist/astro.js"
     },
     "./client": {
       "types": "./client.d.ts"
@@ -29,6 +36,7 @@
   "devDependencies": {
     "@types/node": "^20.11.30",
     "@types/serialize-javascript": "^5.0.4",
+    "astro": "^4.7.0",
     "serialize-javascript": "^6.0.2",
     "vite": "^5.0.8"
   }

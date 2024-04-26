@@ -1,0 +1,26 @@
+{
+  "name": "astro-app",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "DEBUG=vite-plugin-public-typescript* astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.10",
+    "astro": "^4.6.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.4.5",
+    "vite-plugin-istanbul-widget": "workspace:*",
+    "vite-plugin-public-typescript": "^2.4.0"
+  },
+  "devDependencies": {
+    "@astrojs/react": "^3.3.1",
+    "@minko-fe/tsconfig": "latest",
+    "@types/react": "^18.3.0"
+  }
+}

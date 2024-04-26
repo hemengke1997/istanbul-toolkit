@@ -1,5 +1,5 @@
 import { deepMerge, isArray, isFunction, isObject, set } from '@minko-fe/lodash-pro'
-import { type ConsolaInstance, LogLevels, createConsola } from 'consola'
+import { type ConsolaInstance, LogLevels, createConsola } from 'consola/browser'
 import { ButtonGroupPlugin } from '@/plugins/button-group/ButtonGroupPlugin'
 import { ReportPlugin } from '@/plugins/report/ReportPlugin'
 import { SettingPlugin } from '@/plugins/setting/SettingPlugin'
@@ -44,10 +44,9 @@ export class IstanbulWidget {
 
   public static logger: ConsolaInstance
 
-  constructor(opts: IstanbulWidgetOptions) {
+  constructor(opts: IstanbulWidgetOptions = {}) {
     IstanbulWidget.logger = createConsola({
-      level: opts.debug ? LogLevels.debug : LogLevels.box,
-      fancy: true,
+      level: opts?.debug ? LogLevels.debug : LogLevels.box,
     })
 
     if (!!IstanbulWidget.instance && IstanbulWidget.instance instanceof IstanbulWidget) {

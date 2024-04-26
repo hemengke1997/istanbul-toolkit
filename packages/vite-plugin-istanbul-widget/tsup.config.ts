@@ -2,7 +2,10 @@ import { defineConfig } from 'tsup'
 
 export const tsup = defineConfig((option) => [
   {
-    entry: ['src/index.ts'],
+    entry: {
+      index: 'src/index.ts',
+      astro: 'src/astro/index.ts',
+    },
     dts: true,
     target: 'node16',
     format: ['cjs', 'esm'],

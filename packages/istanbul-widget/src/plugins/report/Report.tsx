@@ -7,7 +7,12 @@ function Report() {
   const { report } = plugin || {}
 
   return (
-    <Button size='sm' onClick={() => reportFn.run()}>
+    <Button
+      size='sm'
+      onClick={() => {
+        reportFn.run()
+      }}
+    >
       {report?.text || '上报'}
     </Button>
   )

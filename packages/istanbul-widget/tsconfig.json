@@ -1,6 +1,7 @@
 {
   "extends": "@minko-fe/tsconfig/tsconfig.project",
   "compilerOptions": {
+    "moduleResolution": "Bundler",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

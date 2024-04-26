@@ -1,6 +1,8 @@
 # vite-plugin-istanbul-widget
 
 > 集成了 istanbul-widget 和 vite-plugin-istanbul 的vite插件
+>
+> 额外支持astro
 
 ## 安装
 
@@ -8,7 +10,11 @@
 npm install vite-plugin-istanbul-widget --save-dev
 ```
 
-## 使用
+## 上手
+
+### vite.config
+
+[参考配置](../../playground/react-app/vite.config.ts)
 
 ```ts
 import { defineConfig } from 'vite'
@@ -18,7 +24,7 @@ import { istanbulWidget } from 'vite-plugin-istanbul-widget'
 export default defineConfig((env) => ({
   plugins: [
     istanbulWidget({
-      enabled: env.mode === 'test',
+      enabled: env.mode === 'test', // 按需启用
       istanbulWidgetConfig: {
         plugin: {
           report: {
@@ -38,15 +44,68 @@ export default defineConfig((env) => ({
 }))
 ```
 
+### astro.config
+
+[参考配置](../../playground/astro-app/astro.config.ts)
+
+```ts
+import react from '@astrojs/react'
+import { defineConfig } from 'astro/config'
+import { exclude, istanbulWidget } from 'vite-plugin-istanbul-widget/astro'
+import { publicTypescript } from 'vite-plugin-public-typescript'
+
+export default defineConfig({
+  integrations: [
+    istanbulWidget({
+      enabled: true,
+      istanbulWidgetConfig: {
+        theme: 'dark',
+        defaultPosition: {
+          x: 0,
+          y: 100,
+        },
+        plugin: {
+          report: {
+            async onReport(coverage: any, ...args: any[]) {
+              await window.__report(coverage, ...args)
+            },
+          },
+          setting: {
+            autoReport: false,
+            onLeavePage: true,
+            requireReporter: true,
+          },
+          buttonGroup: [
+            {
+              text: '自定义按钮',
+              onClick(...args: any[]) {
+                window.__customClick(...args)
+              },
+            },
+          ],
+        },
+        debug: true,
+      },
+      fullReport: true,
+    }),
+    react({
+      exclude,
+    }),
+  ],
+  vite: {
+    plugins: [
+      publicTypescript({
+        babel: true,
+      }),
+    ],
+  },
+})
+```
+
 ## 配置项
 
 ```ts
 type VitePluginIstanbulWidgetOptions = {
-  /**
-   * 入口文件
-   * @default 'src/main.{ts,tsx}'
-   */
-  entry?: string
   /**
    * 是否开启插件
    * @default false

@@ -1,62 +1,17 @@
 import type { Plugin } from 'vite'
 import { isArray, set } from '@minko-fe/lodash-pro'
-import { type IstanbulWidgetOptions } from 'istanbul-widget'
-import { execSync } from 'node:child_process'
-import { createRequire } from 'node:module'
-import path from 'node:path'
-import glob from 'tiny-glob'
-import istanbul, { type IstanbulPluginOptions } from 'vite-plugin-istanbul'
-import serialize from '../serialize'
-
-export type VitePluginIstanbulWidgetOptions = {
-  /**
-   * 入口文件
-   * @default 'src/main.{ts,tsx}'
-   */
-  entry?: string
-  /**
-   * 是否开启插件
-   * @default false
-   */
-  enabled?: boolean
-  /**
-   * 全量上报
-   * @default true
-   */
-  fullReport?: boolean
-  /**
-   * vite-plugin-istanbul 配置
-   */
-  istanbulPluginConfig?: IstanbulPluginOptions
-  /**
-   * istanbul-widget 配置
-   * @description false 则关闭 istanbul-widget 控件
-   */
-  istanbulWidgetConfig: IstanbulWidgetOptions | false
-}
-
-function getCommitId() {
-  try {
-    return execSync('git rev-parse HEAD').toString().trim()
-  } catch {
-    return ''
-  }
-}
+import istanbul from 'vite-plugin-istanbul'
+import { type VitePluginIstanbulWidgetOptions } from './types'
+import { getCommitId, resolveInlineScript } from './utils'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
-  let {
-    entry = 'src/main.{ts,tsx}',
-    enabled = false,
-    fullReport = true,
-    istanbulPluginConfig,
-    istanbulWidgetConfig,
-  } = opts || {}
+  const { enabled = false, fullReport = true, istanbulPluginConfig, istanbulWidgetConfig } = opts || {}
 
   if (!enabled) return undefined
 
   return [
     {
-      name: 'vite:plugin-istanbul-widget:config:pre',
+      name: 'vite:plugin-istanbul-widget:pre',
       enforce: 'pre',
       config(c) {
         if (!c.build?.sourcemap) {
@@ -69,24 +24,40 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           },
         }
       },
-      async configResolved(c) {
-        if (c.root && !path.isAbsolute(entry)) {
-          entry = (
-            await glob(path.resolve(c.root, entry), {
-              absolute: true,
-              filesOnly: true,
-            })
-          )?.[0]
-        }
+      transformIndexHtml: {
+        order: 'pre',
+        handler(html) {
+          return {
+            html,
+            tags: [
+              {
+                tag: 'script',
+                attrs: {
+                  type: 'module',
+                  src: resolveInlineScript('min', istanbulWidgetConfig).src,
+                },
+                injectTo: 'body',
+              },
+              {
+                tag: 'script',
+                attrs: {
+                  type: 'module',
+                },
+                injectTo: 'body',
+                children: resolveInlineScript('min', istanbulWidgetConfig).script,
+              },
+            ],
+          }
+        },
       },
     },
-
     istanbul({
+      extension: ['.js', '.cjs', '.mjs', '.ts', '.tsx', '.jsx', '.vue', '.astro', '.svelte'],
       ...istanbulPluginConfig,
       forceBuildInstrument: enabled,
     }),
     {
-      name: 'vite:plugin-istanbul-widget:config:post',
+      name: 'vite:plugin-istanbul-widget:post',
       enforce: 'post',
       config(c) {
         c.build ??= {}
@@ -116,34 +87,6 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           } else {
             set(c, 'build.rollupOptions.output.manualChunks', manualChunks)
           }
-        }
-      },
-    },
-    {
-      name: 'vite:plugin-istanbul-widget',
-      enforce: 'post',
-      transform(source, id) {
-        if (istanbulWidgetConfig !== false && entry === id) {
-          const require = createRequire(import.meta.url)
-          const istanbulWidgetPath = path.join(
-            path.dirname(require.resolve('istanbul-widget')),
-            'istanbul-widget.esm.js',
-          )
-
-          // TODO: suuport plugin
-          const code = `
-            import IstanbulWidget from "${istanbulWidgetPath}";
-            new IstanbulWidget(${serialize(istanbulWidgetConfig)});
-            ${source}`
-
-          return {
-            code,
-            map: null,
-          }
-        }
-        return {
-          code: source,
-          map: null,
         }
       },
     },

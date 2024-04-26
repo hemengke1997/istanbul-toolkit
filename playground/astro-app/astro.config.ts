@@ -1,10 +1,10 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
-import { istanbulWidget } from 'vite-plugin-istanbul-widget'
+import react from '@astrojs/react'
+import { defineConfig } from 'astro/config'
+import { exclude, istanbulWidget } from 'vite-plugin-istanbul-widget/astro'
+import { publicTypescript } from 'vite-plugin-public-typescript'
 
-export default defineConfig(() => ({
-  plugins: [
-    react(),
+export default defineConfig({
+  integrations: [
     istanbulWidget({
       enabled: true,
       istanbulWidgetConfig: {
@@ -33,17 +33,19 @@ export default defineConfig(() => ({
             },
           ],
         },
+        debug: true,
       },
       fullReport: true,
     }),
+    react({
+      exclude,
+    }),
   ],
-  build: {
-    minify: false,
+  vite: {
+    plugins: [
+      publicTypescript({
+        babel: true,
+      }),
+    ],
   },
-  optimizeDeps: {
-    force: true,
-  },
-  server: {
-    host: true,
-  },
-}))
+})

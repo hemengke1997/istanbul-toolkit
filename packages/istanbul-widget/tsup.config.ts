@@ -101,24 +101,24 @@ const common = (option: Options): Options => ({
   },
 })
 
-const esmBundle: Options = {
+const esmBundle = (option: Options): Options => ({
   format: 'esm',
   entry: {
     'istanbul-widget.esm': 'src/istanbul-widget.ts',
   },
-  dts: {
-    entry: {
-      'istanbul-widget': 'src/istanbul-widget.ts',
-    },
-  },
-  banner() {
-    return {
-      js: `import './istanbul-widget.esm.css';`,
-    }
-  },
-}
+  dts: option.watch
+    ? false
+    : {
+        entry: {
+          'istanbul-widget': 'src/istanbul-widget.ts',
+        },
+      },
+  noExternal: Object.keys(pkg.dependencies) || [],
+  splitting: false,
+  injectStyle: true,
+})
 
-const iife: Options = {
+const iife = (_option: Options): Options => ({
   injectStyle: true,
   format: 'iife',
   entry: {
@@ -131,35 +131,35 @@ const iife: Options = {
     options.logOverride!['empty-import-meta'] = 'silent'
   },
   dts: false,
-  minify: true,
-}
+})
 
-const esmBundleless: Options = {
+const esmBundleless = (option: Options): Options => ({
   entry: ['src/**/*.{ts,tsx,css}'],
-  dts: {
-    entry: getEntry('src/**/*.{ts,tsx}'),
-  },
+  dts: option.watch
+    ? false
+    : {
+        entry: getEntry('src/**/*.{ts,tsx}'),
+      },
   format: 'esm',
   outDir: 'dist/es',
   outExtension: () => ({ js: '.js' }),
   esbuildPlugins: [fileSuffixPlugin('esm')],
   splitting: false,
-  external: ['react', 'react-dom'],
-}
+})
 
 export default defineConfig((option) => {
   return [
     {
       ...common(option),
-      ...esmBundleless,
+      ...esmBundleless(option),
     },
     {
       ...common(option),
-      ...esmBundle,
+      ...esmBundle(option),
     },
     {
       ...common(option),
-      ...iife,
+      ...iife(option),
     },
   ]
 })
