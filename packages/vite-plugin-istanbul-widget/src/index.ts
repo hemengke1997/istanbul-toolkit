@@ -27,27 +27,30 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       transformIndexHtml: {
         order: 'pre',
         handler(html) {
-          return {
-            html,
-            tags: [
-              {
-                tag: 'script',
-                attrs: {
-                  type: 'module',
-                  src: resolveInlineScript('min', istanbulWidgetConfig).src,
+          if (istanbulWidgetConfig !== false) {
+            return {
+              html,
+              tags: [
+                {
+                  tag: 'script',
+                  attrs: {
+                    type: 'module',
+                    src: resolveInlineScript('min', istanbulWidgetConfig).src,
+                  },
+                  injectTo: 'body',
                 },
-                injectTo: 'body',
-              },
-              {
-                tag: 'script',
-                attrs: {
-                  type: 'module',
+                {
+                  tag: 'script',
+                  attrs: {
+                    type: 'module',
+                  },
+                  injectTo: 'body',
+                  children: resolveInlineScript('min', istanbulWidgetConfig).script,
                 },
-                injectTo: 'body',
-                children: resolveInlineScript('min', istanbulWidgetConfig).script,
-              },
-            ],
+              ],
+            }
           }
+          return html
         },
       },
     },

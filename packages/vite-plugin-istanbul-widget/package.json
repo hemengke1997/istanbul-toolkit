@@ -24,8 +24,7 @@
   },
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup",
-    "lib": "tsup --config tsup.config.lib.ts"
+    "build": "tsup"
   },
   "dependencies": {
     "@minko-fe/lodash-pro": "^0.2.4",

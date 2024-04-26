@@ -22,13 +22,15 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 name: 'vite:plugin-istanbul-widget:astro',
                 enforce: 'pre',
                 transform(code, id) {
-                  if (id === 'astro:scripts/page.js') {
-                    code = /*js*/ `${resolveInlineScript('esm', opts.istanbulWidgetConfig).script}
-                    \n${code}`
+                  if (opts.istanbulWidgetConfig !== false) {
+                    if (id === 'astro:scripts/page.js') {
+                      code = /*js*/ `${resolveInlineScript('esm', opts.istanbulWidgetConfig).script}
+                      \n${code}`
 
-                    return {
-                      code,
-                      map: { mappings: '' },
+                      return {
+                        code,
+                        map: { mappings: '' },
+                      }
                     }
                   }
                 },
