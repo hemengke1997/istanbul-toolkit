@@ -28,6 +28,8 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         order: 'pre',
         handler(html) {
           if (istanbulWidgetConfig !== false) {
+            const { src, script } = resolveInlineScript('min', istanbulWidgetConfig)
+
             return {
               html,
               tags: [
@@ -35,7 +37,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                   tag: 'script',
                   attrs: {
                     type: 'module',
-                    src: resolveInlineScript('min', istanbulWidgetConfig).src,
+                    src,
                   },
                   injectTo: 'body',
                 },
@@ -45,7 +47,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                     type: 'module',
                   },
                   injectTo: 'body',
-                  children: resolveInlineScript('min', istanbulWidgetConfig).script,
+                  children: script,
                 },
               ],
             }

@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -27,9 +27,8 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@minko-fe/lodash-pro": "^0.2.4",
+    "@minko-fe/lodash-pro": "^0.3.0",
     "istanbul-widget": "workspace:*",
-    "tiny-glob": "^0.2.9",
     "vite-plugin-istanbul": "^6.0.0"
   },
   "devDependencies": {

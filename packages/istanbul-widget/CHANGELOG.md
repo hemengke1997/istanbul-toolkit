@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.5.0
+
+### Minor Changes
+
+- 639d522: esm bundle all and fix context-state production error
+
 ## 1.4.0
 
 ### Minor Changes

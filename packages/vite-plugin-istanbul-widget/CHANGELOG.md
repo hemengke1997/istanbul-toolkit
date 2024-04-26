@@ -1,5 +1,16 @@
 # vite-plugin-istanbul-widget
 
+## 1.5.0
+
+### Minor Changes
+
+- 639d522: feat: add astro integration
+
+### Patch Changes
+
+- Updated dependencies [639d522]
+  - istanbul-widget@1.5.0
+
 ## 1.4.0
 
 ### Minor Changes

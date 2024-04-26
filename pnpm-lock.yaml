@@ -57,8 +57,8 @@ importers:
   packages/istanbul-server-middleware:
     dependencies:
       '@minko-fe/lodash-pro':
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.3.0
+        version: 0.3.0
       archiver:
         specifier: 7.0.0
         version: 7.0.0
@@ -251,14 +251,11 @@ importers:
   packages/vite-plugin-istanbul-widget:
     dependencies:
       '@minko-fe/lodash-pro':
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.3.0
+        version: 0.3.0
       istanbul-widget:
         specifier: workspace:*
         version: link:../istanbul-widget
-      tiny-glob:
-        specifier: ^0.2.9
-        version: 0.2.9
       vite-plugin-istanbul:
         specifier: ^6.0.0
         version: 6.0.0(vite@5.2.8)
@@ -341,8 +338,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/vite-plugin-istanbul-widget
       vite-plugin-public-typescript:
-        specifier: ^2.3.0
-        version: 2.3.0(vite@5.2.8)
+        specifier: ^2.4.0
+        version: 2.4.0(vite@5.2.8)
 
   playground/vue-app:
     dependencies:
@@ -2880,15 +2877,6 @@ packages:
       - ts-node
       - vue-eslint-parser
     dev: true
-
-  /@minko-fe/lodash-pro@0.2.4:
-    resolution: {integrity: sha512-y63OrqVky+k8mXR8o2HvGg7F0EWcSquYF2RPmbBxE7gMUFGjNKC02q1dka8umE3zwf8Y8v/Ua9pwgEM2Y566og==}
-    dependencies:
-      '@types/lodash-es': 4.17.12
-      deepmerge: 4.3.1
-      lodash-es: 4.17.21
-      p-is-promise: 4.0.0
-    dev: false
 
   /@minko-fe/lodash-pro@0.3.0:
     resolution: {integrity: sha512-RM3J2bUOJAUNxH9gkpiOtXHuvuTZbARNWkzfRY2AclLnrBD6kDgGxRWDIwqyWlFwXcQGcWHpyhoZHo0pf3jgAg==}
@@ -7796,10 +7784,6 @@ packages:
       define-properties: 1.2.1
     dev: true
 
-  /globalyzer@0.1.0:
-    resolution: {integrity: sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==}
-    dev: false
-
   /globby@11.1.0:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
@@ -7811,10 +7795,6 @@ packages:
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
-
-  /globrex@0.1.2:
-    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-    dev: false
 
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
@@ -12247,13 +12227,6 @@ packages:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
 
-  /tiny-glob@0.2.9:
-    resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
-    dependencies:
-      globalyzer: 0.1.0
-      globrex: 0.1.2
-    dev: false
-
   /tiny-readdir@2.7.2:
     resolution: {integrity: sha512-211Pbj4W3EVVIrIkABDPlEyLNzAz1Zb921qwmkKQvx7YR90ma3wuzojFx62nptlrAlI/ict1f++r9E/+9DcWnQ==}
     dependencies:
@@ -12939,36 +12912,6 @@ packages:
       - supports-color
     dev: false
 
-  /vite-plugin-public-typescript@2.3.0(vite@5.2.8):
-    resolution: {integrity: sha512-mmPfUzrW+DRvp2p+HHux+vp/rsXUnJLH4OGA1e2nGLYHhkVMMeQ34SSvhwcCIN0Ze5g4gGMAyCEwyulln2WBWw==}
-    engines: {node: '>=16.0.0'}
-    peerDependencies:
-      vite: '>=4.0.0'
-    dependencies:
-      '@antfu/install-pkg': 0.1.1
-      '@babel/core': 7.24.4
-      '@babel/preset-env': 7.24.4(@babel/core@7.24.4)
-      '@babel/preset-typescript': 7.24.1(@babel/core@7.24.4)
-      browserslist: 4.23.0
-      core-js: 3.37.0
-      debug: 4.3.4
-      esbuild: 0.19.12
-      esbuild-plugin-browserslist: 0.10.0(browserslist@4.23.0)(esbuild@0.19.12)
-      fast-glob: 3.3.2
-      fs-extra: 11.2.0
-      local-pkg: 0.5.0
-      magic-string: 0.30.9
-      on-change: 4.0.2
-      parse5: 7.1.2
-      picocolors: 1.0.0
-      prompts: 2.4.2
-      std-env: 3.7.0
-      vite: 5.2.8(@types/node@20.12.5)
-      watcher: 2.3.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /vite-plugin-public-typescript@2.4.0(vite@5.2.10):
     resolution: {integrity: sha512-nJm0F1H6tIx2RAFLuExLZYozd3/dLJBHnG+2zMDauBLIwBN7RZ4vS2A64ho+rNu4cQc2K746RHupwYzI2bFdoA==}
     engines: {node: '>=16.0.0'}
@@ -12998,6 +12941,36 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /vite-plugin-public-typescript@2.4.0(vite@5.2.8):
+    resolution: {integrity: sha512-nJm0F1H6tIx2RAFLuExLZYozd3/dLJBHnG+2zMDauBLIwBN7RZ4vS2A64ho+rNu4cQc2K746RHupwYzI2bFdoA==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      vite: '>=4.0.0 || >=5.0.0'
+    dependencies:
+      '@antfu/install-pkg': 0.1.1
+      '@babel/core': 7.24.4
+      '@babel/preset-env': 7.24.4(@babel/core@7.24.4)
+      '@babel/preset-typescript': 7.24.1(@babel/core@7.24.4)
+      browserslist: 4.23.0
+      core-js: 3.37.0
+      debug: 4.3.4
+      esbuild: 0.19.12
+      esbuild-plugin-browserslist: 0.10.0(browserslist@4.23.0)(esbuild@0.19.12)
+      fast-glob: 3.3.2
+      fs-extra: 11.2.0
+      local-pkg: 0.5.0
+      magic-string: 0.30.10
+      on-change: 4.0.2
+      parse5: 7.1.2
+      picocolors: 1.0.0
+      prompts: 2.4.2
+      std-env: 3.7.0
+      vite: 5.2.8(@types/node@20.12.5)
+      watcher: 2.3.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /vite@5.2.10(@types/node@20.12.5):
     resolution: {integrity: sha512-PAzgUZbP7msvQvqdSD+ErD5qGnSFiGOoWmV5yAKUEI0kdhjbH6nMWVyZQC/hSc4aXwc0oJ9aEdIiF9Oje0JFCw==}
