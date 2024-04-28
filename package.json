@@ -50,5 +50,10 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "pnpm": {
+    "patchedDependencies": {
+      "vite-plugin-istanbul@6.0.0": "patches/vite-plugin-istanbul@6.0.0.patch"
+    }
+  }
 }

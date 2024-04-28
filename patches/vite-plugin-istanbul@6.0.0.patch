@@ -1,0 +1,28 @@
+diff --git a/dist/index.cjs b/dist/index.cjs
+index e552163df832aa02286da63d90b6a83dfd3fc392..cbd46bddd202e4a329bea55ae3f93ab3f61229ec 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -182,6 +182,9 @@ To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
+         const combinedSourceMap = sanitizeSourceMap(
+           this.getCombinedSourcemap()
+         );
++        combinedSourceMap.sources.forEach((_, index) => {
++          combinedSourceMap.sources[index] = combinedSourceMap.sources[index].replace(/\?.*$/, '');
++        })
+         const code = instrumenter.instrumentSync(
+           srcCode,
+           filename,
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 34e886906b6527286eae6978ce6e73bde396470f..b7bb82857dcd59eabc48271f1316bbc95006f504 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -162,6 +162,9 @@ To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
+         const combinedSourceMap = sanitizeSourceMap(
+           this.getCombinedSourcemap()
+         );
++        combinedSourceMap.sources.forEach((_, index) => {
++          combinedSourceMap.sources[index] = combinedSourceMap.sources[index].replace(/\?.*$/, '');
++        })
+         const code = instrumenter.instrumentSync(
+           srcCode,
+           filename,

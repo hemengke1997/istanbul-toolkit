@@ -1,5 +1,17 @@
 # vite-plugin-istanbul-widget
 
+## 1.5.1
+
+### Patch Changes
+
+- fix: vue3 ts lang
+
+## 1.4.1
+
+### Patch Changes
+
+- fix: vue3 ts lang support
+
 ## 1.5.0
 
 ### Minor Changes

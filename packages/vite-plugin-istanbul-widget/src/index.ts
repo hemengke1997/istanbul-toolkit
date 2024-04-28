@@ -59,6 +59,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     istanbul({
       extension: ['.js', '.cjs', '.mjs', '.ts', '.tsx', '.jsx', '.vue', '.astro', '.svelte'],
       ...istanbulPluginConfig,
+      exclude: [...(istanbulPluginConfig?.exclude ?? []), '**/index.html?html-proxy*.js'],
       forceBuildInstrument: enabled,
     }),
     {
@@ -76,7 +77,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
             if (id.includes('node_modules')) {
               return 'vendor'
             } else if (id.startsWith(process.cwd())) {
-              return 'source'
+              return 'src'
             }
           }
 
