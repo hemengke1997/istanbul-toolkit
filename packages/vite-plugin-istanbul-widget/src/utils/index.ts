@@ -12,13 +12,13 @@ export function getCommitId() {
   }
 }
 
-export function resolveInlineScript(mode: 'esm' | 'min', config: IstanbulWidgetOptions) {
+export function resolveInlineScript(mode: 'lib' | 'min', config: IstanbulWidgetOptions) {
   const require = createRequire(import.meta.url)
 
   const istanbulWidgetPath = path.join(path.dirname(require.resolve('istanbul-widget')), `istanbul-widget.${mode}.js`)
 
   const map = {
-    esm: {
+    lib: {
       src: istanbulWidgetPath,
       script: /*js*/ `import { IstanbulWidget } from "${istanbulWidgetPath}";
       new IstanbulWidget(${serialize(config)})`,

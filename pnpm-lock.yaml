@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   vite-plugin-istanbul@6.0.0:
-    hash: p6l4itvaj2j2zykm76quocjzbm
+    hash: p2tl43ds32rdbxssgiow2i7vam
     path: patches/vite-plugin-istanbul@6.0.0.patch
 
 importers:
@@ -231,6 +231,9 @@ importers:
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
+      istanbul-widget:
+        specifier: 'link: ./'
+        version: 'link: .'
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -249,6 +252,9 @@ importers:
       tailwindcss-rem-to-px:
         specifier: ^0.1.0
         version: 0.1.0
+      tsc-alias:
+        specifier: ^1.8.8
+        version: 1.8.8
       vite:
         specifier: ^5.0.8
         version: 5.2.8(@types/node@20.12.5)
@@ -263,7 +269,7 @@ importers:
         version: link:../istanbul-widget
       vite-plugin-istanbul:
         specifier: ^6.0.0
-        version: 6.0.0(patch_hash=p6l4itvaj2j2zykm76quocjzbm)(vite@5.2.8)
+        version: 6.0.0(patch_hash=p2tl43ds32rdbxssgiow2i7vam)(vite@5.2.8)
     devDependencies:
       '@types/node':
         specifier: ^20.11.30
@@ -5659,6 +5665,11 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
+  /commander@9.5.0:
+    resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==}
+    engines: {node: ^12.20.0 || >=14}
+    dev: true
+
   /common-ancestor-path@1.0.1:
     resolution: {integrity: sha512-L3sHRo1pXXEqX8VU28kfgUY+YGsk09hPqZiZmLacNib6XNTCM8ubYeT7ryXQw8asB1sKgcU5lkB7ONug08aB8w==}
 
@@ -9535,6 +9546,11 @@ packages:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
     dev: false
 
+  /mylas@2.1.13:
+    resolution: {integrity: sha512-+MrqnJRtxdF+xngFfUUkIMQrUUL0KsxbADUkn23Z/4ibGg192Q+z+CQyiYwvWTsYjJygmMR8+w3ZDa98Zh6ESg==}
+    engines: {node: '>=12.0.0'}
+    dev: true
+
   /mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
     dependencies:
@@ -10223,6 +10239,13 @@ packages:
       mlly: 1.6.1
       pathe: 1.1.2
 
+  /plimit-lit@1.6.1:
+    resolution: {integrity: sha512-B7+VDyb8Tl6oMJT9oSO2CW8XC/T4UcJGrwOVoNGwOQsQYhlpfajmrMj5xeejqaASq3V/EqThyOeATEOMuSEXiA==}
+    engines: {node: '>=12'}
+    dependencies:
+      queue-lit: 1.5.2
+    dev: true
+
   /pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
@@ -10671,6 +10694,11 @@ packages:
     dependencies:
       side-channel: 1.0.6
     dev: false
+
+  /queue-lit@1.5.2:
+    resolution: {integrity: sha512-tLc36IOPeMAubu8BkW8YDBV+WyIgKlYU7zUNs0J5Vk9skSZ4JfGlPOqplP0aHdfv7HL0B2Pg6nwiq60Qc6M2Hw==}
+    engines: {node: '>=12'}
+    dev: true
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -12306,6 +12334,18 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
+  /tsc-alias@1.8.8:
+    resolution: {integrity: sha512-OYUOd2wl0H858NvABWr/BoSKNERw3N9GTi3rHPK8Iv4O1UyUXIrTTOAZNHsjlVpXFOhpJBVARI1s+rzwLivN3Q==}
+    hasBin: true
+    dependencies:
+      chokidar: 3.6.0
+      commander: 9.5.0
+      globby: 11.1.0
+      mylas: 2.1.13
+      normalize-path: 3.0.0
+      plimit-lit: 1.6.1
+    dev: true
+
   /tsconfck@3.0.3(typescript@5.4.5):
     resolution: {integrity: sha512-4t0noZX9t6GcPTfBAbIbbIU4pfpCwh0ueq3S4O/5qXI1VwK1outmxhe9dOiEWqMz3MW2LKgDTpqWV+37IWuVbA==}
     engines: {node: ^18 || >=20}
@@ -12901,7 +12941,7 @@ packages:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  /vite-plugin-istanbul@6.0.0(patch_hash=p6l4itvaj2j2zykm76quocjzbm)(vite@5.2.8):
+  /vite-plugin-istanbul@6.0.0(patch_hash=p2tl43ds32rdbxssgiow2i7vam)(vite@5.2.8):
     resolution: {integrity: sha512-Vwh2XdesjcLwaPbHSOiWHh+0s7CNovQTPEjUCTkqmJUe0FN2TKsOp0qpoaklOuwrKlL9elhD5fPFxi5lmG62zA==}
     peerDependencies:
       vite: '>=4 <=6'

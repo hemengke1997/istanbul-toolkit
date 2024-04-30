@@ -1,4 +1,4 @@
-import { Button } from './src/components/ui'
+import { Button } from './src/components'
 import { IstanbulWidget } from './src/istanbul-widget'
 
 function ReactPlugin() {

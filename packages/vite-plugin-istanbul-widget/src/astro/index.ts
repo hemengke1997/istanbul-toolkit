@@ -24,7 +24,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 transform(code, id) {
                   if (opts.istanbulWidgetConfig !== false) {
                     if (id === 'astro:scripts/page.js') {
-                      const { script } = resolveInlineScript('esm', opts.istanbulWidgetConfig)
+                      const { script } = resolveInlineScript('lib', opts.istanbulWidgetConfig)
 
                       code = /*js*/ `${script}
                       \n${code}`

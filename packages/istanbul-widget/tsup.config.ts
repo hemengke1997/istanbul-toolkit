@@ -3,6 +3,7 @@ import glob from 'fast-glob'
 import fs from 'node:fs'
 import path from 'node:path'
 import stripDirs from 'strip-dirs'
+import { replaceTscAliasPaths } from 'tsc-alias'
 import { type Options, defineConfig } from 'tsup'
 import pkg from './package.json'
 
@@ -101,10 +102,10 @@ const common = (option: Options): Options => ({
   },
 })
 
-const esmBundle = (option: Options): Options => ({
+const lib = (option: Options): Options => ({
   format: 'esm',
   entry: {
-    'istanbul-widget.esm': 'src/istanbul-widget.ts',
+    'istanbul-widget.lib': 'src/istanbul-widget.ts',
   },
   dts: option.watch
     ? false
@@ -133,7 +134,9 @@ const iife = (_option: Options): Options => ({
   dts: false,
 })
 
-const esmBundleless = (option: Options): Options => ({
+const esOutDir = 'dist/es'
+
+const es = (option: Options): Options => ({
   entry: ['src/**/*.{ts,tsx,css}'],
   dts: option.watch
     ? false
@@ -141,21 +144,30 @@ const esmBundleless = (option: Options): Options => ({
         entry: getEntry('src/**/*.{ts,tsx}'),
       },
   format: 'esm',
-  outDir: 'dist/es',
+  outDir: esOutDir,
+  bundle: false,
   outExtension: () => ({ js: '.js' }),
   esbuildPlugins: [fileSuffixPlugin('esm')],
   splitting: false,
+  minify: false,
+  skipNodeModulesBundle: true,
+  async onSuccess() {
+    replaceTscAliasPaths({
+      configFile: './tsconfig.json',
+      outDir: esOutDir,
+    })
+  },
 })
 
 export default defineConfig((option) => {
   return [
     {
       ...common(option),
-      ...esmBundleless(option),
+      ...es(option),
     },
     {
       ...common(option),
-      ...esmBundle(option),
+      ...lib(option),
     },
     {
       ...common(option),

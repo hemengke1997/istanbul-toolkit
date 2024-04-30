@@ -8,7 +8,7 @@
     "istanbul",
     "istanbul-toolkit",
     "coverage",
-    "vite"
+    "nyc"
   ],
   "license": "MIT",
   "repository": {

@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.5.1
+
+### Patch Changes
+
+- fix: es bundle less mode ts alias
+
 ## 1.5.0
 
 ### Minor Changes

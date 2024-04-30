@@ -1,24 +1,33 @@
 {
   "name": "istanbul-widget",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "type": "module",
   "files": [
-    "**"
+    "components.d.ts",
+    "dist",
+    "lib.d.ts"
   ],
-  "main": "./dist/es/istanbul-widget.js",
+  "main": "./dist/istanbul-widget.lib.js",
   "module": "./dist/es/istanbul-widget.js",
   "types": "./dist/istanbul-widget.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/istanbul-widget.d.ts",
+      "require": "./dist/istanbul-widget.lib.js",
       "import": "./dist/es/istanbul-widget.js",
-      "default": "./dist/istanbul-widget.esm.js"
+      "default": "./dist/es/istanbul-widget.js"
     },
     "./components": {
       "types": "./component.d.ts",
-      "import": "./dist/es/components/ui/index.js",
-      "default": "./dist/es/components/ui/index.js"
+      "import": "./dist/es/components/index.js",
+      "default": "./dist/es/components/index.js"
+    },
+    "./lib": {
+      "types": "./dist/istanbul-widget.d.ts",
+      "require": "./dist/istanbul-widget.lib.js",
+      "import": "./dist/istanbul-widget.lib.js",
+      "default": "./dist/istanbul-widget.lib.js"
     },
     "./*": "./*"
   },
@@ -75,6 +84,7 @@
     "strip-dirs": "^3.0.0",
     "tailwindcss": "3.2.7",
     "tailwindcss-rem-to-px": "^0.1.0",
+    "tsc-alias": "^1.8.8",
     "vite": "^5.0.8"
   }
 }
