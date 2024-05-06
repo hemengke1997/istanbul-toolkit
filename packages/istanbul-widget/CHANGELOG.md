@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.5.2
+
+### Patch Changes
+
+- style: entry button z-index
+
 ## 1.5.1
 
 ### Patch Changes

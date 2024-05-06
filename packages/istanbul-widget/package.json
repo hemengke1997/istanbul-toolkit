@@ -1,11 +1,12 @@
 {
   "name": "istanbul-widget",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "type": "module",
   "files": [
     "components.d.ts",
     "dist",
-    "lib.d.ts"
+    "lib.d.ts",
+    "package.json"
   ],
   "main": "./dist/istanbul-widget.lib.js",
   "module": "./dist/es/istanbul-widget.js",

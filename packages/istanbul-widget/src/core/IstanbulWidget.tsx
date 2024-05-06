@@ -36,7 +36,7 @@ export default function IstanbulWidget() {
       <div
         className={cn(
           'iw-block',
-          'iw-fixed iw-z-[49] iw-right-0 iw-top-0 iw-left-0 iw-bottom-0 iw-pointer-events-none',
+          'iw-fixed iw-z-[99999] iw-right-0 iw-top-0 iw-left-0 iw-bottom-0 iw-pointer-events-none',
         )}
       >
         <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
