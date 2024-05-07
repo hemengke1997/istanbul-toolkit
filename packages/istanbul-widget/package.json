@@ -82,7 +82,7 @@
     "rollup-plugin-visualizer": "^5.12.0",
     "tailwindcss": "3.2.7",
     "tailwindcss-rem-to-px": "^0.1.0",
-    "tsup-plugin-bundleless": "^0.0.1",
+    "tsup-plugin-bundleless": "^0.1.2",
     "tsup-plugin-css-legacy": "^0.0.1",
     "vite": "^5.2.10"
   }

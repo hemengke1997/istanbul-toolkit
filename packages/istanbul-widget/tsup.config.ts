@@ -1,5 +1,5 @@
 import { type Options, defineConfig } from 'tsup'
-import { bundless } from 'tsup-plugin-bundleless'
+import { bundleless } from 'tsup-plugin-bundleless'
 import { cssLegacy } from 'tsup-plugin-css-legacy'
 import pkg from './package.json'
 
@@ -52,7 +52,7 @@ const es = (option: Options): Options => ({
   outDir: 'dist/es',
   splitting: false,
   minify: false,
-  plugins: [bundless()],
+  plugins: [bundleless()],
 })
 
 export default defineConfig((option) => {
