@@ -1,5 +1,3 @@
-/// <reference types="vite/client" />
-
 declare global {
   declare var __VERSION__: string
 

@@ -22,7 +22,7 @@
     "lint": "turbo lint --filter=\"./packages/*\"",
     "prepare": "simple-git-hooks",
     "commitlint": "commitlint -e",
-    "up": "taze -I -w -r",
+    "up": "taze -I -w",
     "changeset": "changeset",
     "version": "changeset version && changeset tag",
     "report": "nyc report --excludeAfterRemap=false"

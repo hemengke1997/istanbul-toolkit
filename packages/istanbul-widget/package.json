@@ -33,7 +33,9 @@
     "./*": "./*"
   },
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "./dist/istanbul-widget.lib.js",
+    "./dist/istanbul-widget.min.js"
   ],
   "scripts": {
     "dev": "tsup --watch",
@@ -68,24 +70,20 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.24.4",
     "@iconify/tailwind": "^0.1.4",
-    "@rollup/plugin-babel": "^6.0.4",
     "@swc/core": "^1.4.17",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
-    "bundle-require": "^4.0.3",
-    "fast-glob": "^3.3.2",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.38",
     "rollup-plugin-visualizer": "^5.12.0",
-    "strip-dirs": "^3.0.0",
     "tailwindcss": "3.2.7",
     "tailwindcss-rem-to-px": "^0.1.0",
-    "tsc-alias": "^1.8.8",
-    "vite": "^5.0.8"
+    "tsup-plugin-bundleless": "^0.0.1",
+    "tsup-plugin-css-legacy": "^0.0.1",
+    "vite": "^5.2.10"
   }
 }
