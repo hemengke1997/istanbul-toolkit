@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -36,15 +36,21 @@
     }
   },
   "dependencies": {
+    "@istanbuljs/load-nyc-config": "1.1.0",
     "@minko-fe/lodash-pro": "^0.3.0",
+    "espree": "10.0.1",
+    "istanbul-lib-instrument": "6.0.2",
     "istanbul-widget": "workspace:*",
-    "slash": "^5.1.0"
+    "picocolors": "1.0.0",
+    "slash": "^5.1.0",
+    "source-map": "0.7.4",
+    "test-exclude": "6.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
     "@types/serialize-javascript": "^5.0.4",
+    "local-pkg": "^0.5.0",
     "serialize-javascript": "^6.0.2",
-    "vite": "^5.0.8",
-    "vite-plugin-istanbul": "^6.0.0"
+    "vite-plugin-istanbul": "6.0.0"
   }
 }
