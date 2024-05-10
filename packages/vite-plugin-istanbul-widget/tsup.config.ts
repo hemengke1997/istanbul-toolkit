@@ -9,6 +9,7 @@ export const tsup = defineConfig((option) => [
     dts: true,
     target: 'node16',
     format: ['cjs', 'esm'],
+    external: ['vite'],
     platform: 'node',
     splitting: false,
     treeshake: true,

@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.5.3
+
+### Patch Changes
+
+- type fix
+
 ## 1.5.2
 
 ### Patch Changes

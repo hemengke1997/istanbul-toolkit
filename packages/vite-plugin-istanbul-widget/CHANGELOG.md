@@ -1,5 +1,13 @@
 # vite-plugin-istanbul-widget
 
+## 1.5.4
+
+### Patch Changes
+
+- astro3 and windows support
+- Updated dependencies
+  - istanbul-widget@1.5.3
+
 ## 1.5.3
 
 ### Patch Changes

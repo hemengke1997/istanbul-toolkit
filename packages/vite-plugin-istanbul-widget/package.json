@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -26,17 +26,25 @@
     "dev": "tsup --watch",
     "build": "tsup"
   },
+  "peerDependencies": {
+    "astro": "^3 || ^4",
+    "vite": "^4 || ^5"
+  },
+  "peerDependenciesMeta": {
+    "astro": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@minko-fe/lodash-pro": "^0.3.0",
     "istanbul-widget": "workspace:*",
-    "slash": "^5.1.0",
-    "vite-plugin-istanbul": "^6.0.0"
+    "slash": "^5.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
     "@types/serialize-javascript": "^5.0.4",
-    "astro": "^4.7.0",
     "serialize-javascript": "^6.0.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-istanbul": "^6.0.0"
   }
 }
