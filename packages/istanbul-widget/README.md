@@ -190,10 +190,10 @@ istanbulWidget.addPlugin(htmlPlugin)
 ## 截图
 
 ### 入口按钮
-![入口](screenshots/entry.png)
+![入口](./screenshots/entry.png)
 
 ### 深色主题
-![深色主题](screenshots/dark.png)
+![深色主题](./screenshots/dark.png)
 
 ### 浅色主题
-![浅色主题](screenshots/light.png)
+![浅色主题](./screenshots/light.png)

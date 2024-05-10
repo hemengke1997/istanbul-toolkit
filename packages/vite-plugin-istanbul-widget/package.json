@@ -2,6 +2,7 @@
   "name": "vite-plugin-istanbul-widget",
   "version": "1.5.5",
   "type": "module",
+  "homepage": "https://github.com/hemengke1997/istanbul-toolkit/tree/master/packages/vite-plugin-istanbul-widget",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

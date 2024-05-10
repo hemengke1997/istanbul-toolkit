@@ -2,6 +2,7 @@
   "name": "istanbul-widget",
   "version": "1.5.3",
   "type": "module",
+  "homepage": "https://github.com/hemengke1997/istanbul-toolkit/tree/master/packages/istanbul-widget",
   "files": [
     "components.d.ts",
     "dist",
