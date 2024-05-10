@@ -2,6 +2,9 @@
   "name": "istanbul-server-middleware",
   "version": "1.1.0",
   "homepage": "https://github.com/hemengke1997/istanbul-toolkit/tree/master/packages/istanbul-server-middleware",
+  "repository": {
+    "url": "https://github.com/hemengke1997/istanbul-toolkit/tree/master/packages/istanbul-server-middleware"
+  },
   "files": [
     "dist",
     "ecosystem.config.js"

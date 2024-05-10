@@ -68,7 +68,7 @@ export class IstanbulWidget {
     this._addBuiltInPlugins()
 
     // try to init
-    const _onload = async () => {
+    const _onload = () => {
       if (this.isInited) {
         return
       }
@@ -96,7 +96,7 @@ export class IstanbulWidget {
     }
   }
 
-  private async _initComponent() {
+  private _initComponent() {
     if (!$.one(`#${ISTANBUL_WIDGET_ID}`)) {
       let target: HTMLElement = document.body
       if (typeof this.option.target === 'string') {
