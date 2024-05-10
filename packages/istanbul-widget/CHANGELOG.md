@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.5.4
+
+### Patch Changes
+
+- fix: react-dom asyn render leading to issue in safari
+
 ## 1.5.3
 
 ### Patch Changes

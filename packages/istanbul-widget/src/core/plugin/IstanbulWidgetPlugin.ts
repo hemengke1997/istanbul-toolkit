@@ -6,7 +6,7 @@ import { type IstanbulWidget } from '../core'
 type Events = {
   init: []
   ready: []
-  render: [callback: (res: { htmlElement: HTMLElement | undefined }) => void]
+  render: [callback: (res: { htmlElement: HTMLElement | undefined }) => void | Promise<void>]
 }
 
 export class IstanbulWidgetPlugin {
@@ -96,8 +96,8 @@ export class IstanbulWidgetPlugin {
   }
 
   public onRender() {
-    this.on('render', (callback) => {
-      callback({ htmlElement: this.htmlElement })
+    this.on('render', async (callback) => {
+      await callback({ htmlElement: this.htmlElement })
     })
   }
 

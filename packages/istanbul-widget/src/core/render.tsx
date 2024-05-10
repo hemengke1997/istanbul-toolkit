@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom/client'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import Context, { type InitialWidgetProps } from './Context'
 import IstanbulWidget from './IstanbulWidget'
+import { reactdomRender, reactdomUnmount } from './dom/react-render'
 import { type PluginType } from './options.interface'
 
 export type CompInstance = {
@@ -19,19 +19,20 @@ export function render({
   const container = document.createElement('div')
   container.id = ISTANBUL_WIDGET_ID
   target.appendChild(container)
-  const reactRoot = ReactDOM.createRoot(container)
-  reactRoot.render(
+
+  reactdomRender(
     <Context.Provider value={coreOptions}>
       <IstanbulWidget />
     </Context.Provider>,
+    container,
   )
 
   return {
     destroy() {
-      reactRoot.unmount()
+      reactdomUnmount(container)
     },
-    update(newProps) {
-      reactRoot.render(
+    async update(newProps) {
+      reactdomRender(
         <Context.Provider
           value={{
             ...coreOptions,
@@ -40,12 +41,9 @@ export function render({
         >
           <IstanbulWidget />
         </Context.Provider>,
+        container,
       )
-      return new Promise((resolve) => {
-        requestIdleCallback(() => {
-          resolve(true)
-        })
-      })
+      return true
     },
   }
 }
