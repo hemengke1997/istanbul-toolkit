@@ -29,6 +29,7 @@
   "dependencies": {
     "@minko-fe/lodash-pro": "^0.3.0",
     "istanbul-widget": "workspace:*",
+    "slash": "^5.1.0",
     "vite-plugin-istanbul": "^6.0.0"
   },
   "devDependencies": {

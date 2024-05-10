@@ -1,1 +1,1 @@
-export * from './dist/istanbul-widget'
+export * from './dist/istanbul-widget.d'

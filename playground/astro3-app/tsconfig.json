@@ -1,0 +1,7 @@
+{
+  "extends": "@minko-fe/tsconfig/tsconfig.project",
+  "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "types": ["vite-plugin-istanbul-widget/client"]
+  }
+}

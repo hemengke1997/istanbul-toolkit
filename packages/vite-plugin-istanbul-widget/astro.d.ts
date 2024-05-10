@@ -1,1 +1,1 @@
-export * from './dist/astro'
+export * from './dist/astro.d'

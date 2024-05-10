@@ -43,9 +43,8 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         if (opts.istanbulWidgetConfig !== false) {
           injectScript(
             'page',
-            /*js*/ `
             // hack to inject istanbul-widget
-          `,
+            '',
           )
         }
       },
