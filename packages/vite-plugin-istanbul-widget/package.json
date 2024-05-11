@@ -1,6 +1,7 @@
 {
   "name": "vite-plugin-istanbul-widget",
   "version": "1.5.7",
+  "description": "集成了 istanbul-widget 和 vite-plugin-istanbul 的vite插件",
   "type": "module",
   "keywords": [
     "istanbul",
@@ -11,7 +12,9 @@
   ],
   "homepage": "https://github.com/hemengke1997/istanbul-toolkit/tree/master/packages/vite-plugin-istanbul-widget",
   "repository": {
-    "url": "https://github.com/hemengke1997/istanbul-toolkit/tree/master/packages/vite-plugin-istanbul-widget"
+    "type": "git",
+    "url": "git+https://github.com/hemengke1997/istanbul-toolkit.git",
+    "directory": "packages/vite-plugin-istanbul-widget"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

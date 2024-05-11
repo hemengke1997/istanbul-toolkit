@@ -23,7 +23,7 @@ const istanbulWidget = new IstanbulWidget({
   plugin: {
     // 上报按钮
     report: {
-      onReport(coverage) {
+      async onReport(coverage) {
         console.log('上报', coverage)
         // throw new Error('上报失败') // 你可以控制失败的逻辑
       },
@@ -50,7 +50,7 @@ const istanbulWidget = new IstanbulWidget({
 <script src="https://unpkg.com/istanbul-widget@latest/dist/istanbul-widget.min.js"></script>
 <script>
   // 默认会挂载到 `window.IstanbulWidget` 上
-  var istanbulWidget = new window.IstanbulWidget();
+  const istanbulWidget = new window.IstanbulWidget();
 </script>
 ```
 
