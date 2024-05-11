@@ -1,1 +1,1 @@
-export * from './dist/es/components/ui/index'
+export * from './dist/esm/components/ui/index'

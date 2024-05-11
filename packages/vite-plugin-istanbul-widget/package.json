@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "type": "module",
   "keywords": [
     "istanbul",

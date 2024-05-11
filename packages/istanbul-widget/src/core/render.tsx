@@ -1,6 +1,6 @@
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import Context, { type InitialWidgetProps } from './Context'
-import IstanbulWidget from './IstanbulWidget'
+import IstanbulWidgetComponent from './IstanbulWidget'
 import { reactdomRender, reactdomUnmount } from './dom/react-render'
 import { type PluginType } from './options.interface'
 
@@ -22,9 +22,12 @@ export function render({
 
   reactdomRender(
     <Context.Provider value={coreOptions}>
-      <IstanbulWidget />
+      <IstanbulWidgetComponent />
     </Context.Provider>,
-    container,
+    {
+      container,
+      sync: true,
+    },
   )
 
   return {
@@ -39,9 +42,12 @@ export function render({
             ...newProps,
           }}
         >
-          <IstanbulWidget />
+          <IstanbulWidgetComponent />
         </Context.Provider>,
-        container,
+        {
+          container,
+          sync: true,
+        },
       )
       return true
     },

@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.5.5
+
+### Patch Changes
+
+- fix: compatible with safari
+
 ## 1.5.4
 
 ### Patch Changes

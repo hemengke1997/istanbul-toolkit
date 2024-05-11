@@ -45,11 +45,11 @@ const iife = (_option: Options): Options => ({
   dts: false,
 })
 
-const es = (option: Options): Options => ({
+const esm = (option: Options): Options => ({
   entry: ['src/**/*.{ts,tsx,css}'],
   dts: !option.watch,
   format: 'esm',
-  outDir: 'dist/es',
+  outDir: 'dist/esm',
   splitting: false,
   minify: false,
   plugins: [bundleless()],
@@ -59,7 +59,7 @@ export default defineConfig((option) => {
   return [
     {
       ...common(option),
-      ...es(option),
+      ...esm(option),
     },
     {
       ...common(option),

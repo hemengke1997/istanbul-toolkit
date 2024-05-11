@@ -33,6 +33,8 @@ export default defineConfig((env) => {
     optimizeDeps: {
       exclude: ['istanbul-widget'],
     },
-    server: {},
+    server: {
+      host: '0.0.0.0',
+    },
   }
 })

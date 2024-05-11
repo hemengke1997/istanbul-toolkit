@@ -44,7 +44,9 @@ export class IstanbulWidgetReactPlugin<T extends {} = {}> extends IstanbulWidget
           name: this.name,
           domID: this.domID,
         }),
-        el,
+        {
+          container: el,
+        },
       )
 
       const target = $.queryEl(`#${this.domID}`)

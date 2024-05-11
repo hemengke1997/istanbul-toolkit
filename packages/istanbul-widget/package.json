@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "type": "module",
   "keywords": [
     "istanbul",
@@ -18,20 +18,20 @@
     "package.json"
   ],
   "main": "./dist/istanbul-widget.lib.js",
-  "module": "./dist/es/istanbul-widget.js",
+  "module": "./dist/esm/istanbul-widget.js",
   "types": "./dist/istanbul-widget.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/istanbul-widget.d.ts",
       "require": "./dist/istanbul-widget.lib.js",
-      "import": "./dist/es/istanbul-widget.js",
-      "default": "./dist/es/istanbul-widget.js"
+      "import": "./dist/esm/istanbul-widget.js",
+      "default": "./dist/esm/istanbul-widget.js"
     },
     "./components": {
       "types": "./component.d.ts",
-      "import": "./dist/es/components/index.js",
-      "default": "./dist/es/components/index.js"
+      "import": "./dist/esm/components/index.js",
+      "default": "./dist/esm/components/index.js"
     },
     "./lib": {
       "types": "./dist/istanbul-widget.d.ts",
@@ -54,11 +54,23 @@
     "lint": "eslint . --fix",
     "preview": "vite preview"
   },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "@iconify-json/vscode-icons": "^1.1.33",
+    "@iconify-json/vscode-icons": "^1.1.34",
     "@minko-fe/lodash-pro": "^0.3.0",
     "@minko-fe/react-hook": "^0.3.1",
-    "@neodrag/react": "^2.0.3",
+    "@neodrag/react": "^2.0.4",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-icons": "^1.3.0",
@@ -68,31 +80,31 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.5",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "consola": "^3.2.3",
     "context-state": "^3.0.0",
     "eventemitter3": "^5.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.2.2",
+    "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@iconify/tailwind": "^0.1.4",
-    "@swc/core": "^1.4.17",
-    "@types/node": "^20.11.30",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
+    "@iconify/tailwind": "^1.0.1",
+    "@swc/core": "^1.5.5",
+    "@types/node": "^20.12.11",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.38",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "tailwindcss": "3.2.7",
     "tailwindcss-rem-to-px": "^0.1.0",
-    "tsup-plugin-bundleless": "^0.1.2",
+    "tsup-plugin-bundleless": "^0.1.3",
     "tsup-plugin-css-legacy": "^0.0.1",
-    "vite": "^5.2.10"
+    "vite": "^5.2.11"
   }
 }

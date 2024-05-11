@@ -8,12 +8,27 @@ type ContainerType = (Element | DocumentFragment) & {
   [MARK]?: Root
 }
 
-export function reactdomRender(node: ReactElement, container: ContainerType) {
-  flushSync(() => {
+export function reactdomRender(
+  node: ReactElement,
+  {
+    container,
+    sync,
+  }: {
+    container: ContainerType
+    sync?: boolean
+  },
+) {
+  const render = () => {
     const root = container[MARK] || ReactDOM.createRoot(container)
     root.render(node)
     container[MARK] = root
-  })
+  }
+
+  if (sync) {
+    flushSync(render)
+  } else {
+    render()
+  }
 }
 
 export async function reactdomUnmount(container: ContainerType) {

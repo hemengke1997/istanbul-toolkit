@@ -8,7 +8,7 @@ import Context from './Context'
 import Draggable from './components/Draggable'
 import { type Position } from './options.interface'
 
-export default function IstanbulWidget() {
+export default function IstanbulWidgetComponent() {
   const { theme, pluginList } = Context.usePicker(['theme', 'pluginList'])
 
   const [popoverOpen, setPopoverOpen] = useState(false)
@@ -29,6 +29,7 @@ export default function IstanbulWidget() {
   }, [])
 
   const dragging = useRef<boolean>(false)
+  const draggingTimer = useRef<number | null>(null)
   const [dragPos, setDragPos] = useState<Position>({ x: 0, y: 0 })
 
   return (
@@ -49,17 +50,20 @@ export default function IstanbulWidget() {
               onDrag({ offsetX, offsetY }) {
                 const dragX = Math.abs(dragPos.x - offsetX)
                 const dragY = Math.abs(dragPos.y - offsetY)
+
                 if (dragX > 10 || dragY > 10) {
+                  draggingTimer.current && window.clearTimeout(draggingTimer.current)
                   dragging.current = true
                 } else {
                   dragging.current = false
                 }
               },
               onDragEnd() {
-                const t = setTimeout(() => {
-                  dragging.current = false
-                  clearTimeout(t)
-                }, 100)
+                if (dragging.current) {
+                  draggingTimer.current = window.setTimeout(() => {
+                    dragging.current = false
+                  }, 16)
+                }
               },
             }}
             className='iw-rounded-full iw-overflow-hidden'
@@ -74,7 +78,7 @@ export default function IstanbulWidget() {
               }}
             >
               <div
-                className='iw-w-9 iw-h-9 iw-flex iw-justify-center iw-items-center iw-p-2 iw-cursor-pointer'
+                className='iw-w-10 iw-h-10 iw-flex iw-justify-center iw-items-center iw-p-2 iw-cursor-pointer'
                 style={{
                   backgroundColor: 'rgba(0, 0, 0, 0.25)',
                 }}
@@ -87,7 +91,7 @@ export default function IstanbulWidget() {
 
           <PopoverContent sideOffset={2}>
             <div
-              className='iw-flex iw-items-center iw-space-x-2 iw-rounded-md iw-p-2 iw-text-xs iw-shadow'
+              className='iw-flex iw-items-center iw-rounded-md iw-p-2 iw-text-xs iw-shadow iw-max-w-[100vw] iw-flex-wrap iw-space-x-2'
               id={`${ISTANBUL_WIDGET_ID}__popover`}
             >
               {Object.entries(pluginList).map(([_, plugin]) => {
