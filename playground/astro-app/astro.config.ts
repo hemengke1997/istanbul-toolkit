@@ -47,5 +47,8 @@ export default defineConfig({
         babel: true,
       }),
     ],
+    build: {
+      minify: false,
+    },
   },
 })

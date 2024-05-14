@@ -1,5 +1,11 @@
 # vite-plugin-istanbul-widget
 
+## 1.5.8
+
+### Patch Changes
+
+- fix: astro fullreport
+
 ## 1.5.7
 
 ### Patch Changes

@@ -1,9 +1,14 @@
+import node from '@astrojs/node'
 import react from '@astrojs/react'
 import { defineConfig } from 'astro/config'
 import { exclude, istanbulWidget } from 'vite-plugin-istanbul-widget/astro'
 import { publicTypescript } from 'vite-plugin-public-typescript'
 
 export default defineConfig({
+  adapter: node({
+    mode: 'standalone',
+  }),
+  output: 'server',
   integrations: [
     istanbulWidget({
       enabled: true,
@@ -47,5 +52,8 @@ export default defineConfig({
         babel: true,
       }),
     ],
+    build: {
+      minify: false,
+    },
   },
 })

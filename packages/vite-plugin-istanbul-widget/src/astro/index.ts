@@ -1,5 +1,5 @@
 import type { AstroIntegration } from 'astro'
-import { istanbulWidget as viteIstanbulWidget } from '../index'
+import { VENDOR, istanbulWidget as viteIstanbulWidget } from '../index'
 import { type VitePluginIstanbulWidgetOptions } from '../types'
 import { resolveInlineScript } from '../utils'
 
@@ -15,7 +15,11 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 ...opts,
                 istanbulPluginConfig: {
                   ...opts.istanbulPluginConfig,
-                  exclude: [...(opts.istanbulPluginConfig?.exclude ?? []), '**/astro:scripts/*.js'],
+                  exclude: [
+                    ...(opts.istanbulPluginConfig?.exclude ?? []),
+                    '**/astro:scripts/*.js',
+                    '**/node_modules/**',
+                  ],
                 },
               }),
               {
@@ -37,6 +41,34 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                   }
                 },
               },
+              {
+                name: 'vite:plugin-istanbul-widget:astro:post',
+                enforce: 'post',
+                generateBundle: {
+                  order: 'post',
+                  handler(opts, bundle) {
+                    for (const file in bundle) {
+                      const chunk = bundle[file]
+                      if (chunk.type === 'chunk') {
+                        if (chunk.code.includes('/* empty css')) {
+                          if (chunk.name === VENDOR) {
+                            const { format } = opts
+                            const emptyCss = `\\/\\*\\s*empty\\s*css\\s*\\*\\/`
+                            const emptyChunkRE = new RegExp(
+                              format === 'es'
+                                ? `${emptyCss}\\bimport\\s*["'][^"']*(?:.*)["'];`
+                                : `${emptyCss}(\\b|,\\s*)require\\(\\s*["'][^"']*(?:.*)["']\\)(;|,)`,
+                              'g',
+                            )
+
+                            chunk.code = chunk.code.replace(emptyChunkRE, '')
+                          }
+                        }
+                      }
+                    }
+                  },
+                },
+              },
             ],
           },
         })
@@ -52,4 +84,4 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   } as AstroIntegration
 }
 
-export const exclude = [/istanbul-widget.esm/]
+export const exclude = [/istanbul-widget\..*\.js/]

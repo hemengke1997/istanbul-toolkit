@@ -34,7 +34,7 @@
     "@minko-fe/commitlint-config": "^2.0.7",
     "@minko-fe/eslint-config": "^3.2.0",
     "@minko-fe/prettier-config": "^2.2.2",
-    "@minko-fe/tsconfig": "^2.1.0",
+    "@minko-fe/tsconfig": "latest",
     "eslint": "^8.57.0",
     "nyc": "^15.1.0",
     "prettier-plugin-astro": "^0.13.0",
@@ -56,5 +56,11 @@
     "patchedDependencies": {
       "vite-plugin-istanbul@6.0.0": "patches/vite-plugin-istanbul@6.0.0.patch"
     }
+  },
+  "prettier": "@minko-fe/prettier-config",
+  "commitlint": {
+    "extends": [
+      "@minko-fe"
+    ]
   }
 }

@@ -15,7 +15,7 @@ export const tsup = defineConfig((option) => {
       splitting: false,
       treeshake: true,
       clean: !option.watch,
-      minify: !option.watch,
+      minify: false,
       sourcemap: !!option.watch,
     },
   ]
