@@ -7,7 +7,15 @@ import { getCommitId, resolveInlineScript } from './utils'
 export const VENDOR = 'vendor'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
-  const { enabled = false, fullReport = true, istanbulPluginConfig, istanbulWidgetConfig } = opts || {}
+  const {
+    enabled = false,
+    fullReport = true,
+    istanbulPluginConfig,
+    istanbulWidgetConfig,
+    checkProd = true,
+  } = opts || {}
+
+  if (checkProd && process.env.NODE_ENV === 'production') return undefined
 
   if (!enabled) return undefined
 
