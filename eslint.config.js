@@ -7,13 +7,10 @@ export default defineConfig(
     {
       ignores: ['**/packages/istanbul-widget/src/components/**/*'],
     },
-    {
-      rules: {
-        'node/no-deprecated-api': 'off',
-      },
-    },
   ],
   {
     astro: true,
+    react: true,
+    vue: true,
   },
 )

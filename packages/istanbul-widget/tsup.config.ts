@@ -29,6 +29,7 @@ const lib = (option: Options): Options => ({
       },
   noExternal: Object.keys(pkg.dependencies) || [],
   splitting: false,
+  minify: false,
   injectStyle: true,
 })
 

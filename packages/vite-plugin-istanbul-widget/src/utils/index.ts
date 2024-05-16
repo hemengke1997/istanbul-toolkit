@@ -8,8 +8,8 @@ import serialize from './serialize'
 export function getCommitId() {
   try {
     return execSync('git rev-parse HEAD').toString().trim()
-  } catch {
-    return ''
+  } catch (e) {
+    console.error(`Failed to resolve git HEAD:\n${e}`)
   }
 }
 

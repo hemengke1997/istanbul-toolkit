@@ -1,5 +1,13 @@
 # vite-plugin-istanbul-widget
 
+## 1.5.9
+
+### Patch Changes
+
+- log error message when git not found
+- Updated dependencies
+  - istanbul-widget@1.5.6
+
 ## 1.5.8
 
 ### Patch Changes

@@ -1,0 +1,19 @@
+{
+  "extends": "@minko-fe/tsconfig/tsconfig.app",
+  "compilerOptions": {
+    "incremental": true,
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": ["vite-plugin-istanbul-widget/client"],
+    "allowJs": true,
+    "isolatedModules": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "**/*.mts"]
+}

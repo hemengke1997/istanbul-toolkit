@@ -1,4 +1,4 @@
-import { deepMerge, isArray, isFunction, isObject, set } from '@minko-fe/lodash-pro'
+import { isArray, isFunction, isObject, merge, set } from '@minko-fe/lodash-pro'
 import { type ConsolaInstance, LogLevels, createConsola } from 'consola/browser'
 import { ButtonGroupPlugin } from '@/plugins/button-group/ButtonGroupPlugin'
 import { ReportPlugin } from '@/plugins/report/ReportPlugin'
@@ -59,9 +59,8 @@ export class IstanbulWidget {
     this.isInited = false
 
     if (isObject(opts)) {
-      this.option = deepMerge(this.option, opts, {
-        arrayMerge: (_, source) => source,
-      })
+      this.option = merge(this.option, opts)
+      IstanbulWidget.logger.debug('final options:', this.option)
     }
 
     // add built-in plugins

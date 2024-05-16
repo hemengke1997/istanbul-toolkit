@@ -23,7 +23,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 },
               }),
               {
-                name: 'vite:plugin-istanbul-widget:astro',
+                name: 'vite:plugin-istanbul-widget:astro:pre',
                 enforce: 'pre',
                 transform(code, id) {
                   if (opts.istanbulWidgetConfig !== false) {
@@ -50,19 +50,17 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                     for (const file in bundle) {
                       const chunk = bundle[file]
                       if (chunk.type === 'chunk') {
-                        if (chunk.code.includes('/* empty css')) {
-                          if (chunk.name === VENDOR) {
-                            const { format } = opts
-                            const emptyCss = `\\/\\*\\s*empty\\s*css\\s*\\*\\/`
-                            const emptyChunkRE = new RegExp(
-                              format === 'es'
-                                ? `${emptyCss}\\bimport\\s*["'][^"']*(?:.*)["'];`
-                                : `${emptyCss}(\\b|,\\s*)require\\(\\s*["'][^"']*(?:.*)["']\\)(;|,)`,
-                              'g',
-                            )
+                        if (chunk.name === VENDOR) {
+                          const { format } = opts
+                          const emptyCss = `\\/\\*\\s*empty\\s*css\\s*\\*\\/`
+                          const emptyChunkRE = new RegExp(
+                            format === 'es'
+                              ? `${emptyCss}\\bimport\\s*["'][^"']*(?:.*)["'];`
+                              : `${emptyCss}(\\b|,\\s*)require\\(\\s*["'][^"']*(?:.*)["']\\)(;|,)`,
+                            'g',
+                          )
 
-                            chunk.code = chunk.code.replace(emptyChunkRE, '')
-                          }
+                          chunk.code = chunk.code.replace(emptyChunkRE, '')
                         }
                       }
                     }

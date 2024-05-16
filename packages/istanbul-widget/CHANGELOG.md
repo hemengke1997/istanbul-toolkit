@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.5.6
+
+### Patch Changes
+
+- use merge replace with deepmerge
+
 ## 1.5.5
 
 ### Patch Changes
