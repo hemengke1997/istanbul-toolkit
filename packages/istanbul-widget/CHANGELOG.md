@@ -1,5 +1,11 @@
 # istanbul-widget
 
+## 1.6.0
+
+### Minor Changes
+
+- 70797d1: synchronize vite-plugin-istanbul-widget version
+
 ## 1.5.6
 
 ### Patch Changes

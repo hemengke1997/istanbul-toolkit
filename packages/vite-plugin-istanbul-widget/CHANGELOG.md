@@ -1,5 +1,16 @@
 # vite-plugin-istanbul-widget
 
+## 1.6.0
+
+### Minor Changes
+
+- 70797d1: add `checkProd` option to avoid plugin enabled in production env
+
+### Patch Changes
+
+- Updated dependencies [70797d1]
+  - istanbul-widget@1.6.0
+
 ## 1.5.9
 
 ### Patch Changes

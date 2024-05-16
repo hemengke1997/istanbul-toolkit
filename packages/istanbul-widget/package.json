@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "1.5.6",
+  "version": "1.6.0",
   "description": "收集 istanbul 代码覆盖率的web小组件",
   "type": "module",
   "keywords": [
