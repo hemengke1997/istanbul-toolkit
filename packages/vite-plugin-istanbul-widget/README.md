@@ -112,6 +112,12 @@ type VitePluginIstanbulWidgetOptions = {
    */
   enabled?: boolean
   /**
+   * 是否检查正式环境
+   * 若为true，则正式环境下禁用插件
+   * @default true
+   */
+  checkProd?: boolean
+  /**
    * 全量上报
    * @default true
    */
