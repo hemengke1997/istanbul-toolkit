@@ -1,5 +1,11 @@
 # vite-plugin-istanbul-widget
 
+## 1.6.2
+
+### Patch Changes
+
+- patch serialize-javascript@6.0.2
+
 ## 1.6.1
 
 ### Patch Changes

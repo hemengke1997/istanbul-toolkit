@@ -78,42 +78,45 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     {
       name: 'vite:plugin-istanbul-widget:post',
       enforce: 'post',
-      config(c) {
-        c.build ??= {}
-        c.build.sourcemap = false
+      config: {
+        order: 'post',
+        handler(c) {
+          c.build ??= {}
+          c.build.sourcemap = false
 
-        if (!c.build.ssr) {
-          if (fullReport) {
-            const manualChunks = (id: string) => {
-              const CSS_LANGS_RE = /\.(css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/
-              const isCSSRequest = (request: string): boolean => CSS_LANGS_RE.test(request)
-              if (isCSSRequest(id)) return
+          if (!c.build.ssr) {
+            if (fullReport) {
+              const manualChunks = (id: string) => {
+                const CSS_LANGS_RE = /\.(css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/
+                const isCSSRequest = (request: string): boolean => CSS_LANGS_RE.test(request)
+                if (isCSSRequest(id)) return
 
-              if (id.match(/istanbul-widget.*\.js$/)) {
-                return ISTANBUL_WIDGET
+                if (id.match(/istanbul-widget.*\.js$/)) {
+                  return ISTANBUL_WIDGET
+                }
+                if (id.includes('node_modules')) {
+                  return VENDOR
+                }
+                if (id.startsWith(process.cwd())) {
+                  return 'src'
+                }
               }
 
-              if (id.includes('node_modules')) {
-                return VENDOR
-              } else if (id.startsWith(process.cwd())) {
-                return 'src'
-              }
-            }
-
-            const output = c.build?.rollupOptions?.output
-            if (output) {
-              if (isArray(output)) {
-                output.forEach((_, index) => {
-                  set(c, `build.rollupOptions.output[${index}].manualChunks`, manualChunks)
-                })
+              const output = c.build?.rollupOptions?.output
+              if (output) {
+                if (isArray(output)) {
+                  output.forEach((_, index) => {
+                    set(c, `build.rollupOptions.output[${index}].manualChunks`, manualChunks)
+                  })
+                } else {
+                  set(c, 'build.rollupOptions.output.manualChunks', manualChunks)
+                }
               } else {
                 set(c, 'build.rollupOptions.output.manualChunks', manualChunks)
               }
-            } else {
-              set(c, 'build.rollupOptions.output.manualChunks', manualChunks)
             }
           }
-        }
+        },
       },
     },
   ] as Plugin[]

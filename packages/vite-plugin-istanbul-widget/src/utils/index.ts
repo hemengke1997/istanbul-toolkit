@@ -2,8 +2,8 @@ import { type IstanbulWidgetOptions } from 'istanbul-widget'
 import { execSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import path from 'node:path'
+import serialize from 'serialize-javascript'
 import { normalizePath } from 'vite'
-import serialize from './serialize'
 
 export function getCommitId() {
   try {
@@ -16,13 +16,15 @@ export function getCommitId() {
 export function resolveInlineScript(mode: 'lib' | 'min', config: IstanbulWidgetOptions) {
   const require = createRequire(import.meta.url)
 
-  const istanbulWidgetPath = `${normalizePath(`/@fs/${path.join(path.dirname(require.resolve('istanbul-widget')), `istanbul-widget.${mode}.js`)}`)}`
+  const istanbulWidgetPath = normalizePath(
+    `/@fs/${path.join(path.dirname(require.resolve('istanbul-widget')), `istanbul-widget.${mode}.js`)}`,
+  )
 
   const map = {
     lib: {
       src: istanbulWidgetPath,
       script: /*js*/ `import { IstanbulWidget } from "${istanbulWidgetPath}";
-      new IstanbulWidget(${serialize(config)})`,
+      new IstanbulWidget(${serialize(config)});`,
     },
     min: {
       src: istanbulWidgetPath,

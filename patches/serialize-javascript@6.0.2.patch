@@ -1,0 +1,13 @@
+diff --git a/index.js b/index.js
+index 156f8f917f41ff5eea61809d4bcd7125091ff2c6..5ee15b3efc223f7d7c00762b511320a77a75f01f 100644
+--- a/index.js
++++ b/index.js
+@@ -6,7 +6,7 @@ See the accompanying LICENSE file for terms.
+ 
+ 'use strict';
+ 
+-var randomBytes = require('randombytes');
++import { randomBytes } from 'node:crypto';
+ 
+ // Generate an internal UID to make the regexp pattern harder to guess.
+ var UID_LENGTH          = 16;

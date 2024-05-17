@@ -54,7 +54,8 @@
   ],
   "pnpm": {
     "patchedDependencies": {
-      "vite-plugin-istanbul@6.0.0": "patches/vite-plugin-istanbul@6.0.0.patch"
+      "vite-plugin-istanbul@6.0.0": "patches/vite-plugin-istanbul@6.0.0.patch",
+      "serialize-javascript@6.0.2": "patches/serialize-javascript@6.0.2.patch"
     }
   },
   "prettier": "@minko-fe/prettier-config",
