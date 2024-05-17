@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:test": "vite build --mode test",
+    "build:test": "NODE_ENV=test vite build --mode test",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -19,8 +19,8 @@
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8",
-    "vite-plugin-istanbul-widget": "workspace:*",
+    "vite": "^5.2.10",
+    "vite-plugin-istanbul-widget": "latest",
     "vite-plugin-public-typescript": "latest"
   }
 }

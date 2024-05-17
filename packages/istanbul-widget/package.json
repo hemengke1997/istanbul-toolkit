@@ -17,8 +17,7 @@
   "files": [
     "components.d.ts",
     "dist",
-    "lib.d.ts",
-    "package.json"
+    "lib.d.ts"
   ],
   "main": "./dist/istanbul-widget.lib.js",
   "module": "./dist/esm/istanbul-widget.js",

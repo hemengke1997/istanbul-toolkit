@@ -1,7 +1,7 @@
 import type { AstroIntegration } from 'astro'
-import { VENDOR, istanbulWidget as viteIstanbulWidget } from '../index'
+import { ISTANBUL_WIDGET, VENDOR, istanbulWidget as viteIstanbulWidget } from '../index'
 import { type VitePluginIstanbulWidgetOptions } from '../types'
-import { resolveInlineScript } from '../utils'
+import { ensureArray, resolveInlineScript } from '../utils'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   return {
@@ -16,7 +16,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 istanbulPluginConfig: {
                   ...opts.istanbulPluginConfig,
                   exclude: [
-                    ...(opts.istanbulPluginConfig?.exclude ?? []),
+                    ...ensureArray(opts.istanbulPluginConfig?.exclude),
                     '**/astro:scripts/*.js',
                     '**/node_modules/**',
                   ],
@@ -50,7 +50,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                     for (const file in bundle) {
                       const chunk = bundle[file]
                       if (chunk.type === 'chunk') {
-                        if (chunk.name === VENDOR) {
+                        if ([VENDOR, ISTANBUL_WIDGET].includes(chunk.name)) {
                           const { format } = opts
                           const emptyCss = `\\/\\*\\s*empty\\s*css\\s*\\*\\/`
                           const emptyChunkRE = new RegExp(

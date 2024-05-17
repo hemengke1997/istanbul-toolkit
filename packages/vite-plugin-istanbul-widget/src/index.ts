@@ -2,9 +2,10 @@ import type { Plugin } from 'vite'
 import { isArray, set } from '@minko-fe/lodash-pro'
 import istanbul from 'vite-plugin-istanbul'
 import { type VitePluginIstanbulWidgetOptions } from './types'
-import { getCommitId, resolveInlineScript } from './utils'
+import { ensureArray, getCommitId, resolveInlineScript } from './utils'
 
 export const VENDOR = 'vendor'
+export const ISTANBUL_WIDGET = 'istanbul-widget'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   const {
@@ -48,6 +49,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                   attrs: {
                     type: 'module',
                     src,
+                    defer: true,
                   },
                   injectTo: 'body',
                 },
@@ -55,6 +57,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                   tag: 'script',
                   attrs: {
                     type: 'module',
+                    defer: true,
                   },
                   injectTo: 'body',
                   children: script,
@@ -69,7 +72,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     istanbul({
       extension: ['.js', '.cjs', '.mjs', '.ts', '.tsx', '.jsx', '.vue', '.astro', '.svelte'],
       ...istanbulPluginConfig,
-      exclude: [...(istanbulPluginConfig?.exclude ?? []), '**/index.html?html-proxy*.js', '**/node_modules/**'],
+      exclude: [...ensureArray(istanbulPluginConfig?.exclude), '**/index.html?html-proxy*.js', '**/node_modules/**'],
       forceBuildInstrument: enabled,
     }),
     {
@@ -79,12 +82,17 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         c.build ??= {}
         c.build.sourcemap = false
 
-        if (fullReport) {
-          if (!c.build.ssr) {
+        if (!c.build.ssr) {
+          if (fullReport) {
             const manualChunks = (id: string) => {
               const CSS_LANGS_RE = /\.(css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/
               const isCSSRequest = (request: string): boolean => CSS_LANGS_RE.test(request)
               if (isCSSRequest(id)) return
+
+              if (id.match(/istanbul-widget.*\.js$/)) {
+                return ISTANBUL_WIDGET
+              }
+
               if (id.includes('node_modules')) {
                 return VENDOR
               } else if (id.startsWith(process.cwd())) {

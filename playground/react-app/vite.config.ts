@@ -44,6 +44,6 @@ export default defineConfig(() => ({
     force: true,
   },
   server: {
-    host: true,
+    host: '0.0.0.0',
   },
 }))

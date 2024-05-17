@@ -1,5 +1,11 @@
 # vite-plugin-istanbul-widget
 
+## 1.6.1
+
+### Patch Changes
+
+- fix: not allowed to load local resource
+
 ## 1.6.0
 
 ### Minor Changes

@@ -2,7 +2,7 @@ import { type IstanbulWidgetOptions } from 'istanbul-widget'
 import { execSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import path from 'node:path'
-import slash from 'slash'
+import { normalizePath } from 'vite'
 import serialize from './serialize'
 
 export function getCommitId() {
@@ -16,9 +16,7 @@ export function getCommitId() {
 export function resolveInlineScript(mode: 'lib' | 'min', config: IstanbulWidgetOptions) {
   const require = createRequire(import.meta.url)
 
-  const istanbulWidgetPath = slash(
-    path.join(path.dirname(require.resolve('istanbul-widget')), `istanbul-widget.${mode}.js`),
-  )
+  const istanbulWidgetPath = `${normalizePath(`/@fs/${path.join(path.dirname(require.resolve('istanbul-widget')), `istanbul-widget.${mode}.js`)}`)}`
 
   const map = {
     lib: {
@@ -33,4 +31,14 @@ export function resolveInlineScript(mode: 'lib' | 'min', config: IstanbulWidgetO
   }
 
   return map[mode]
+}
+
+export function ensureArray<T>(value: T | T[] | undefined): T[] {
+  if (!value) {
+    return []
+  }
+  if (Array.isArray(value)) {
+    return value
+  }
+  return [value]
 }
