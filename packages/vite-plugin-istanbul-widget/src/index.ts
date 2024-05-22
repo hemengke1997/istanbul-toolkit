@@ -43,7 +43,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         }
       },
       load(id) {
-        if (id === resolvedVirtualIstanbulWidgetId) {
+        if (id === resolvedVirtualIstanbulWidgetId && istanbulWidgetConfig !== false) {
           const js = resolveInlineScript('lib', istanbulWidgetConfig).src
           const content = fs.readFileSync(js, 'utf-8')
           return content
