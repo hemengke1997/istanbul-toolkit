@@ -1,5 +1,11 @@
 # vite-plugin-istanbul-widget
 
+## 1.6.3
+
+### Patch Changes
+
+- fix: no more splitting istanbul-widget as standlone chunk because rollup cannot disable code-splitting
+
 ## 1.6.2
 
 ### Patch Changes

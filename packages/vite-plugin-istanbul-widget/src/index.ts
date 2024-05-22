@@ -1,11 +1,13 @@
 import type { Plugin } from 'vite'
 import { isArray, set } from '@minko-fe/lodash-pro'
+import fs from 'node:fs'
 import istanbul from 'vite-plugin-istanbul'
 import { type VitePluginIstanbulWidgetOptions } from './types'
 import { ensureArray, getCommitId, resolveInlineScript } from './utils'
 
-export const VENDOR = 'vendor'
-export const ISTANBUL_WIDGET = 'istanbul-widget'
+export const vendor = 'vendor'
+export const virtualIstanbulWidgetId = 'virtual:istanbul-widget'
+const resolvedVirtualIstanbulWidgetId = `\0${virtualIstanbulWidgetId}.js`
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   const {
@@ -35,12 +37,23 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           },
         }
       },
+      resolveId(id) {
+        if (id === virtualIstanbulWidgetId) {
+          return resolvedVirtualIstanbulWidgetId
+        }
+      },
+      load(id) {
+        if (id === resolvedVirtualIstanbulWidgetId) {
+          const js = resolveInlineScript('lib', istanbulWidgetConfig).src
+          const content = fs.readFileSync(js, 'utf-8')
+          return content
+        }
+      },
       transformIndexHtml: {
         order: 'pre',
         handler(html) {
           if (istanbulWidgetConfig !== false) {
             const { src, script } = resolveInlineScript('min', istanbulWidgetConfig)
-
             return {
               html,
               tags: [
@@ -48,8 +61,8 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                   tag: 'script',
                   attrs: {
                     type: 'module',
-                    src,
                     defer: true,
+                    src,
                   },
                   injectTo: 'body',
                 },
@@ -91,18 +104,16 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 const isCSSRequest = (request: string): boolean => CSS_LANGS_RE.test(request)
                 if (isCSSRequest(id)) return
 
-                if (id.match(/istanbul-widget.*\.js$/)) {
-                  return ISTANBUL_WIDGET
-                }
                 if (id.includes('node_modules')) {
-                  return VENDOR
-                }
-                if (id.startsWith(process.cwd())) {
+                  return vendor
+                } else if (id.startsWith(process.cwd())) {
                   return 'src'
                 }
               }
 
-              const output = c.build?.rollupOptions?.output
+              c.build.rollupOptions ??= {}
+              const output = c.build?.rollupOptions.output
+
               if (output) {
                 if (isArray(output)) {
                   output.forEach((_, index) => {

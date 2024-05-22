@@ -1,5 +1,5 @@
 import type { AstroIntegration } from 'astro'
-import { ISTANBUL_WIDGET, VENDOR, istanbulWidget as viteIstanbulWidget } from '../index'
+import { vendor, istanbulWidget as viteIstanbulWidget } from '../index'
 import { type VitePluginIstanbulWidgetOptions } from '../types'
 import { ensureArray, resolveInlineScript } from '../utils'
 
@@ -50,7 +50,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                     for (const file in bundle) {
                       const chunk = bundle[file]
                       if (chunk.type === 'chunk') {
-                        if ([VENDOR, ISTANBUL_WIDGET].includes(chunk.name)) {
+                        if ([vendor].includes(chunk.name)) {
                           const { format } = opts
                           const emptyCss = `\\/\\*\\s*empty\\s*css\\s*\\*\\/`
                           const emptyChunkRE = new RegExp(

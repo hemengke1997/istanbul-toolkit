@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "集成了 istanbul-widget 和 vite-plugin-istanbul 的vite插件",
   "type": "module",
   "keywords": [
@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@istanbuljs/load-nyc-config": "1.1.0",
-    "@minko-fe/lodash-pro": "^0.3.0",
+    "@minko-fe/lodash-pro": "^0.3.2",
     "espree": "10.0.1",
     "istanbul-lib-instrument": "6.0.2",
     "istanbul-widget": "workspace:*",
@@ -65,7 +65,7 @@
     "test-exclude": "6.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.12.12",
     "@types/serialize-javascript": "5.0.4",
     "serialize-javascript": "6.0.2",
     "vite-plugin-istanbul": "6.0.0"
