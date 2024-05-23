@@ -1,6 +1,6 @@
 import { isObject, remove, toNumber } from '@minko-fe/lodash-pro'
 import { useLocalStorageState, useMemoizedFn, useSetState, useUpdateEffect } from '@minko-fe/react-hook'
-import { memo, useEffect, useMemo, useState } from 'react'
+import { memo, useEffect, useMemo, useRef, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -111,10 +111,10 @@ function Settings() {
     })
   })
 
-  const flush = () => {
+  const flush = useMemoizedFn(() => {
     reportFn?.run(false)
     reportFn?.flush()
-  }
+  })
 
   useEffect(() => {
     const { report_on_pageleave } = staticConfig || {}
@@ -152,19 +152,19 @@ function Settings() {
     }
   }, [staticConfig])
 
-  let dialogOpenTimer: number
+  const dialogOpenTimer = useRef<number>()
   useUpdateEffect(() => {
     if (!dialogOpen) {
-      dialogOpenTimer = window.setTimeout(() => {
+      dialogOpenTimer.current = window.setTimeout(() => {
         setDynamicConfig(staticConfig!)
-        clearTimeout(dialogOpenTimer)
+        clearTimeout(dialogOpenTimer.current)
         // animation end
       }, 150)
     } else {
-      dialogOpenTimer && clearTimeout(dialogOpenTimer)
+      dialogOpenTimer.current && clearTimeout(dialogOpenTimer.current)
     }
     return () => {
-      dialogOpenTimer && clearTimeout(dialogOpenTimer)
+      dialogOpenTimer.current && clearTimeout(dialogOpenTimer.current)
     }
   }, [dialogOpen])
 

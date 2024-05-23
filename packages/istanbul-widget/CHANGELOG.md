@@ -1,5 +1,12 @@
 # istanbul-widget
 
+## 1.7.0
+
+### Minor Changes
+
+- prefer dark mode
+- fix popover close on click
+
 ## 1.6.0
 
 ### Minor Changes

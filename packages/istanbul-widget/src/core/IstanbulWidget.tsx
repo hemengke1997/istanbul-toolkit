@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Toaster } from '@/components/ui/toaster'
-import { cn } from '@/components/utils'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import { $ } from '@/utils/query'
 import Context from './Context'
@@ -19,12 +18,13 @@ export default function IstanbulWidgetComponent() {
 
     const dom = document.querySelector(`#${ISTANBUL_WIDGET_ID}`) as HTMLDivElement
 
-    if (theme === 'dark') {
-      $.removeClass(dom, lightClass)
-      $.addClass(dom, darkClass)
-    } else {
+    // prefer dark
+    if (theme === 'light') {
       $.removeClass(dom, darkClass)
       $.addClass(dom, lightClass)
+    } else {
+      $.removeClass(dom, lightClass)
+      $.addClass(dom, darkClass)
     }
   }, [])
 
@@ -34,17 +34,11 @@ export default function IstanbulWidgetComponent() {
 
   return (
     <>
-      <div
-        className={cn(
-          'iw-block',
-          'iw-fixed iw-z-[99999] iw-right-0 iw-top-0 iw-left-0 iw-bottom-0 iw-pointer-events-none',
-        )}
-      >
+      <div className='iw-block iw-fixed iw-z-[99999] iw-right-0 iw-top-0 iw-left-0 iw-bottom-0 iw-pointer-events-none'>
         <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
           <Draggable
             dragOptions={{
               onDragStart({ offsetX, offsetY }) {
-                setPopoverOpen(false)
                 setDragPos({ x: offsetX, y: offsetY })
               },
               onDrag({ offsetX, offsetY }) {
@@ -52,6 +46,7 @@ export default function IstanbulWidgetComponent() {
                 const dragY = Math.abs(dragPos.y - offsetY)
 
                 if (dragX > 10 || dragY > 10) {
+                  setPopoverOpen(false)
                   draggingTimer.current && window.clearTimeout(draggingTimer.current)
                   dragging.current = true
                 } else {
@@ -62,7 +57,7 @@ export default function IstanbulWidgetComponent() {
                 if (dragging.current) {
                   draggingTimer.current = window.setTimeout(() => {
                     dragging.current = false
-                  }, 16)
+                  }, 20)
                 }
               },
             }}

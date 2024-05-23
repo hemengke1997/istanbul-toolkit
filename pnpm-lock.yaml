@@ -141,11 +141,11 @@ importers:
         specifier: ^1.1.34
         version: 1.1.34
       '@minko-fe/lodash-pro':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.3.2
+        version: 0.3.2
       '@minko-fe/react-hook':
-        specifier: ^0.3.1
-        version: 0.3.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.3.4
+        version: 0.3.4(react-dom@18.2.0)(react@18.2.0)
       '@neodrag/react':
         specifier: ^2.0.4
         version: 2.0.4
@@ -199,8 +199,8 @@ importers:
         version: 1.0.7(tailwindcss@3.2.7)
     devDependencies:
       '@iconify/tailwind':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^1.1.1
+        version: 1.1.1
       '@swc/core':
         specifier: ^1.5.5
         version: 1.5.5
@@ -214,8 +214,8 @@ importers:
         specifier: ^18.3.0
         version: 18.3.0
       '@vitejs/plugin-react':
-        specifier: ^4.2.1
-        version: 4.2.1(vite@5.2.11)
+        specifier: ^4.3.0
+        version: 4.3.0(vite@5.2.11)
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -241,8 +241,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       tsup-plugin-bundleless:
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.2.1
+        version: 0.2.1
       tsup-plugin-css-legacy:
         specifier: ^0.0.1
         version: 0.0.1
@@ -648,7 +648,7 @@ packages:
     dependencies:
       '@types/react': 18.3.1
       '@types/react-dom': 18.3.0
-      '@vitejs/plugin-react': 4.2.1(vite@5.2.11)
+      '@vitejs/plugin-react': 4.3.0(vite@5.2.11)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       ultrahtml: 1.5.3
@@ -668,7 +668,7 @@ packages:
     dependencies:
       '@types/react': 18.3.1
       '@types/react-dom': 18.3.0
-      '@vitejs/plugin-react': 4.2.1(vite@5.2.11)
+      '@vitejs/plugin-react': 4.3.0(vite@5.2.11)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       ultrahtml: 1.5.3
@@ -1638,6 +1638,16 @@ packages:
       '@babel/helper-plugin-utils': 7.24.0
     dev: true
 
+  /@babel/plugin-transform-react-jsx-self@7.24.5(@babel/core@7.24.5):
+    resolution: {integrity: sha512-RtCJoUO2oYrYwFPtR1/jkoBEcFuI1ae9a9IMxeyAVa3a1Ap4AnxmyIKG2b2FaJKqkidw/0cxRbWN+HOs6ZWd1w==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.5
+      '@babel/helper-plugin-utils': 7.24.5
+    dev: true
+
   /@babel/plugin-transform-react-jsx-source@7.24.1(@babel/core@7.24.4):
     resolution: {integrity: sha512-1v202n7aUq4uXAieRTKcwPzNyphlCuqHHDcdSNc+vdhoTEZcFMh+L5yZuCmGaIO7bs1nJUNfHB89TZyoL48xNA==}
     engines: {node: '>=6.9.0'}
@@ -1645,6 +1655,16 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
+      '@babel/helper-plugin-utils': 7.24.0
+    dev: true
+
+  /@babel/plugin-transform-react-jsx-source@7.24.1(@babel/core@7.24.5):
+    resolution: {integrity: sha512-1v202n7aUq4uXAieRTKcwPzNyphlCuqHHDcdSNc+vdhoTEZcFMh+L5yZuCmGaIO7bs1nJUNfHB89TZyoL48xNA==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.0
     dev: true
 
@@ -3006,8 +3026,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify/tailwind@1.0.1:
-    resolution: {integrity: sha512-Y0AbOvabPJ4qjhQGWvCfhWoYC7aETqYAg9V++xkHFqy9gcUteKnEEmgOEsoOf6T7V9Xz34qKNLnaIAVkt1gLtQ==}
+  /@iconify/tailwind@1.1.1:
+    resolution: {integrity: sha512-4mmA//qjZigv7D4KlqcVSYTqfRIJzyts2/lSCAJfCL0rVMIE76+ifJnaE5jxCo1+nYGBF8FsFo0qFOs+sX4EnA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -3397,8 +3417,8 @@ packages:
       prettier-plugin-tailwindcss: 0.5.14(prettier-plugin-astro@0.13.0)(prettier@3.2.5)
     dev: true
 
-  /@minko-fe/react-hook@0.3.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-vpd41IRY5Q8SqnFuyeBXwNu3KeVVfkuejRgsLRrhSmli2FSSNRgpxMw3ZgfTBU+8QfLWmOkpo2prKpWi3ul/pA==}
+  /@minko-fe/react-hook@0.3.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-3YQpaFt01k3y0m1H+fnNQ1g0Lbfe7D767p9Xa3HyReaAS1ZChL4W2MKyYtlyIwTGLQ0F1yXB0ovEBNHY14Y38w==}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -3407,7 +3427,7 @@ packages:
       react-router-dom:
         optional: true
     dependencies:
-      '@minko-fe/lodash-pro': 0.3.0
+      '@minko-fe/lodash-pro': 0.3.2
       ahooks: 3.7.11(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -4958,6 +4978,22 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.4)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
+      vite: 5.2.11(@types/node@20.12.12)
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@vitejs/plugin-react@4.3.0(vite@5.2.11):
+    resolution: {integrity: sha512-KcEbMsn4Dpk+LIbHMj7gDPRKaTMStxxWRkRmxsg/jVdFdJCZWt1SchZcf0M4t8lIKdwwMsEyzhrcOXRrDPtOBw==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      vite: ^4.2.0 || ^5.0.0
+    dependencies:
+      '@babel/core': 7.24.5
+      '@babel/plugin-transform-react-jsx-self': 7.24.5(@babel/core@7.24.5)
+      '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.5)
+      '@types/babel__core': 7.20.5
+      react-refresh: 0.14.2
       vite: 5.2.11(@types/node@20.12.11)
     transitivePeerDependencies:
       - supports-color
@@ -11617,6 +11653,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /react-refresh@0.14.2:
+    resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /react-remove-scroll-bar@2.3.6(@types/react@18.3.1)(react@18.2.0):
     resolution: {integrity: sha512-DtSYaao4mBmX+HDo5YWYdBWQwYIQQshUV/dVxFxK+KM26Wjwp1gZ6rv6OC3oujI6Bfu6Xyg3TwK533AQutsn/g==}
     engines: {node: '>=10'}
@@ -13276,8 +13317,8 @@ packages:
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  /tsup-plugin-bundleless@0.1.3:
-    resolution: {integrity: sha512-T3gOnuFf38hj1/5LqKGZN0KfaoPO6d3y8G7q+lH/1AXzJHMCv0LvmIGwHYYFayF9J1Z+KjA3TQN2k2aBeBaJkA==}
+  /tsup-plugin-bundleless@0.2.1:
+    resolution: {integrity: sha512-g43du/xZGfuvDi3Pjn98NXZjQgtTg7X8TcF7h6K9f1EYulOsmJRZb/LByO/tKK49KvN7yjUhZPtrVXCugS6R4A==}
     dev: true
 
   /tsup-plugin-css-legacy@0.0.1:
