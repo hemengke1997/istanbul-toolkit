@@ -27,4 +27,9 @@ export type VitePluginIstanbulWidgetOptions = {
    * @description false 则关闭 istanbul-widget 控件
    */
   istanbulWidgetConfig: IstanbulWidgetOptions | false
+  /**
+   * 延迟istanbul-widget初始化(ms)
+   * @default 0
+   */
+  delayIstanbulWidgetInit?: number
 }

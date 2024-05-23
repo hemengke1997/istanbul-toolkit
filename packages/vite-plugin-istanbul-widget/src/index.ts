@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import istanbul from 'vite-plugin-istanbul'
 import { type VitePluginIstanbulWidgetOptions } from './types'
 import { ensureArray, getCommitId, resolveInlineScript } from './utils'
+import { debug } from './utils/debug'
 
 export const vendor = 'vendor'
 export const virtualIstanbulWidgetId = 'virtual:istanbul-widget'
@@ -16,11 +17,14 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     istanbulPluginConfig,
     istanbulWidgetConfig,
     checkProd = true,
+    delayIstanbulWidgetInit = 0,
   } = opts || {}
 
   if (checkProd && process.env.NODE_ENV === 'production') return undefined
 
   if (!enabled) return undefined
+
+  debug('istanbulWidget options:', opts)
 
   return [
     {
@@ -53,7 +57,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         order: 'pre',
         handler(html) {
           if (istanbulWidgetConfig !== false) {
-            const { src, script } = resolveInlineScript('min', istanbulWidgetConfig)
+            const { src, script } = resolveInlineScript('min', istanbulWidgetConfig, { delayIstanbulWidgetInit })
             return {
               html,
               tags: [
@@ -70,7 +74,6 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                   tag: 'script',
                   attrs: {
                     type: 'module',
-                    defer: true,
                   },
                   injectTo: 'body',
                   children: script,

@@ -2,6 +2,7 @@ import type { AstroIntegration } from 'astro'
 import { vendor, istanbulWidget as viteIstanbulWidget } from '../index'
 import { type VitePluginIstanbulWidgetOptions } from '../types'
 import { ensureArray, resolveInlineScript } from '../utils'
+import { debug } from '../utils/debug'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   return {
@@ -28,7 +29,11 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 transform(code, id) {
                   if (opts.istanbulWidgetConfig !== false) {
                     if (id === 'astro:scripts/page.js') {
-                      const { script } = resolveInlineScript('lib', opts.istanbulWidgetConfig)
+                      debug('istanbulWidget transform:', id)
+
+                      const { script } = resolveInlineScript('lib', opts.istanbulWidgetConfig, {
+                        delayIstanbulWidgetInit: opts.delayIstanbulWidgetInit,
+                      })
 
                       code = /*js*/ `${script}
                       \n${code}`
@@ -82,4 +87,4 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   } as AstroIntegration
 }
 
-export const exclude = [/istanbul-widget\..*\.js/]
+export const exclude = [/istanbul-widget.*\.js/]

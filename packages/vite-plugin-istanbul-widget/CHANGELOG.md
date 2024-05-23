@@ -1,5 +1,12 @@
 # vite-plugin-istanbul-widget
 
+## 1.7.0
+
+### Minor Changes
+
+- feat: add `delayIstanbulWidgetInit` option to support scenarios that might block js
+- add debug mode
+
 ## 1.6.3
 
 ### Patch Changes
