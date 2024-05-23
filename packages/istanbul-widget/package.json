@@ -70,8 +70,8 @@
   },
   "dependencies": {
     "@iconify-json/vscode-icons": "^1.1.34",
-    "@minko-fe/lodash-pro": "^0.3.2",
-    "@minko-fe/react-hook": "^0.3.4",
+    "@minko-fe/lodash-pro": "^0.3.3",
+    "@minko-fe/react-hook": "^0.3.5",
     "@neodrag/react": "^2.0.4",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -92,10 +92,10 @@
   },
   "devDependencies": {
     "@iconify/tailwind": "^1.1.1",
-    "@swc/core": "^1.5.5",
-    "@types/node": "^20.12.11",
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0",
+    "@swc/core": "^1.5.7",
+    "@types/node": "^20.12.12",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.19",
     "npm-run-all": "^4.1.5",
@@ -105,7 +105,7 @@
     "rollup-plugin-visualizer": "^5.12.0",
     "tailwindcss": "3.2.7",
     "tailwindcss-rem-to-px": "^0.1.0",
-    "tsup-plugin-bundleless": "^0.2.1",
+    "tsup-plugin-bundleless": "^0.3.2",
     "tsup-plugin-css-legacy": "^0.0.1",
     "vite": "^5.2.11"
   }

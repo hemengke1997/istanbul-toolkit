@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@istanbuljs/load-nyc-config": "1.1.0",
-    "@minko-fe/lodash-pro": "^0.3.2",
+    "@minko-fe/lodash-pro": "^0.3.3",
     "debug": "^4.3.4",
     "espree": "10.0.1",
     "istanbul-lib-instrument": "6.0.2",

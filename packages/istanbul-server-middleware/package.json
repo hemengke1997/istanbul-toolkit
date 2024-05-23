@@ -21,7 +21,7 @@
     "debug": "nyc --all report --reporter=html"
   },
   "dependencies": {
-    "@minko-fe/lodash-pro": "^0.3.0",
+    "@minko-fe/lodash-pro": "^0.3.3",
     "archiver": "7.0.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -33,17 +33,17 @@
     "node-html-parser": "^6.1.13",
     "nyc": "^15.1.0",
     "pm2": "^5.3.1",
-    "rimraf": "^5.0.5",
-    "tsx": "^4.7.2"
+    "rimraf": "^5.0.7",
+    "tsx": "^4.11.0"
   },
   "devDependencies": {
     "@types/archiver": "^6.0.2",
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/express-serve-static-core": "^4.19.0",
+    "@types/express-serve-static-core": "^4.19.1",
     "@types/fs-extra": "^11.0.4",
     "@types/istanbul-lib-coverage": "^2.0.6",
-    "@types/node": "^20.11.30"
+    "@types/node": "^20.12.12"
   }
 }
