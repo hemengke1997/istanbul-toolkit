@@ -1,10 +1,17 @@
 import type { AstroIntegration } from 'astro'
 import { vendor, istanbulWidget as viteIstanbulWidget } from '../index'
 import { type VitePluginIstanbulWidgetOptions } from '../types'
-import { ensureArray, resolveInlineScript } from '../utils'
+import { checkPluginEnabled, ensureArray, resolveInlineScript, resolveOptions } from '../utils'
 import { debug } from '../utils/debug'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
+  const { enabled, istanbulPluginConfig, istanbulWidgetConfig, checkProd, delayIstanbulWidgetInit } =
+    resolveOptions(opts)
+
+  if (!checkPluginEnabled(enabled, checkProd)) return
+
+  debug('astro istanbulWidget options:', opts)
+
   return {
     name: 'vite-plugin-istanbul-widget-integration',
     hooks: {
@@ -15,9 +22,9 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
               viteIstanbulWidget({
                 ...opts,
                 istanbulPluginConfig: {
-                  ...opts.istanbulPluginConfig,
+                  ...istanbulPluginConfig,
                   exclude: [
-                    ...ensureArray(opts.istanbulPluginConfig?.exclude),
+                    ...ensureArray(istanbulPluginConfig?.exclude),
                     '**/astro:scripts/*.js',
                     '**/node_modules/**',
                   ],
@@ -27,12 +34,12 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 name: 'vite:plugin-istanbul-widget:astro:pre',
                 enforce: 'pre',
                 transform(code, id) {
-                  if (opts.istanbulWidgetConfig !== false) {
+                  if (istanbulWidgetConfig !== false) {
                     if (id === 'astro:scripts/page.js') {
                       debug('istanbulWidget transform:', id)
 
-                      const { script } = resolveInlineScript('lib', opts.istanbulWidgetConfig, {
-                        delayIstanbulWidgetInit: opts.delayIstanbulWidgetInit,
+                      const { script } = resolveInlineScript('lib', istanbulWidgetConfig, {
+                        delayIstanbulWidgetInit,
                       })
 
                       code = /*js*/ `${script}
@@ -51,12 +58,12 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 enforce: 'post',
                 generateBundle: {
                   order: 'post',
-                  handler(opts, bundle) {
+                  handler(options, bundle) {
                     for (const file in bundle) {
                       const chunk = bundle[file]
                       if (chunk.type === 'chunk') {
                         if ([vendor].includes(chunk.name)) {
-                          const { format } = opts
+                          const { format } = options
                           const emptyCss = `\\/\\*\\s*empty\\s*css\\s*\\*\\/`
                           const emptyChunkRE = new RegExp(
                             format === 'es'
@@ -75,7 +82,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
             ],
           },
         })
-        if (opts.istanbulWidgetConfig !== false) {
+        if (istanbulWidgetConfig !== false) {
           injectScript(
             'page',
             // hack to inject istanbul-widget

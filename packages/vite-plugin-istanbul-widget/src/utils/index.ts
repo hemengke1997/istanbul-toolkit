@@ -1,18 +1,22 @@
+import { execaCommand } from 'execa'
 import { type IstanbulWidgetOptions } from 'istanbul-widget'
-import { execSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import serialize from 'serialize-javascript'
 import { normalizePath } from 'vite'
+import { type VitePluginIstanbulWidgetOptions } from '../types'
 import { debug } from './debug'
+import { logger } from './logger'
 
-export function getCommitId() {
+export async function getCommitId() {
   try {
-    const commitid = execSync('git rev-parse HEAD').toString().trim()
+    const { stdout } = await execaCommand('git rev-parse HEAD', { stdio: 'pipe' })
+    const commitid = stdout.trim()
     debug(`Resolved git HEAD: ${commitid}`)
     return commitid
-  } catch (e) {
-    console.error(`Failed to resolve git HEAD:\n${e}`)
+  } catch {
+    logger.warnOnce(`[vite-plugin-istanbul-widget]: Failed to resolve git HEAD\n`)
+    return ''
   }
 }
 
@@ -65,4 +69,27 @@ export function ensureArray<T>(value: T | T[] | undefined): T[] {
     return value
   }
   return [value]
+}
+
+export function resolveOptions(opts: VitePluginIstanbulWidgetOptions) {
+  const defaultOptions: VitePluginIstanbulWidgetOptions = {
+    enabled: false,
+    fullReport: true,
+    istanbulPluginConfig: {},
+    istanbulWidgetConfig: {},
+    checkProd: true,
+    delayIstanbulWidgetInit: 0,
+  }
+  return {
+    ...defaultOptions,
+    ...opts,
+  } as Required<VitePluginIstanbulWidgetOptions>
+}
+
+export function checkPluginEnabled(enabled: boolean, checkProd: boolean) {
+  if (checkProd && process.env.NODE_ENV === 'production') {
+    return false
+  }
+
+  return enabled
 }

@@ -1,5 +1,10 @@
 # vite-plugin-istanbul-widget
 
+## 1.7.2
+### Patch Changes
+
+- resolve astro options and check enabled
+
 ## 1.7.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "集成了 istanbul-widget 和 vite-plugin-istanbul 的vite插件",
   "type": "module",
   "keywords": [
@@ -59,6 +59,7 @@
     "@minko-fe/lodash-pro": "^0.3.3",
     "debug": "^4.3.4",
     "espree": "10.0.1",
+    "execa": "^8.0.1",
     "istanbul-lib-instrument": "6.0.2",
     "istanbul-widget": "workspace:*",
     "picocolors": "1.0.0",

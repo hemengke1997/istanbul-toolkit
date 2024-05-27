@@ -3,7 +3,7 @@ import { isArray, set } from '@minko-fe/lodash-pro'
 import fs from 'node:fs'
 import istanbul from 'vite-plugin-istanbul'
 import { type VitePluginIstanbulWidgetOptions } from './types'
-import { ensureArray, getCommitId, resolveInlineScript } from './utils'
+import { checkPluginEnabled, ensureArray, getCommitId, resolveInlineScript, resolveOptions } from './utils'
 import { debug } from './utils/debug'
 
 export const vendor = 'vendor'
@@ -11,18 +11,10 @@ export const virtualIstanbulWidgetId = 'virtual:istanbul-widget'
 const resolvedVirtualIstanbulWidgetId = `\0${virtualIstanbulWidgetId}.js`
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
-  const {
-    enabled = false,
-    fullReport = true,
-    istanbulPluginConfig,
-    istanbulWidgetConfig,
-    checkProd = true,
-    delayIstanbulWidgetInit = 0,
-  } = opts || {}
+  const { enabled, fullReport, istanbulPluginConfig, istanbulWidgetConfig, checkProd, delayIstanbulWidgetInit } =
+    resolveOptions(opts)
 
-  if (checkProd && process.env.NODE_ENV === 'production') return undefined
-
-  if (!enabled) return undefined
+  if (!checkPluginEnabled(enabled, checkProd)) return
 
   debug('istanbulWidget options:', opts)
 
@@ -30,14 +22,15 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     {
       name: 'vite:plugin-istanbul-widget:pre',
       enforce: 'pre',
-      config(c) {
+      async config(c) {
+        if (c.build?.ssr) return
         if (!c.build?.sourcemap) {
           c.build ??= {}
           c.build.sourcemap = 'hidden'
         }
         return {
           define: {
-            __GIT_COMMIT_ID__: JSON.stringify(getCommitId()),
+            __GIT_COMMIT_ID__: JSON.stringify(await getCommitId()),
           },
         }
       },
