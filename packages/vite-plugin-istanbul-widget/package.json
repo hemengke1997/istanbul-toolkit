@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "description": "集成了 istanbul-widget 和 vite-plugin-istanbul 的vite插件",
   "type": "module",
   "keywords": [
@@ -17,8 +17,7 @@
     "directory": "packages/vite-plugin-istanbul-widget"
   },
   "files": [
-    "astro.d.ts",
-    "client.d.ts",
+    "*.d.ts",
     "dist"
   ],
   "main": "./dist/index.cjs",
@@ -37,6 +36,17 @@
       "import": "./dist/astro.js",
       "default": "./dist/astro.js"
     },
+    "./remix": {
+      "types": "./remix.d.ts",
+      "require": "./dist/remix.cjs",
+      "import": "./dist/remix.js",
+      "default": "./dist/remix.js"
+    },
+    "./remix/client": {
+      "require": "./dist/remix/client.cjs",
+      "import": "./dist/remix/client.js",
+      "default": "./dist/remix/client.js"
+    },
     "./client": {
       "types": "./client.d.ts"
     }
@@ -47,10 +57,18 @@
   },
   "peerDependencies": {
     "astro": "^3 || ^4",
+    "react": ">=18",
+    "typescript": ">=4",
     "vite": "^4 || ^5"
   },
   "peerDependenciesMeta": {
     "astro": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "typescript": {
       "optional": true
     }
   },
@@ -58,10 +76,12 @@
     "@istanbuljs/load-nyc-config": "1.1.0",
     "@minko-fe/lodash-pro": "^0.3.3",
     "debug": "^4.3.4",
+    "es-module-lexer": "^1.5.3",
     "espree": "10.0.1",
     "execa": "^8.0.1",
     "istanbul-lib-instrument": "6.0.2",
     "istanbul-widget": "workspace:*",
+    "magic-string": "^0.30.10",
     "picocolors": "1.0.0",
     "source-map": "0.7.4",
     "test-exclude": "6.0.0"
@@ -69,8 +89,11 @@
   "devDependencies": {
     "@types/debug": "^4.1.12",
     "@types/node": "^20.12.12",
+    "@types/react": "^18.3.3",
     "@types/serialize-javascript": "5.0.4",
+    "react": "^18.3.1",
     "serialize-javascript": "6.0.2",
+    "typescript": "^5.4.5",
     "vite-plugin-istanbul": "6.0.0"
   }
 }

@@ -1,7 +1,26 @@
 diff --git a/dist/index.cjs b/dist/index.cjs
-index e552163df832aa02286da63d90b6a83dfd3fc392..4fb5258d4500e8ba0346ee5639655cc729342902 100644
+index e552163df832aa02286da63d90b6a83dfd3fc392..637fb3db39ebbaa99b8892a57739cced5250190b 100644
 --- a/dist/index.cjs
 +++ b/dist/index.cjs
+@@ -131,12 +131,12 @@ function istanbulPlugin(opts = {}) {
+     enforce: "post",
+     async config(config) {
+       if (!config.build?.sourcemap) {
+-        logger.warn(
+-          `${PLUGIN_NAME}> ${yellow(`Sourcemaps was automatically enabled for code coverage to be accurate.
+-To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
+-        );
+-        config.build ?? (config.build = {});
+-        config.build.sourcemap = true;
++//         logger.warn(
++//           `${PLUGIN_NAME}> ${yellow(`Sourcemaps was automatically enabled for code coverage to be accurate.
++// To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
++//         );
++//         config.build ?? (config.build = {});
++//         config.build.sourcemap = true;
+       }
+       testExclude = await createTestExclude(opts);
+     },
 @@ -182,6 +182,9 @@ To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
          const combinedSourceMap = sanitizeSourceMap(
            this.getCombinedSourcemap()
@@ -13,9 +32,28 @@ index e552163df832aa02286da63d90b6a83dfd3fc392..4fb5258d4500e8ba0346ee5639655cc7
            srcCode,
            filename,
 diff --git a/dist/index.mjs b/dist/index.mjs
-index 34e886906b6527286eae6978ce6e73bde396470f..6d224c417b00523d5ab7ddc7a4022f389e8cfd4b 100644
+index 34e886906b6527286eae6978ce6e73bde396470f..f1a3575edb4704dec63ad62a7946fbcf7edf0707 100644
 --- a/dist/index.mjs
 +++ b/dist/index.mjs
+@@ -111,12 +111,12 @@ function istanbulPlugin(opts = {}) {
+     enforce: "post",
+     async config(config) {
+       if (!config.build?.sourcemap) {
+-        logger.warn(
+-          `${PLUGIN_NAME}> ${yellow(`Sourcemaps was automatically enabled for code coverage to be accurate.
+-To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
+-        );
+-        config.build ?? (config.build = {});
+-        config.build.sourcemap = true;
++//         logger.warn(
++//           `${PLUGIN_NAME}> ${yellow(`Sourcemaps was automatically enabled for code coverage to be accurate.
++// To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
++//         );
++//         config.build ?? (config.build = {});
++//         config.build.sourcemap = true;
+       }
+       testExclude = await createTestExclude(opts);
+     },
 @@ -162,6 +162,9 @@ To hide this message set build.sourcemap to true, 'inline' or 'hidden'.`)}`
          const combinedSourceMap = sanitizeSourceMap(
            this.getCombinedSourcemap()

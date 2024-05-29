@@ -25,7 +25,7 @@ export function reactdomRender(
   }
 
   if (sync) {
-    flushSync(render)
+    Promise.resolve().then(() => flushSync(render))
   } else {
     render()
   }

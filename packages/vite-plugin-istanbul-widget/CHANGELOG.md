@@ -1,5 +1,15 @@
 # vite-plugin-istanbul-widget
 
+## 1.8.0
+### Minor Changes
+
+- remix support
+
+### Patch Changes
+
+- Updated dependencies
+  - istanbul-widget@1.8.0
+
 ## 1.7.2
 ### Patch Changes
 

@@ -13,10 +13,11 @@ const common = (option: Options): Options => ({
     __VERSION__: JSON.stringify(pkg.version),
   },
   plugins: [...(option.plugins || []), cssLegacy()],
+  treeshake: true,
 })
 
 const lib = (option: Options): Options => ({
-  format: 'esm',
+  format: ['cjs', 'esm'],
   entry: {
     'istanbul-widget.lib': 'src/istanbul-widget.ts',
   },
@@ -27,7 +28,7 @@ const lib = (option: Options): Options => ({
           'istanbul-widget': 'src/istanbul-widget.ts',
         },
       },
-  noExternal: Object.keys(pkg.dependencies) || [],
+  outExtension: ({ format }) => ({ js: format === 'esm' ? '.js' : '.cjs' }),
   splitting: false,
   minify: false,
   injectStyle: true,
@@ -60,15 +61,15 @@ export default defineConfig((option) => {
   return [
     {
       ...common(option),
-      ...esm(option),
-    },
-    {
-      ...common(option),
       ...lib(option),
     },
     {
       ...common(option),
       ...iife(option),
+    },
+    {
+      ...common(option),
+      ...esm(option),
     },
   ]
 })

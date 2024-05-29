@@ -2,7 +2,7 @@
 
 > 集成了 istanbul-widget 和 vite-plugin-istanbul 的vite插件
 >
-> 额外支持astro
+> 额外支持astro/remix
 
 ## 安装
 
@@ -44,9 +44,16 @@ export default defineConfig((env) => ({
 }))
 ```
 
+## Astro项目
+
 ### astro.config
 
 [参考配置](../../playground/astro-app/astro.config.ts)
+
+## Remix项目
+
+### vite.config
+[参考配置](../../playground/remix-app/vite.config.ts)
 
 ```ts
 import react from '@astrojs/react'

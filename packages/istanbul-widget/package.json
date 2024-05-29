@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "收集 istanbul 代码覆盖率的web小组件",
   "type": "module",
   "keywords": [
@@ -15,18 +15,16 @@
     "directory": "packages/istanbul-widget"
   },
   "files": [
-    "components.d.ts",
-    "dist",
-    "lib.d.ts"
+    "*.d.ts",
+    "dist"
   ],
   "main": "./dist/istanbul-widget.lib.js",
   "module": "./dist/esm/istanbul-widget.js",
   "types": "./dist/istanbul-widget.d.ts",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
       "types": "./dist/istanbul-widget.d.ts",
-      "require": "./dist/istanbul-widget.lib.js",
+      "require": "./dist/istanbul-widget.lib.cjs",
       "import": "./dist/esm/istanbul-widget.js",
       "default": "./dist/esm/istanbul-widget.js"
     },
@@ -37,10 +35,11 @@
     },
     "./lib": {
       "types": "./dist/istanbul-widget.d.ts",
-      "require": "./dist/istanbul-widget.lib.js",
+      "require": "./dist/istanbul-widget.lib.cjs",
       "import": "./dist/istanbul-widget.lib.js",
-      "default": "./dist/istanbul-widget.lib.js"
+      "default": "./dist/istanbul-widget.lib.cjs"
     },
+    "./package.json": "./package.json",
     "./*": "./*"
   },
   "sideEffects": [
@@ -71,7 +70,7 @@
   "dependencies": {
     "@iconify-json/vscode-icons": "^1.1.34",
     "@minko-fe/lodash-pro": "^0.3.3",
-    "@minko-fe/react-hook": "^0.3.5",
+    "@minko-fe/react-hook": "^0.3.6",
     "@neodrag/react": "^2.0.4",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -98,7 +97,7 @@
     "@types/react-dom": "^18.2.25",
     "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.19",
-    "npm-run-all": "^4.1.5",
+    "npm-run-all2": "^6.2.0",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

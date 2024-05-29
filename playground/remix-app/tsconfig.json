@@ -1,0 +1,10 @@
+{
+  "extends": "@minko-fe/tsconfig/tsconfig.app.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"]
+    },
+    "types": ["@remix-run/node", "vite/client", "vite-plugin-istanbul-widget/client"]
+  }
+}

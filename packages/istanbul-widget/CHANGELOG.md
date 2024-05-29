@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.8.0
+### Minor Changes
+
+- ssr support
+
 ## 1.7.0
 
 ### Minor Changes

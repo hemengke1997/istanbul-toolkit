@@ -17,7 +17,7 @@ export class IstanbulWidget {
   public isInited: boolean = false
   public option = {
     theme: 'dark',
-    target: document.body,
+    target: 'body',
     float: {
       offsetX: 8,
     },
@@ -125,7 +125,7 @@ export class IstanbulWidget {
   }
 
   /**
-   * Add built-in plugins.
+   * Add built-in plugins
    */
   private _addBuiltInPlugins() {
     // add default report plugin
@@ -164,7 +164,7 @@ export class IstanbulWidget {
   }
 
   /**
-   * Add a new plugin.
+   * Add a new plugin
    */
   public addPlugin(plugin: IstanbulWidgetPlugin) {
     // ignore this plugin if it has already been installed
@@ -181,7 +181,7 @@ export class IstanbulWidget {
   }
 
   /**
-   * Init a plugin.
+   * Init a plugin
    */
   private _initPlugin<T extends IstanbulWidgetPlugin>(plugin: T) {
     plugin.istanbulWidget = this
@@ -245,8 +245,8 @@ export class IstanbulWidget {
   }
 
   /**
-   * Sorting plugin list by option `pluginOrder`.
-   * Plugin not listed in `pluginOrder` will be put last.
+   * Sorting plugin list by option `pluginOrder`
+   * Plugin not listed in `pluginOrder` will be put last
    */
   private _reorderPluginList(pluginList: { [pluginID: string]: any }) {
     if (!isArray(this.option.pluginOrder)) {

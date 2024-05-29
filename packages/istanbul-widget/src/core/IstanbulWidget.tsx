@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { memo, useLayoutEffect, useRef, useState } from 'react'
 import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Toaster } from '@/components/ui/toaster'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
@@ -7,7 +7,7 @@ import Context from './Context'
 import Draggable from './components/Draggable'
 import { type Position } from './options.interface'
 
-export default function IstanbulWidgetComponent() {
+function IstanbulWidgetComponent() {
   const { theme, pluginList } = Context.usePicker(['theme', 'pluginList'])
 
   const [popoverOpen, setPopoverOpen] = useState(false)
@@ -108,3 +108,5 @@ export default function IstanbulWidgetComponent() {
     </>
   )
 }
+
+export default memo(IstanbulWidgetComponent)

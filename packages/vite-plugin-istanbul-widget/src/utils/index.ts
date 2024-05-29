@@ -41,19 +41,23 @@ export function resolveInlineScript(
       src: istanbulWidgetPath,
       script: /*js*/ `
         import { IstanbulWidget } from "${istanbulWidgetPath}";
-        const timer = setTimeout(() => {
-          new IstanbulWidget(${serialize(config)});
-          clearTimeout(timer);
-        }, ${delayIstanbulWidgetInit});
+        if(typeof window !== 'undefined' && typeof document !== 'undefined') {
+          const timer = setTimeout(() => {
+            new IstanbulWidget(${serialize(config)});
+            clearTimeout(timer);
+          }, ${delayIstanbulWidgetInit});
+        }
       `,
     },
     min: {
       src: istanbulWidgetPath,
       script: /*js*/ `
-        const timer = setTimeout(() => {
-          new window.IstanbulWidget(${serialize(config)});
-          clearTimeout(timer);
-        }, ${delayIstanbulWidgetInit});
+        if(typeof window !== 'undefined' && typeof document !== 'undefined') {
+          const timer = setTimeout(() => {
+            new window.IstanbulWidget(${serialize(config)});
+            clearTimeout(timer);
+          }, ${delayIstanbulWidgetInit});
+        }
       `,
     },
   }

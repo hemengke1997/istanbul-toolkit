@@ -1,5 +1,13 @@
-// @ts-nocheck
-
+import { isBrowser } from '@minko-fe/lodash-pro'
 import { IstanbulWidget } from './core/core'
 
-window.IstanbulWidget = IstanbulWidget
+declare global {
+  interface Window {
+    IstanbulWidget: typeof IstanbulWidget
+  }
+}
+
+// ssr support
+if (isBrowser()) {
+  window.IstanbulWidget = IstanbulWidget
+}
