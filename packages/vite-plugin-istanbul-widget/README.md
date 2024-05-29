@@ -50,11 +50,6 @@ export default defineConfig((env) => ({
 
 [参考配置](../../playground/astro-app/astro.config.ts)
 
-## Remix项目
-
-### vite.config
-[参考配置](../../playground/remix-app/vite.config.ts)
-
 ```ts
 import react from '@astrojs/react'
 import { defineConfig } from 'astro/config'
@@ -106,6 +101,46 @@ export default defineConfig({
       }),
     ],
   },
+})
+```
+
+## Remix项目
+
+### vite.config
+[参考配置](../../playground/remix-app/vite.config.ts)
+
+```ts
+import { vitePlugin as remix } from '@remix-run/dev'
+import { defineConfig } from 'vite'
+import { istanbulWidget } from 'vite-plugin-istanbul-widget/remix'
+
+export default defineConfig({
+  plugins: [
+    remix(),
+    istanbulWidget({
+      enabled: true,
+      checkProd: false,
+      istanbulWidgetConfig: {
+        defaultPosition: {
+          x: 0,
+          y: 100,
+        },
+        plugin: {
+          report: {
+            async onReport(coverage, ...args) {
+              console.log(coverage, ...args)
+            },
+          },
+          setting: {
+            autoReport: false,
+            onLeavePage: true,
+            requireReporter: false,
+          },
+        },
+      },
+      fullReport: true,
+    }),
+  ],
 })
 ```
 
