@@ -1,5 +1,5 @@
-import { IstanbulWidgetReactPlugin } from '@/core/plugin/IstanbulWidgetReactPlugin'
-import Setting from './Setting'
+import { IstanbulWidgetReactPlugin } from '@/core/plugin/istanbul-widget-react-plugin'
+import Setting from './setting'
 
 export class SettingPlugin extends IstanbulWidgetReactPlugin {
   constructor(id: string, name: string, renderProps = {}) {

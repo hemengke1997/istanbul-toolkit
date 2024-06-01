@@ -3,8 +3,8 @@ import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } f
 import { Toaster } from '@/components/ui/toaster'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import { $ } from '@/utils/query'
-import Context from './Context'
-import Draggable from './components/Draggable'
+import Draggable from './components/draggable'
+import Context from './context'
 import { type Position } from './options.interface'
 
 function IstanbulWidgetComponent() {

@@ -19,7 +19,7 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { useToast } from '@/components/ui/use-toast'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
-import Context from '../../core/Context'
+import Context from '../../core/context'
 
 type Config = {
   reporter: string

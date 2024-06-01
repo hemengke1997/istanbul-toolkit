@@ -52,7 +52,9 @@
     "build": "tsup",
     "vite": "vite",
     "report": "NODE_ENV=production REPORT=true vite build --mode production",
-    "lint": "eslint . --fix",
+    "lint": "run-p type-check eslint",
+    "type-check": "tsc --noEmit",
+    "eslint": "eslint . --fix",
     "preview": "vite preview"
   },
   "peerDependencies": {
@@ -106,6 +108,7 @@
     "tailwindcss-rem-to-px": "^0.1.0",
     "tsup-plugin-bundleless": "^0.3.2",
     "tsup-plugin-css-legacy": "^0.0.1",
+    "typescript": "^5.4.5",
     "vite": "^5.2.11"
   }
 }

@@ -1,7 +1,7 @@
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
-import Context, { type InitialWidgetProps } from './Context'
-import IstanbulWidgetComponent from './IstanbulWidget'
+import Context, { type InitialWidgetProps } from './context'
 import { reactdomRender, reactdomUnmount } from './dom/react-render'
+import IstanbulWidgetComponent from './istanbul-widget'
 import { type PluginType } from './options.interface'
 
 export type CompInstance = {

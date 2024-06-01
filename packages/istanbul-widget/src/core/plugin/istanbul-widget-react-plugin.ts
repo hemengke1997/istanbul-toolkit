@@ -3,7 +3,7 @@ import { $ } from '@/utils/query'
 import { IstanbulWidget } from '../core'
 import { reactdomRender, reactdomUnmount } from '../dom/react-render'
 import { type PluginType } from '../options.interface'
-import { IstanbulWidgetPlugin } from './IstanbulWidgetPlugin'
+import { IstanbulWidgetPlugin } from './istanbul-widget-plugin'
 
 export type IstanbulWidgetReactPluginProps = {} & PluginType
 

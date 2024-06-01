@@ -40,6 +40,9 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
+      npm-run-all2:
+        specifier: ^6.2.0
+        version: 6.2.0
       nyc:
         specifier: ^15.1.0
         version: 15.1.0
@@ -246,6 +249,9 @@ importers:
       tsup-plugin-css-legacy:
         specifier: ^0.0.1
         version: 0.0.1
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
       vite:
         specifier: ^5.2.11
         version: 5.2.11(@types/node@20.12.12)

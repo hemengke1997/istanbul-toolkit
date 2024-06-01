@@ -1,5 +1,5 @@
-import { IstanbulWidgetReactPlugin } from '@/core/plugin/IstanbulWidgetReactPlugin'
-import Report from './Report'
+import { IstanbulWidgetReactPlugin } from '@/core/plugin/istanbul-widget-react-plugin'
+import Report from './report'
 
 export class ReportPlugin extends IstanbulWidgetReactPlugin {
   constructor(id: string, name: string, renderProps = {}) {

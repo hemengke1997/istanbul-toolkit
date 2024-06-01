@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
-import Context from '@/core/Context'
+import Context from '@/core/context'
 import { type ButtonGroupOptions } from '@/core/options.interface'
 
 export type ButtonGroupProps = {
