@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.8.1
+### Patch Changes
+
+- f2d8086: update deps
+
 ## 1.8.0
 ### Minor Changes
 

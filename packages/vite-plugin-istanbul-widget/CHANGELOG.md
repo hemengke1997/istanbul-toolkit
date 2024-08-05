@@ -1,5 +1,12 @@
 # vite-plugin-istanbul-widget
 
+## 1.8.1
+### Patch Changes
+
+- f2d8086: update deps
+- Updated dependencies [f2d8086]
+  - istanbul-widget@1.8.1
+
 ## 1.8.0
 ### Minor Changes
 
