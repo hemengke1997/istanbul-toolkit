@@ -17,7 +17,7 @@ export default defineConfig(() => ({
           setting: {
             autoReport: false,
             onLeavePage: true,
-            requireReporter: true,
+            requireReporter: false,
             text: '!设置文案!',
           },
         },

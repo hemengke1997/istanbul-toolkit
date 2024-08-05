@@ -14,7 +14,7 @@ function useHydrated() {
   return hydrated
 }
 
-export const withIstanbulWidget = (Component: ComponentType, istanbulWidgetConfig: IstanbulWidgetOptions) => () => {
+export function withIstanbulWidget(Component: ComponentType, istanbulWidgetConfig: IstanbulWidgetOptions) {
   function AppWithIstanbulWidget(props) {
     const hydrated = useHydrated()
     useEffect(() => {

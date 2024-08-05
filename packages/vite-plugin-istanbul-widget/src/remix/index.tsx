@@ -9,7 +9,6 @@ import { debug } from '../utils/debug'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   const { enabled, checkProd, istanbulWidgetConfig } = resolveOptions(opts)
-
   if (!checkPluginEnabled(enabled, checkProd)) return
 
   debug('remix istanbulWidget options:', opts)
@@ -21,7 +20,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       transform: {
         order: 'pre',
         async handler(code, id) {
-          if (id.endsWith('/root.tsx')) {
+          if (/.+\/root\.[t|j]sx?$/.test(id)) {
             const app = 'AppExport'
 
             const s = new MagicString(code)

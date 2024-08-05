@@ -1,11 +1,11 @@
 import type { Plugin } from 'vite'
 import { isArray, set } from '@minko-fe/lodash-pro'
 import istanbul from 'vite-plugin-istanbul'
+import { vendor } from './meta'
 import { type VitePluginIstanbulWidgetOptions } from './types'
 import { checkPluginEnabled, ensureArray, getCommitId, resolveInlineScript, resolveOptions } from './utils'
 import { debug } from './utils/debug'
 
-export const vendor = 'vendor'
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   const { enabled, fullReport, istanbulPluginConfig, istanbulWidgetConfig, checkProd, delayIstanbulWidgetInit } =
     resolveOptions(opts)

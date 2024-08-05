@@ -1,5 +1,6 @@
 import type { AstroIntegration } from 'astro'
-import { vendor, istanbulWidget as viteIstanbulWidget } from '../index'
+import { istanbulWidget as viteIstanbulWidget } from '../index'
+import { vendor } from '../meta'
 import { type VitePluginIstanbulWidgetOptions } from '../types'
 import { checkPluginEnabled, ensureArray, resolveInlineScript, resolveOptions } from '../utils'
 import { debug } from '../utils/debug'

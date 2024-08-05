@@ -75,25 +75,25 @@
   "dependencies": {
     "@istanbuljs/load-nyc-config": "1.1.0",
     "@minko-fe/lodash-pro": "^0.3.3",
-    "debug": "^4.3.4",
-    "es-module-lexer": "^1.5.3",
+    "debug": "^4.3.6",
+    "es-module-lexer": "1.5.3",
     "espree": "10.0.1",
-    "execa": "^8.0.1",
+    "execa": "8.0.1",
     "istanbul-lib-instrument": "6.0.2",
     "istanbul-widget": "workspace:*",
-    "magic-string": "^0.30.10",
+    "magic-string": "^0.30.11",
     "picocolors": "1.0.0",
     "source-map": "0.7.4",
-    "test-exclude": "6.0.0"
+    "test-exclude": "6.0.0",
+    "vite-plugin-istanbul": "6.0.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.12",
-    "@types/node": "^20.12.12",
+    "@types/node": "^20.14.14",
     "@types/react": "^18.3.3",
     "@types/serialize-javascript": "5.0.4",
     "react": "^18.3.1",
     "serialize-javascript": "6.0.2",
-    "typescript": "^5.4.5",
-    "vite-plugin-istanbul": "6.0.0"
+    "typescript": "^5.5.4"
   }
 }
