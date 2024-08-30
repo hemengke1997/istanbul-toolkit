@@ -1,5 +1,15 @@
 # vite-plugin-istanbul-widget
 
+## 1.9.0
+### Minor Changes
+
+- refactor
+
+### Patch Changes
+
+- Updated dependencies
+  - istanbul-widget@1.9.0
+
 ## 1.8.1
 ### Patch Changes
 
