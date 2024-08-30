@@ -15,12 +15,12 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.2",
+    "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.0",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
     "vite-plugin-istanbul-widget": "workspace:*",
-    "vite-plugin-public-typescript": "latest"
+    "vite-plugin-public-typescript": "^3.2.3"
   }
 }

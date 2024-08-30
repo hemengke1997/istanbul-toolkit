@@ -1,4 +1,4 @@
-import { type Options, defineConfig } from 'tsup'
+import { defineConfig, type Options } from 'tsup'
 import { bundleless } from 'tsup-plugin-bundleless'
 import { cssLegacy } from 'tsup-plugin-css-legacy'
 import pkg from './package.json'

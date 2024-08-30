@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite'
-import { isArray, set } from '@minko-fe/lodash-pro'
+import { isArray, set } from 'lodash-es'
 import istanbul from 'vite-plugin-istanbul'
 import { vendor } from './meta'
 import { type VitePluginIstanbulWidgetOptions } from './types'

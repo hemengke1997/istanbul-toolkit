@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { visualizer as rollupVisualizer } from 'rollup-plugin-visualizer'
-import { type PluginOption, defineConfig } from 'vite'
+import { defineConfig, type PluginOption } from 'vite'
 import pkg from './package.json'
 
 function visualizer() {

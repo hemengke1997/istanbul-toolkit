@@ -7,7 +7,9 @@ import { IstanbulWidgetPlugin } from './istanbul-widget-plugin'
 
 export type IstanbulWidgetReactPluginProps = {} & PluginType
 
-export class IstanbulWidgetReactPlugin<T extends {} = {}> extends IstanbulWidgetPlugin {
+export class IstanbulWidgetReactPlugin<
+  T extends Record<string, any> = Record<string, any>,
+> extends IstanbulWidgetPlugin {
   private _root!: HTMLDivElement
   constructor(
     /**

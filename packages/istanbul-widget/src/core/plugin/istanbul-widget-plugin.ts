@@ -1,5 +1,5 @@
-import { isFunction, uniqueId } from '@minko-fe/lodash-pro'
 import EventEmitter from 'eventemitter3'
+import { isFunction, uniqueId } from 'lodash-es'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import { type IstanbulWidget } from '../core'
 

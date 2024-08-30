@@ -1,5 +1,5 @@
-import { isArray, isFunction, isObject, merge, set } from '@minko-fe/lodash-pro'
-import { type ConsolaInstance, LogLevels, createConsola } from 'consola/browser'
+import { type ConsolaInstance, createConsola, LogLevels } from 'consola/browser'
+import { isArray, isFunction, isObject, merge, set } from 'lodash-es'
 import { ButtonGroupPlugin } from '@/plugins/button-group/button-group-plugin'
 import { ReportPlugin } from '@/plugins/report/report-plugin'
 import { SettingPlugin } from '@/plugins/setting/setting-plugin'

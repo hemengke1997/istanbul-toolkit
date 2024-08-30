@@ -1,10 +1,10 @@
-import { isArray } from '@minko-fe/lodash-pro'
+import { isArray } from 'lodash-es'
 
 const $ = {
   one(selector: string, contextElement: Element | Document = document) {
     try {
       return <HTMLElement>contextElement.querySelector(selector) || undefined
-    } catch (e) {
+    } catch {
       return undefined
     }
   },
@@ -23,7 +23,7 @@ const $ = {
     try {
       const nodeList = <NodeListOf<HTMLElement>>contextElement.querySelectorAll(selector)
       return <HTMLElement[]>[].slice.call(nodeList)
-    } catch (e) {
+    } catch {
       return <HTMLElement[]>[]
     }
   },

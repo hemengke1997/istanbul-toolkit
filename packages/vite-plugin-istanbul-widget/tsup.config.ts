@@ -13,6 +13,7 @@ export const tsup = defineConfig((option) => {
       target: 'node16',
       format: ['cjs', 'esm'],
       external: ['vite-plugin-istanbul/*'],
+      noExternal: ['vite-plugin-istanbul'],
       platform: 'node',
       splitting: false,
       treeshake: true,

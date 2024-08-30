@@ -1,4 +1,3 @@
-import { isBrowser } from '@minko-fe/lodash-pro'
 import { IstanbulWidget } from './core/core'
 
 declare global {
@@ -8,6 +7,6 @@ declare global {
 }
 
 // ssr support
-if (isBrowser()) {
+if (typeof window !== 'undefined') {
   window.IstanbulWidget = IstanbulWidget
 }

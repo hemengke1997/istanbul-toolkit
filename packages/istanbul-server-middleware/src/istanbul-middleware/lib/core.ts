@@ -3,12 +3,12 @@
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 
-import * as _ from '@minko-fe/lodash-pro'
 import { $ } from 'execa'
 import { type Request, type Response } from 'express'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { type CoverageMap, createCoverageMap } from 'istanbul-lib-coverage'
+import * as _ from 'lodash-es'
 import path from 'node:path'
 import * as querystring from 'node:querystring'
 import { parse } from 'node-html-parser'
