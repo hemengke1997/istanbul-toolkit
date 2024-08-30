@@ -1,6 +1,7 @@
 {
   "name": "istanbul-toolkit",
   "private": true,
+  "packageManager": "pnpm@9.7.1",
   "description": "istanbul toolkit",
   "type": "module",
   "keywords": [
@@ -43,7 +44,7 @@
     "simple-git-hooks": "^2.11.1",
     "taze": "^0.16.7",
     "tsup": "^8.2.4",
-    "turbo": "^1.13.4",
+    "turbo": "^2.1.0",
     "typescript": "^5.5.4"
   },
   "simple-git-hooks": {
