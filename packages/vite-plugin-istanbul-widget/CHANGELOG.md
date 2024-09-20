@@ -1,5 +1,12 @@
 # vite-plugin-istanbul-widget
 
+## 1.9.1
+### Patch Changes
+
+- 0b0fc94: upgrade deps
+- Updated dependencies [0b0fc94]
+  - istanbul-widget@1.9.1
+
 ## 1.9.0
 ### Minor Changes
 
