@@ -7,7 +7,7 @@ const common = (option: Options): Options => ({
   clean: true,
   outExtension: () => ({ js: '.js' }),
   outDir: 'dist',
-  minify: !option.watch,
+  minify: false,
   target: 'es3',
   define: {
     __VERSION__: JSON.stringify(pkg.version),
@@ -52,9 +52,8 @@ const esm = (option: Options): Options => ({
   dts: !option.watch,
   format: 'esm',
   outDir: 'dist/esm',
-  splitting: false,
   minify: false,
-  plugins: [bundleless()],
+  ...bundleless(),
 })
 
 export default defineConfig((option) => {
@@ -70,6 +69,7 @@ export default defineConfig((option) => {
     {
       ...common(option),
       ...esm(option),
+      plugins: [...(common(option).plugins || []), ...(esm(option).plugins || [])],
     },
   ]
 })

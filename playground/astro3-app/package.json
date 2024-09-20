@@ -19,9 +19,9 @@
     "@astrojs/node": "6.0.0",
     "@astrojs/react": "3.0.2",
     "@minko-fe/tsconfig": "latest",
-    "@types/react": "^18.3.4",
-    "typescript": "^5.5.4",
+    "@types/react": "^18.3.8",
+    "typescript": "^5.6.2",
     "vite-plugin-istanbul-widget": "workspace:*",
-    "vite-plugin-public-typescript": "^3.2.3"
+    "vite-plugin-public-typescript": "^4.0.0"
   }
 }

@@ -6,6 +6,11 @@ import { type VitePluginIstanbulWidgetOptions } from './types'
 import { checkPluginEnabled, ensureArray, getCommitId, resolveInlineScript, resolveOptions } from './utils'
 import { debug } from './utils/debug'
 
+declare global {
+  // eslint-disable-next-line vars-on-top, no-var
+  var __GIT_COMMIT_ID__: string
+}
+
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   const { enabled, fullReport, istanbulPluginConfig, istanbulWidgetConfig, checkProd, delayIstanbulWidgetInit } =
     resolveOptions(opts)

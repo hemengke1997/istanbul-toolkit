@@ -1,6 +1,4 @@
 {
   "extends": "@minko-fe/tsconfig/tsconfig.app",
-  "compilerOptions": {
-    "types": ["vite-plugin-istanbul-widget/client"]
-  }
+  "compilerOptions": {}
 }

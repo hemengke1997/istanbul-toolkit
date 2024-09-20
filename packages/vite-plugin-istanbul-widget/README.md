@@ -96,9 +96,7 @@ export default defineConfig({
   ],
   vite: {
     plugins: [
-      publicTypescript({
-        babel: true,
-      }),
+      publicTypescript(),
     ],
   },
 })

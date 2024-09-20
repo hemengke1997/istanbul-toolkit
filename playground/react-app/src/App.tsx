@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import Static from './Static'
 import './App.css'
 

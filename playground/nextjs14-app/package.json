@@ -12,21 +12,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^14.2.7",
+    "next": "^14.2.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.16.2",
-    "@types/react": "^18.3.4",
+    "@types/node": "^20.16.5",
+    "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
-    "babel-plugin-istanbul": "^6.1.1",
+    "babel-plugin-istanbul": "^7.0.0",
     "istanbul-widget": "workspace:*",
-    "postcss": "^8.4.41",
-    "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.2",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.12",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.6",
     "vite-plugin-istanbul-widget": "workspace:*",
-    "vite-plugin-public-typescript": "^3.2.3"
+    "vite-plugin-public-typescript": "^4.0.0"
   }
 }

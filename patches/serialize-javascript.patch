@@ -1,5 +1,5 @@
 diff --git a/index.js b/index.js
-index 156f8f917f41ff5eea61809d4bcd7125091ff2c6..5ee15b3efc223f7d7c00762b511320a77a75f01f 100644
+index 156f8f917f41ff5eea61809d4bcd7125091ff2c6..d74926ced04afe4a00c48b887e441d1d3cd26a72 100644
 --- a/index.js
 +++ b/index.js
 @@ -6,7 +6,7 @@ See the accompanying LICENSE file for terms.

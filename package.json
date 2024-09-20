@@ -21,6 +21,7 @@
     "dev": "turbo dev --filter=\"./packages/*\"",
     "build": "turbo build --filter=\"./packages/*\"",
     "lint": "turbo lint --filter=\"./packages/*\"",
+    "lint:playground": "eslint ./playground --fix",
     "prepare": "simple-git-hooks",
     "commitlint": "commitlint -e",
     "up": "taze -I -w",
@@ -30,22 +31,22 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.7",
-    "@commitlint/cli": "^19.4.1",
+    "@changesets/cli": "^2.27.8",
+    "@commitlint/cli": "^19.5.0",
     "@minko-fe/commitlint-config": "^2.1.2",
-    "@minko-fe/eslint-config": "^4.0.0",
+    "@minko-fe/eslint-config": "^4.0.2",
     "@minko-fe/prettier-config": "^2.2.3",
     "@minko-fe/tsconfig": "latest",
-    "eslint": "^9.9.1",
-    "npm-run-all2": "^6.2.2",
-    "nyc": "^17.0.0",
+    "eslint": "^9.10.0",
+    "npm-run-all2": "^6.2.3",
+    "nyc": "^17.1.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "simple-git-hooks": "^2.11.1",
-    "taze": "^0.16.7",
-    "tsup": "^8.2.4",
-    "turbo": "^2.1.0",
-    "typescript": "^5.5.4"
+    "taze": "^0.16.9",
+    "tsup": "^8.3.0",
+    "turbo": "^2.1.2",
+    "typescript": "^5.6.2"
   },
   "simple-git-hooks": {
     "commit-msg": "npm run commitlint",
@@ -56,8 +57,8 @@
   ],
   "pnpm": {
     "patchedDependencies": {
-      "vite-plugin-istanbul@6.0.0": "patches/vite-plugin-istanbul@6.0.0.patch",
-      "serialize-javascript@6.0.2": "patches/serialize-javascript@6.0.2.patch"
+      "vite-plugin-istanbul": "patches/vite-plugin-istanbul.patch",
+      "serialize-javascript": "patches/serialize-javascript.patch"
     }
   },
   "prettier": "@minko-fe/prettier-config",

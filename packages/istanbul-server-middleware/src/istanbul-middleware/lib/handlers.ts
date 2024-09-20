@@ -117,7 +117,7 @@ export function createHandler(opts?: { resetOnGet: boolean }) {
 
   //return global coverage object on /object as JSON
   app.get('/object', Router.validateQuery, (req, res) => {
-    res.json(core.Coverage.get({ ns: Router.getNS(req), v: Router.getQuery(req).v } || {}))
+    res.json(core.Coverage.get({ ns: Router.getNS(req), v: Router.getQuery(req).v }))
   })
 
   //send self-contained download package with coverage and reports on /download
@@ -142,7 +142,7 @@ export function createHandler(opts?: { resetOnGet: boolean }) {
       filestream.on('end', () => {
         fs.rmSync(zipName, { recursive: true })
       })
-    } catch (err) {
+    } catch {
       res.statusCode = 404
     }
   })

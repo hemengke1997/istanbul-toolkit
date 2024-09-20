@@ -1,0 +1,7 @@
+{
+  "extends": "@minko-fe/tsconfig/tsconfig.lib",
+  "compilerOptions": {
+    "noImplicitAny": false
+  },
+  "exclude": ["**/dist"]
+}
