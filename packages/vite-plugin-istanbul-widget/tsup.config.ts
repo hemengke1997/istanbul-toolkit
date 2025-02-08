@@ -6,7 +6,7 @@ export const tsup = defineConfig((option) => {
       entry: {
         'index': 'src/index.ts',
         'astro': 'src/astro/index.ts',
-        'remix': 'src/remix/index.tsx',
+        'remix': 'src/remix/index.ts',
         'remix/client': 'src/remix/client.tsx',
       },
       dts: true,

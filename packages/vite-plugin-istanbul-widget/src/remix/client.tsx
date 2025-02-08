@@ -1,5 +1,6 @@
-import { IstanbulWidget, type IstanbulWidgetOptions } from 'istanbul-widget/lib'
 import { type ComponentType, useEffect, useState } from 'react'
+// @ts-ignore
+import { IstanbulWidget, type IstanbulWidgetOptions } from 'istanbul-widget/lib'
 
 let hydrating = true
 
@@ -14,8 +15,8 @@ function useHydrated() {
   return hydrated
 }
 
-export function withIstanbulWidget(Component: ComponentType, istanbulWidgetConfig: IstanbulWidgetOptions) {
-  function AppWithIstanbulWidget(props) {
+export const withIstanbulWidget = (Component: ComponentType, istanbulWidgetConfig: IstanbulWidgetOptions) => () => {
+  function AppWithIstanbulWidget(props: any) {
     const hydrated = useHydrated()
     useEffect(() => {
       if (hydrated) {

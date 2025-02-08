@@ -33,6 +33,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
         }
       },
       transformIndexHtml: {
+        // pre for base url
         order: 'pre',
         handler(html) {
           if (istanbulWidgetConfig !== false) {
