@@ -1,5 +1,10 @@
 # vite-plugin-istanbul-widget
 
+## 1.9.2
+### Patch Changes
+
+- a96989e: fix: remix support
+
 ## 1.9.1
 ### Patch Changes
 
