@@ -1,5 +1,10 @@
 # vite-plugin-istanbul-widget
 
+## 1.9.4
+### Patch Changes
+
+- fix: entry not found'
+
 ## 1.9.3
 ### Patch Changes
 

@@ -62,6 +62,12 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 }
               } catch {}
             }
+
+            if (!entryFile) {
+              console.warn(
+                '\n[vite-plugin-istanbul-widget]: Entry file not found, please specify the "entry" in the options',
+              )
+            }
           }
         },
       },
@@ -93,8 +99,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           }
 
           if (isEntry) {
-            return /*js*/ `
-              import '${runtimeId}';
+            return `import '${runtimeId}';
               ${code}
             `
           }
