@@ -1,10 +1,12 @@
-import type { Plugin } from 'vite'
 import { isArray, set } from 'lodash-es'
+import glob from 'tiny-glob'
+import { normalizePath, type Plugin, type ResolvedConfig } from 'vite'
 import istanbul from 'vite-plugin-istanbul'
 import { vendor } from './meta'
 import { type VitePluginIstanbulWidgetOptions } from './types'
-import { checkPluginEnabled, ensureArray, getCommitId, resolveInlineScript, resolveOptions } from './utils'
+import { checkPluginEnabled, ensureArray, getCommitId, resolveOptions, resolveWidgetScript } from './utils'
 import { debug } from './utils/debug'
+import { resolvedVirtualModuleId, runtimeId, vmods } from './virtual'
 
 declare global {
   // eslint-disable-next-line vars-on-top, no-var
@@ -12,10 +14,12 @@ declare global {
 }
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
-  const { enabled, fullReport, istanbulPluginConfig, istanbulWidgetConfig, checkProd, delayIstanbulWidgetInit } =
-    resolveOptions(opts)
+  const { enabled, fullReport, istanbulPluginConfig, istanbulWidgetConfig, checkProd, entry } = resolveOptions(opts)
 
   if (!checkPluginEnabled(enabled, checkProd)) return
+
+  let entryFile: string = entry || ''
+  let config: ResolvedConfig
 
   debug('istanbulWidget options:', opts)
 
@@ -32,36 +36,61 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           },
         }
       },
-      transformIndexHtml: {
-        // pre for base url
+      configResolved: {
         order: 'pre',
-        handler(html) {
-          if (istanbulWidgetConfig !== false) {
-            const { src, script } = resolveInlineScript('min', istanbulWidgetConfig, { delayIstanbulWidgetInit })
-            return {
-              html,
-              tags: [
-                {
-                  tag: 'script',
-                  attrs: {
-                    type: 'module',
-                    defer: true,
-                    src,
-                  },
-                  injectTo: 'body',
-                },
-                {
-                  tag: 'script',
-                  attrs: {
-                    type: 'module',
-                  },
-                  injectTo: 'body',
-                  children: script,
-                },
-              ],
+        async handler(_config) {
+          config = _config
+          if (!entryFile) {
+            // Auto detect entry file
+            const maybeEntry = ['src/main', 'src/root', 'app/main', 'app/root']
+            for (const file of maybeEntry) {
+              try {
+                const files = await glob(`${file}.{ts,tsx,js,jsx}`, {
+                  cwd: config.root,
+                  filesOnly: true,
+                })
+                if (files.length) {
+                  entryFile = files[0]
+                  break
+                }
+              } catch {}
             }
           }
-          return html
+        },
+      },
+      resolveId(id) {
+        if (vmods.includes(id)) {
+          return resolvedVirtualModuleId(id)
+        }
+        return null
+      },
+      async load(id) {
+        switch (id) {
+          case resolvedVirtualModuleId(runtimeId): {
+            return resolveWidgetScript(istanbulWidgetConfig)
+          }
+          default:
+            break
+        }
+      },
+      transform: {
+        order: 'pre',
+        handler(code, id) {
+          if (!entryFile) return
+
+          let isEntry = false
+          if (entryFile.startsWith(config.root)) {
+            isEntry = normalizePath(id).endsWith(normalizePath(entryFile))
+          } else if (new RegExp(entryFile).test(id)) {
+            isEntry = true
+          }
+
+          if (isEntry) {
+            return /*js*/ `
+              import '${runtimeId}';
+              ${code}
+            `
+          }
         },
       },
     },

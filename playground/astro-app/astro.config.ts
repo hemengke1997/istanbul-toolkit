@@ -1,7 +1,6 @@
 import react from '@astrojs/react'
 import { defineConfig } from 'astro/config'
 import { exclude, istanbulWidget } from 'vite-plugin-istanbul-widget/astro'
-import { publicTypescript } from 'vite-plugin-public-typescript'
 
 export default defineConfig({
   integrations: [
@@ -42,11 +41,7 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [
-      publicTypescript({
-        babel: true,
-      }),
-    ],
+    plugins: [],
     build: {
       minify: false,
     },

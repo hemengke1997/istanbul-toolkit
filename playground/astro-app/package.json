@@ -15,8 +15,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.6.2",
-    "vite-plugin-istanbul-widget": "workspace:*",
-    "vite-plugin-public-typescript": "^4.0.0"
+    "vite-plugin-istanbul-widget": "workspace:*"
   },
   "devDependencies": {
     "@astrojs/react": "^3.6.2",

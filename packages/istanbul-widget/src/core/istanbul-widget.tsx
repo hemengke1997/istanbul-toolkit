@@ -1,11 +1,10 @@
-import { memo, useLayoutEffect, useRef, useState } from 'react'
+import { memo, useLayoutEffect, useState } from 'react'
 import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Toaster } from '@/components/ui/toaster'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import { $ } from '@/utils/query'
 import Draggable from './components/draggable'
 import Context from './context'
-import { type Position } from './options.interface'
 
 function IstanbulWidgetComponent() {
   const { theme, pluginList } = Context.usePicker(['theme', 'pluginList'])
@@ -28,50 +27,12 @@ function IstanbulWidgetComponent() {
     }
   }, [])
 
-  const dragging = useRef<boolean>(false)
-  const draggingTimer = useRef<number | null>(null)
-  const [dragPos, setDragPos] = useState<Position>({ x: 0, y: 0 })
-
   return (
     <>
       <div className='iw-block iw-fixed iw-z-[99999] iw-right-0 iw-top-0 iw-left-0 iw-bottom-0 iw-pointer-events-none'>
         <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-          <Draggable
-            dragOptions={{
-              onDragStart({ offsetX, offsetY }) {
-                setDragPos({ x: offsetX, y: offsetY })
-              },
-              onDrag({ offsetX, offsetY }) {
-                const dragX = Math.abs(dragPos.x - offsetX)
-                const dragY = Math.abs(dragPos.y - offsetY)
-
-                if (dragX > 10 || dragY > 10) {
-                  setPopoverOpen(false)
-                  draggingTimer.current && window.clearTimeout(draggingTimer.current)
-                  dragging.current = true
-                } else {
-                  dragging.current = false
-                }
-              },
-              onDragEnd() {
-                if (dragging.current) {
-                  draggingTimer.current = window.setTimeout(() => {
-                    dragging.current = false
-                  }, 20)
-                }
-              },
-            }}
-            className='iw-rounded-full iw-overflow-hidden'
-          >
-            <PopoverTrigger
-              asChild
-              onClick={(e) => {
-                if (dragging.current) {
-                  e.preventDefault()
-                  return
-                }
-              }}
-            >
+          <Draggable className='iw-rounded-full iw-overflow-hidden'>
+            <PopoverTrigger asChild>
               <div
                 className='iw-w-10 iw-h-10 iw-flex iw-justify-center iw-items-center iw-p-2 iw-cursor-pointer'
                 style={{

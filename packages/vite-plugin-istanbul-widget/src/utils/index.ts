@@ -20,49 +20,23 @@ export async function getCommitId() {
   }
 }
 
-export function resolveInlineScript(
-  mode: 'lib' | 'min',
-  config: IstanbulWidgetOptions,
-  options?: {
-    delayIstanbulWidgetInit?: number
-  },
-) {
+export function resolveWidgetScript(config: IstanbulWidgetOptions) {
   const require = createRequire(import.meta.url)
-  const { delayIstanbulWidgetInit = 0 } = options || {}
 
   const istanbulWidgetPath = normalizePath(
-    `/@fs/${path.join(path.dirname(require.resolve('istanbul-widget')), `istanbul-widget.${mode}.js`)}`,
+    `/@fs/${path.join(path.dirname(require.resolve('istanbul-widget')), `istanbul-widget.lib.js`)}`,
   )
 
   debug('istanbul-widget path:', istanbulWidgetPath)
 
-  const map = {
-    lib: {
-      src: istanbulWidgetPath,
-      script: /*js*/ `
-        import { IstanbulWidget } from "${istanbulWidgetPath}";
-        if(typeof window !== 'undefined' && typeof document !== 'undefined') {
-          const timer = setTimeout(() => {
-            new IstanbulWidget(${serialize(config)});
-            clearTimeout(timer);
-          }, ${delayIstanbulWidgetInit});
-        }
-      `,
-    },
-    min: {
-      src: istanbulWidgetPath,
-      script: /*js*/ `
-        if(typeof window !== 'undefined' && typeof document !== 'undefined') {
-          const timer = setTimeout(() => {
-            new window.IstanbulWidget(${serialize(config)});
-            clearTimeout(timer);
-          }, ${delayIstanbulWidgetInit});
-        }
-      `,
-    },
+  return /*js*/ `import { IstanbulWidget } from "${istanbulWidgetPath}";
+  if(typeof window !== 'undefined' && typeof document !== 'undefined') {
+    const timer = setTimeout(() => {
+      new IstanbulWidget(${serialize(config)});
+      clearTimeout(timer);
+    }, 60);
   }
-
-  return map[mode]
+`
 }
 
 export function ensureArray<T>(value: T | T[] | undefined): T[] {
@@ -82,7 +56,6 @@ export function resolveOptions(opts: VitePluginIstanbulWidgetOptions) {
     istanbulPluginConfig: {},
     istanbulWidgetConfig: {},
     checkProd: true,
-    delayIstanbulWidgetInit: 0,
   }
   return {
     ...defaultOptions,

@@ -4,10 +4,8 @@ export const tsup = defineConfig((option) => {
   return [
     {
       entry: {
-        'index': 'src/index.ts',
-        'astro': 'src/astro/index.ts',
-        'remix': 'src/remix/index.ts',
-        'remix/client': 'src/remix/client.tsx',
+        index: 'src/index.ts',
+        astro: 'src/astro/index.ts',
       },
       dts: true,
       target: 'node16',

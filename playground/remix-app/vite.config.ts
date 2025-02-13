@@ -1,6 +1,6 @@
 import { vitePlugin as remix } from '@remix-run/dev'
 import { defineConfig } from 'vite'
-import { istanbulWidget } from 'vite-plugin-istanbul-widget/remix'
+import { istanbulWidget } from 'vite-plugin-istanbul-widget'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({

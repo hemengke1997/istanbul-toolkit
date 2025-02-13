@@ -110,7 +110,7 @@ export default defineConfig({
 ```ts
 import { vitePlugin as remix } from '@remix-run/dev'
 import { defineConfig } from 'vite'
-import { istanbulWidget } from 'vite-plugin-istanbul-widget/remix'
+import { istanbulWidget } from 'vite-plugin-istanbul-widget'
 
 export default defineConfig({
   plugins: [
@@ -152,6 +152,14 @@ type VitePluginIstanbulWidgetOptions = {
    */
   enabled?: boolean
   /**
+   * 入口文件
+   * 对于 csr 项目，入口通常是 src/main 或 app/main
+   * 对于 remix/rr7 项目，入口通常是 app/root
+   *
+   * 默认情况自动探测 ['src/main', 'src/root', 'app/main', 'app/root']
+   */
+  entry?: string
+  /**
    * 是否检查正式环境
    * 若为true，则正式环境下禁用插件
    * @default true
@@ -171,10 +179,5 @@ type VitePluginIstanbulWidgetOptions = {
    * @description false 则关闭 istanbul-widget 控件
    */
   istanbulWidgetConfig: IstanbulWidgetOptions | false
-  /**
-   * 延迟istanbul-widget初始化(ms)
-   * @default 0
-   */
-  delayIstanbulWidgetInit?: number
 }
 ```

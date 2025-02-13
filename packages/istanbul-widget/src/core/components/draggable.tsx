@@ -1,5 +1,5 @@
-import { memo, type PropsWithChildren, useEffect, useRef, useState } from 'react'
-import { type DragOptions, useDraggable } from '@neodrag/react'
+import { memo, type PropsWithChildren, useEffect, useRef } from 'react'
+import { useDraggable } from '@neodrag/react'
 import { useLocalStorageState, useMemoizedFn } from 'ahooks'
 import { max } from 'lodash-es'
 import { cn } from '@/components/utils'
@@ -8,7 +8,6 @@ import Context from '../context'
 import { type Position } from '../options.interface'
 
 type DraggableProps = PropsWithChildren<{
-  dragOptions: DragOptions
   className?: string
 }>
 
@@ -22,14 +21,12 @@ const bounds = {
 }
 
 function Draggable(props: DraggableProps) {
-  const { children, dragOptions, className } = props
+  const { children, className } = props
 
   const { defaultPosition, float } = Context.usePicker(['defaultPosition', 'float'])
 
   const handleRef = useRef<HTMLDivElement>(null)
   const draggableRef = useRef<HTMLDivElement>(null)
-
-  const [dragging, setDragging] = useState(false)
 
   const [position, setPosition] = useLocalStorageState(`${ISTANBUL_WIDGET_ID}_position`, {
     defaultValue: {
@@ -38,26 +35,17 @@ function Draggable(props: DraggableProps) {
     },
   })
 
-  useDraggable(draggableRef, {
-    ...dragOptions,
+  const { isDragging } = useDraggable(draggableRef, {
     position,
     handle: handleRef,
-    onDragStart(data) {
-      setDragging(true)
-      dragOptions.onDragStart?.(data)
-    },
+
     onDrag: (data) => {
       const { offsetX, offsetY } = data
       setPosition({ x: offsetX, y: offsetY })
-      dragOptions.onDrag?.(data)
     },
     onDragEnd(data) {
-      setDragging(false)
-
       const { offsetX, offsetY } = data
       setPosition(fixFloatPosition({ x: offsetX, y: offsetY }))
-
-      dragOptions.onDragEnd?.(data)
     },
     axis: 'both',
     bounds,
@@ -128,7 +116,7 @@ function Draggable(props: DraggableProps) {
   return (
     <div
       ref={draggableRef}
-      className={cn('iw-w-fit iw-pointer-events-auto', !dragging ? 'iw-transition-transform' : '')}
+      className={cn('iw-w-fit iw-pointer-events-auto', !isDragging ? 'iw-transition-transform' : '')}
     >
       <div ref={handleRef} className={className}>
         {children}

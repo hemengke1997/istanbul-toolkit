@@ -21,7 +21,6 @@
     "@minko-fe/tsconfig": "latest",
     "@types/react": "^18.3.8",
     "typescript": "^5.6.2",
-    "vite-plugin-istanbul-widget": "workspace:*",
-    "vite-plugin-public-typescript": "^4.0.0"
+    "vite-plugin-istanbul-widget": "workspace:*"
   }
 }
