@@ -14,7 +14,14 @@ declare global {
 }
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
-  const { enabled, fullReport, istanbulPluginConfig, istanbulWidgetConfig, checkProd, entry } = resolveOptions(opts)
+  const {
+    enabled,
+    fullReport,
+    istanbulPluginConfig,
+    istanbulWidgetConfig = {},
+    checkProd,
+    entry,
+  } = resolveOptions(opts)
 
   if (!checkPluginEnabled(enabled, checkProd)) return
 
@@ -67,7 +74,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       async load(id) {
         switch (id) {
           case resolvedVirtualModuleId(runtimeId): {
-            return resolveWidgetScript(istanbulWidgetConfig)
+            return resolveWidgetScript(istanbulWidgetConfig || {})
           }
           default:
             break
