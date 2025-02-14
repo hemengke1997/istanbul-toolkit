@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-istanbul-widget",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "description": "集成了 istanbul-widget 和 vite-plugin-istanbul 的vite插件",
   "type": "module",
   "keywords": [

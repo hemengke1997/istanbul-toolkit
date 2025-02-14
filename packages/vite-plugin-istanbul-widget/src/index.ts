@@ -80,7 +80,10 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       async load(id) {
         switch (id) {
           case resolvedVirtualModuleId(runtimeId): {
-            return resolveWidgetScript(istanbulWidgetConfig || {})
+            return {
+              code: resolveWidgetScript(istanbulWidgetConfig || {}),
+              map: null,
+            }
           }
           default:
             break
@@ -99,9 +102,12 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           }
 
           if (isEntry) {
-            return `import '${runtimeId}';
+            return {
+              code: `import '${runtimeId}';
               ${code}
-            `
+            `,
+              map: null,
+            }
           }
         },
       },

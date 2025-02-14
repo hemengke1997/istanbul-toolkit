@@ -45,7 +45,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
 
                       return {
                         code,
-                        map: { mappings: '' },
+                        map: null,
                       }
                     }
                   }

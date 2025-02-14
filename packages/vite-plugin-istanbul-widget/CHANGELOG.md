@@ -1,5 +1,10 @@
 # vite-plugin-istanbul-widget
 
+## 1.9.5
+### Patch Changes
+
+- fix: sourcemap incorrect
+
 ## 1.9.4
 ### Patch Changes
 
