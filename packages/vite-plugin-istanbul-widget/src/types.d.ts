@@ -14,7 +14,7 @@ export type VitePluginIstanbulWidgetOptions = {
    *
    * 默认情况自动探测 ['src/main', 'src/root', 'app/main', 'app/root']
    */
-  entry?: string
+  entry?: string | RegExp
   /**
    * 是否检查正式环境
    * 若为true，则正式环境下禁用插件

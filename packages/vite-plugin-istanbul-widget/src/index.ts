@@ -25,7 +25,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
 
   if (!checkPluginEnabled(enabled, checkProd)) return
 
-  let entryFile: string = entry || ''
+  let entryFile = entry || ''
   let config: ResolvedConfig
 
   debug('istanbulWidget options:', opts)
@@ -55,9 +55,10 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                 const files = await glob(`${file}.{ts,tsx,js,jsx}`, {
                   cwd: config.root,
                   filesOnly: true,
+                  absolute: true,
                 })
                 if (files.length) {
-                  entryFile = files[0]
+                  entryFile = normalizePath(files[0])
                   break
                 }
               } catch {}
@@ -95,9 +96,11 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           if (!entryFile) return
 
           let isEntry = false
-          if (entryFile.startsWith(config.root)) {
-            isEntry = normalizePath(id).endsWith(normalizePath(entryFile))
+          if (entryFile instanceof RegExp && entryFile.test(id)) {
+            isEntry = true
           } else if (new RegExp(entryFile).test(id)) {
+            isEntry = true
+          } else if (entryFile === id) {
             isEntry = true
           }
 

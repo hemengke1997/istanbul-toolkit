@@ -1,5 +1,10 @@
 # vite-plugin-istanbul-widget
 
+## 1.9.6
+### Patch Changes
+
+- fix: windows path
+
 ## 1.9.5
 ### Patch Changes
 
