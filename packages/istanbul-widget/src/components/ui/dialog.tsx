@@ -33,6 +33,7 @@ const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <DialogPortal container={document.querySelector(`#${ISTANBUL_WIDGET_ID}`) as HTMLElement}>
+    <DialogDescription />
     <DialogOverlay />
     <DialogPrimitive.Content
       ref={ref}

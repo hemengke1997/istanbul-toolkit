@@ -8,11 +8,6 @@ import { checkPluginEnabled, ensureArray, getCommitId, resolveOptions, resolveWi
 import { debug } from './utils/debug'
 import { resolvedVirtualModuleId, runtimeId, vmods } from './virtual'
 
-declare global {
-  // eslint-disable-next-line vars-on-top, no-var
-  var __GIT_COMMIT_ID__: string
-}
-
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
   const {
     enabled,

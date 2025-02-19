@@ -1,5 +1,15 @@
 # vite-plugin-istanbul-widget
 
+## 1.10.0
+### Minor Changes
+
+- expose context
+
+### Patch Changes
+
+- Updated dependencies
+  - istanbul-widget@1.10.0
+
 ## 1.9.6
 ### Patch Changes
 

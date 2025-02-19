@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.10.0
+### Minor Changes
+
+- expose context
+
 ## 1.9.2
 ### Patch Changes
 

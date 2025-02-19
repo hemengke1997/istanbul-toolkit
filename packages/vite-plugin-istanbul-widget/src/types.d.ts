@@ -1,3 +1,5 @@
+/// <reference types="istanbul-widget/types" />
+
 import { type IstanbulWidgetOptions } from 'istanbul-widget'
 import { type IstanbulPluginOptions } from 'vite-plugin-istanbul'
 
@@ -35,4 +37,8 @@ export type VitePluginIstanbulWidgetOptions = {
    * @description false 则关闭 istanbul-widget 控件
    */
   istanbulWidgetConfig?: IstanbulWidgetOptions | false
+}
+
+declare global {
+  var __GIT_COMMIT_ID__: string
 }

@@ -1,3 +1,4 @@
+import { IstanbulWidgetReactPlugin } from './plugin/istanbul-widget-react-plugin'
 import { type ConsolaInstance, createConsola, LogLevels } from 'consola/browser'
 import { isArray, isFunction, isObject, merge, set } from 'lodash-es'
 import { ButtonGroupPlugin } from '@/plugins/button-group/button-group-plugin'
@@ -5,12 +6,23 @@ import { ReportPlugin } from '@/plugins/report/report-plugin'
 import { SettingPlugin } from '@/plugins/setting/setting-plugin'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import { $ } from '@/utils/query'
-import Context from './context'
 import { type IstanbulWidgetOptions, type PluginName, type PluginType } from './options.interface'
 import { IstanbulWidgetPlugin } from './plugin/istanbul-widget-plugin'
-import { IstanbulWidgetReactPlugin } from './plugin/istanbul-widget-react-plugin'
 import { type CompInstance, render } from './render'
 import '@/styles/global.css'
+
+export type widgetReactContext = {
+  report: (showToast?: boolean) => Promise<void> | undefined
+}
+
+declare global {
+  var __VERSION__: string
+
+  interface Window {
+    __istanbulWidgetAutoReportInterval: number | undefined
+    __coverage__: any | undefined
+  }
+}
 
 export class IstanbulWidget {
   public version: string = __VERSION__
@@ -27,11 +39,12 @@ export class IstanbulWidget {
     },
     defaultPlugins: ['buttonGroup', 'setting'],
   } as IstanbulWidgetOptions
+  public context: widgetReactContext = {} as widgetReactContext
 
-  protected compInstance: CompInstance = {
+  private compInstance: CompInstance = {
     pluginList: {},
   } as CompInstance
-  protected pluginList: { [id: string]: IstanbulWidgetPlugin } = {} // plugin instance
+  private pluginList: { [id: string]: IstanbulWidgetPlugin } = {} // plugin instance
 
   // Export static classes
   public static IstanbulWidgetPlugin: typeof IstanbulWidgetPlugin
@@ -39,8 +52,6 @@ export class IstanbulWidget {
   public static ReportPlugin: typeof ReportPlugin
   public static SettingPlugin: typeof SettingPlugin
   public static ButtonGroupPlugin: typeof ButtonGroupPlugin
-
-  public static Context: typeof Context
 
   public static logger: ConsolaInstance
 
@@ -111,6 +122,7 @@ export class IstanbulWidget {
         ...this.compInstance,
         ...render({
           target,
+          context: this.context,
           pluginList: {},
           theme: this.option.theme,
           defaultPosition: {
@@ -284,7 +296,7 @@ export class IstanbulWidget {
   }
 
   public static get instance() {
-    return window.__ISTANBUL_WIDGET_INSTANCE
+    return window.__istanbul_widget__
   }
 
   public static set instance(value: IstanbulWidget | undefined) {
@@ -294,7 +306,7 @@ export class IstanbulWidget {
       )
       return
     }
-    window.__ISTANBUL_WIDGET_INSTANCE = value
+    window.__istanbul_widget__ = value
   }
 }
 
@@ -303,5 +315,3 @@ IstanbulWidget.IstanbulWidgetReactPlugin = IstanbulWidgetReactPlugin
 IstanbulWidget.ReportPlugin = ReportPlugin
 IstanbulWidget.SettingPlugin = SettingPlugin
 IstanbulWidget.ButtonGroupPlugin = ButtonGroupPlugin
-
-IstanbulWidget.Context = Context

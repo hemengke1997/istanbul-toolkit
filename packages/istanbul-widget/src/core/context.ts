@@ -1,7 +1,7 @@
 import { useDebounceFn, useLatest, useSetState } from 'ahooks'
 import { createContainer } from 'context-state'
 import { useToast } from '@/components/ui'
-import { IstanbulWidget } from './core'
+import { IstanbulWidget, type widgetReactContext } from './core'
 import { type IstanbulWidgetOptions, type PluginName, type PluginType, type ReportParams } from './options.interface'
 
 export type InitialWidgetProps = IstanbulWidgetOptions & {
@@ -9,6 +9,10 @@ export type InitialWidgetProps = IstanbulWidgetOptions & {
    * 插件
    */
   pluginList: { [id: string]: PluginType }
+  /**
+   * 上传上下文
+   */
+  context: widgetReactContext
 }
 
 function useContext(initialValues: InitialWidgetProps) {
@@ -29,6 +33,7 @@ function useContext(initialValues: InitialWidgetProps) {
 
   const { toast } = useToast()
 
+  const { context } = initialValues
   const { beforeReport, onReport, afterReport } = initialValues.plugin?.report || {}
 
   /**
@@ -73,6 +78,8 @@ function useContext(initialValues: InitialWidgetProps) {
       trailing: false,
     },
   )
+
+  context.report = reportFn.run
 
   return {
     ...initialValues,

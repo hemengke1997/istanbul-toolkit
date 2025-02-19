@@ -1,7 +1,7 @@
+import { reactdomRender, reactdomUnmount } from '../dom/react-render'
 import React from 'react'
 import { $ } from '@/utils/query'
 import { IstanbulWidget } from '../core'
-import { reactdomRender, reactdomUnmount } from '../dom/react-render'
 import { type PluginType } from '../options.interface'
 import { IstanbulWidgetPlugin } from './istanbul-widget-plugin'
 

@@ -1,6 +1,7 @@
+import { reactdomRender, reactdomUnmount } from './dom/react-render'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import Context, { type InitialWidgetProps } from './context'
-import { reactdomRender, reactdomUnmount } from './dom/react-render'
+import { type widgetReactContext } from './core'
 import IstanbulWidgetComponent from './istanbul-widget'
 import { type PluginType } from './options.interface'
 
@@ -15,6 +16,7 @@ export function render({
   ...coreOptions
 }: {
   target: HTMLElement
+  context: widgetReactContext
 } & InitialWidgetProps): Pick<CompInstance, 'destroy' | 'update'> {
   const container = document.createElement('div')
   container.id = ISTANBUL_WIDGET_ID

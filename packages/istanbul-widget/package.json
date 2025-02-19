@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "1.9.2",
+  "version": "1.10.0",
   "description": "收集 istanbul 代码覆盖率的web小组件",
   "type": "module",
   "keywords": [
@@ -40,6 +40,9 @@
       "default": "./dist/istanbul-widget.lib.cjs"
     },
     "./package.json": "./package.json",
+    "./types": {
+      "types": "./types.d.ts"
+    },
     "./*": "./*"
   },
   "sideEffects": [
