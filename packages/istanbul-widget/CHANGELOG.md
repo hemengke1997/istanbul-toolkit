@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.10.1
+### Patch Changes
+
+- fix low zindex
+
 ## 1.10.0
 ### Minor Changes
 
