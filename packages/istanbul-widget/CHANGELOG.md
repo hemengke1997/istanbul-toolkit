@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.10.2
+### Patch Changes
+
+- fix: ssr
+
 ## 1.10.1
 ### Patch Changes
 

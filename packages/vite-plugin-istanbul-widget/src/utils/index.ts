@@ -30,11 +30,10 @@ export function resolveWidgetScript(config: IstanbulWidgetOptions) {
   debug('istanbul-widget path:', istanbulWidgetPath)
 
   return /*js*/ `import { IstanbulWidget } from "${istanbulWidgetPath}";
-  if(typeof window !== 'undefined' && typeof document !== 'undefined') {
-    const timer = setTimeout(() => {
+  if (typeof window !== 'undefined') {
+    setTimeout(() => {
       new IstanbulWidget(${serialize(config)});
-      clearTimeout(timer);
-    }, 60);
+    }, 200);
   }
 `
 }
