@@ -29,11 +29,11 @@ export function resolveWidgetScript(config: IstanbulWidgetOptions) {
 
   debug('istanbul-widget path:', istanbulWidgetPath)
 
-  return /*js*/ `import { IstanbulWidget } from "${istanbulWidgetPath}";
+  return /*js*/ `import { IstanbulWidget } from '${istanbulWidgetPath}'
   if (typeof window !== 'undefined') {
     setTimeout(() => {
-      new IstanbulWidget(${serialize(config)});
-    }, 200);
+      new IstanbulWidget(${serialize(config)})
+    }, 200)
   }
 `
 }

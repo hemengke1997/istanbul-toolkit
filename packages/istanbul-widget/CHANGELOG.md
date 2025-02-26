@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.10.3
+### Patch Changes
+
+- fix: non react app support
+
 ## 1.10.2
 ### Patch Changes
 

@@ -1,5 +1,12 @@
 # vite-plugin-istanbul-widget
 
+## 1.10.3
+### Patch Changes
+
+- fix: non react app support
+- Updated dependencies
+  - istanbul-widget@1.10.3
+
 ## 1.10.2
 ### Patch Changes
 
