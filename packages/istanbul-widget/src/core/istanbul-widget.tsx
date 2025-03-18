@@ -4,10 +4,10 @@ import { Toaster } from '@/components/ui/toaster'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import { $ } from '@/utils/query'
 import Draggable from './components/draggable'
-import Context from './context'
+import { Store } from './store'
 
 function IstanbulWidgetComponent() {
-  const { theme, pluginList } = Context.usePicker(['theme', 'pluginList'])
+  const { theme, pluginList } = Store.useStore(['theme', 'pluginList'])
 
   const [popoverOpen, setPopoverOpen] = useState(false)
 

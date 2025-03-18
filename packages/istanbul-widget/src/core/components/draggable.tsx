@@ -1,11 +1,11 @@
 import { useDraggable } from '@neodrag/react'
 import { memo, type PropsWithChildren, useEffect, useRef } from 'react'
 import { useLocalStorageState, useMemoizedFn } from 'ahooks'
-import { max } from 'lodash-es'
+import { max } from 'es-toolkit/compat'
 import { cn } from '@/components/utils'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
-import Context from '../context'
 import { type Position } from '../options.interface'
+import { Store } from '../store'
 
 type DraggableProps = PropsWithChildren<{
   className?: string
@@ -23,7 +23,7 @@ const bounds = {
 function Draggable(props: DraggableProps) {
   const { children, className } = props
 
-  const { defaultPosition, float } = Context.usePicker(['defaultPosition', 'float'])
+  const { defaultPosition, float } = Store.useStore(['defaultPosition', 'float'])
 
   const handleRef = useRef<HTMLDivElement>(null)
   const draggableRef = useRef<HTMLDivElement>(null)

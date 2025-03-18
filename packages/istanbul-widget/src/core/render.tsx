@@ -1,9 +1,9 @@
 import { reactdomRender, reactdomUnmount } from './dom/react-render'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
-import Context, { type InitialWidgetProps } from './context'
 import { type widgetReactContext } from './core'
 import IstanbulWidgetComponent from './istanbul-widget'
 import { type PluginType } from './options.interface'
+import { type InitialWidgetProps, Store } from './store'
 
 export type CompInstance = {
   destroy: () => void
@@ -23,9 +23,9 @@ export function render({
   target.appendChild(container)
 
   reactdomRender(
-    <Context.Provider value={coreOptions}>
+    <Store.Provider {...coreOptions}>
       <IstanbulWidgetComponent />
-    </Context.Provider>,
+    </Store.Provider>,
     {
       container,
       sync: true,
@@ -38,14 +38,9 @@ export function render({
     },
     async update(newProps) {
       reactdomRender(
-        <Context.Provider
-          value={{
-            ...coreOptions,
-            ...newProps,
-          }}
-        >
+        <Store.Provider {...coreOptions} {...newProps}>
           <IstanbulWidgetComponent />
-        </Context.Provider>,
+        </Store.Provider>,
         {
           container,
           sync: true,

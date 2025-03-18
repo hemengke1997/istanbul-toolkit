@@ -1,4 +1,4 @@
-import { isArray, set } from 'lodash-es'
+import { isArray, set } from 'es-toolkit/compat'
 import glob from 'tiny-glob'
 import { normalizePath, type Plugin, type ResolvedConfig } from 'vite'
 import istanbul from 'vite-plugin-istanbul'

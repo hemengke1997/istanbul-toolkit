@@ -1,9 +1,9 @@
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
-import Context from '../../core/context'
+import { Store } from '@/core/store'
 
 function Report() {
-  const { plugin, reportFn } = Context.usePicker(['plugin', 'reportFn'])
+  const { plugin, reportFn } = Store.useStore(['plugin', 'reportFn'])
   const { report } = plugin || {}
 
   return (

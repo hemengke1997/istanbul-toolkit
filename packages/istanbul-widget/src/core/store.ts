@@ -1,5 +1,5 @@
 import { useDebounceFn, useLatest, useSetState } from 'ahooks'
-import { createContainer } from 'context-state'
+import { createStore } from 'context-state'
 import { useToast } from '@/components/ui'
 import { IstanbulWidget, type widgetReactContext } from './core'
 import { type IstanbulWidgetOptions, type PluginName, type PluginType, type ReportParams } from './options.interface'
@@ -15,7 +15,7 @@ export type InitialWidgetProps = IstanbulWidgetOptions & {
   context: widgetReactContext
 }
 
-function useContext(initialValues: InitialWidgetProps) {
+function useGlobalStore(initialValues: InitialWidgetProps) {
   /* ------------------- 上报 ------------------- */
   type Action = {
     id: string
@@ -91,6 +91,6 @@ function useContext(initialValues: InitialWidgetProps) {
   }
 }
 
-const Context = createContainer(useContext)
+const Store = createStore(useGlobalStore)
 
-export default Context
+export { Store }

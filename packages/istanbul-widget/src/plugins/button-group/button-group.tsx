@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
-import Context from '@/core/context'
 import { type ButtonGroupOptions } from '@/core/options.interface'
+import { Store } from '@/core/store'
 
 export type ButtonGroupProps = {
   propList: ButtonGroupOptions | undefined
@@ -10,7 +10,7 @@ export type ButtonGroupProps = {
 function ButtonGroup(props: ButtonGroupProps) {
   const { propList } = props
 
-  const { reportFnparams } = Context.usePicker(['reportFnparams'])
+  const { reportFnparams } = Store.useStore(['reportFnparams'])
 
   if (!propList?.length) return null
 

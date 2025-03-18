@@ -1,6 +1,7 @@
 import { IstanbulWidgetReactPlugin } from './plugin/istanbul-widget-react-plugin'
 import { type ConsolaInstance, createConsola, LogLevels } from 'consola/browser'
-import { isArray, isFunction, isObject, merge, set } from 'lodash-es'
+import { isFunction, merge } from 'es-toolkit'
+import { isArray, isObject, set } from 'es-toolkit/compat'
 import { ButtonGroupPlugin } from '@/plugins/button-group/button-group-plugin'
 import { ReportPlugin } from '@/plugins/report/report-plugin'
 import { SettingPlugin } from '@/plugins/setting/setting-plugin'

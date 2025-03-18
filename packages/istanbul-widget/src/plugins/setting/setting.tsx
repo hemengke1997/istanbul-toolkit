@@ -1,6 +1,7 @@
 import { memo, useEffect, useMemo, useRef, useState } from 'react'
 import { useLocalStorageState, useMemoizedFn, useSetState, useUpdateEffect } from 'ahooks'
-import { isObject, remove, toNumber } from 'lodash-es'
+import { remove } from 'es-toolkit'
+import { isObject, toNumber } from 'es-toolkit/compat'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,7 +20,7 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { useToast } from '@/components/ui/use-toast'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
-import Context from '../../core/context'
+import { Store } from '../../core/store'
 
 type Config = {
   reporter: string
@@ -33,7 +34,7 @@ const default_interval = 60
 const default_min_interval = 60
 
 function Settings() {
-  const { plugin, reportFn, setReportActions, setReportFnParams } = Context.usePicker([
+  const { plugin, reportFn, setReportActions, setReportFnParams } = Store.useStore([
     'plugin',
     'reportFn',
     'setReportActions',

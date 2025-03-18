@@ -1,5 +1,6 @@
+import { isFunction } from 'es-toolkit'
+import { uniqueId } from 'es-toolkit/compat'
 import { EventEmitter } from 'eventemitter3'
-import { isFunction, uniqueId } from 'lodash-es'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
 import { type IstanbulWidget } from '../core'
 

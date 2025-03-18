@@ -1,4 +1,4 @@
-import { isArray } from 'lodash-es'
+import { isArray } from 'es-toolkit/compat'
 
 const $ = {
   one(selector: string, contextElement: Element | Document = document) {
