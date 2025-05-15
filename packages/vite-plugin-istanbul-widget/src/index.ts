@@ -16,6 +16,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     istanbulWidgetConfig = {},
     checkProd,
     entry,
+    delay,
   } = resolveOptions(opts)
 
   if (!checkPluginEnabled(enabled, checkProd)) return
@@ -76,10 +77,13 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
       async load(id) {
         switch (id) {
           case resolvedVirtualModuleId(runtimeId): {
-            return {
-              code: resolveWidgetScript(istanbulWidgetConfig || {}),
-              map: null,
+            if (istanbulWidgetConfig !== false) {
+              return {
+                code: resolveWidgetScript(istanbulWidgetConfig || {}, delay),
+                map: null,
+              }
             }
+            break
           }
           default:
             break

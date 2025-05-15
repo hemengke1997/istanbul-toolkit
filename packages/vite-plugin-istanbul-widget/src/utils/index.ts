@@ -20,7 +20,7 @@ export async function getCommitId() {
   }
 }
 
-export function resolveWidgetScript(config: IstanbulWidgetOptions) {
+export function resolveWidgetScript(config: IstanbulWidgetOptions, delay: number) {
   const require = createRequire(import.meta.url)
 
   const istanbulWidgetPath = normalizePath(
@@ -33,7 +33,7 @@ export function resolveWidgetScript(config: IstanbulWidgetOptions) {
   if (typeof window !== 'undefined') {
     setTimeout(() => {
       new IstanbulWidget(${serialize(config)})
-    }, 200)
+    }, ${delay})
   }
 `
 }
@@ -55,6 +55,7 @@ export function resolveOptions(opts: VitePluginIstanbulWidgetOptions) {
     istanbulPluginConfig: {},
     istanbulWidgetConfig: {},
     checkProd: true,
+    delay: 200,
   }
   return {
     ...defaultOptions,

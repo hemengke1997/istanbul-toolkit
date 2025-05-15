@@ -1,5 +1,10 @@
 # vite-plugin-istanbul-widget
 
+## 1.11.0
+### Minor Changes
+
+- 支持自定义控件初始化延迟
+
 ## 1.10.3
 ### Patch Changes
 
