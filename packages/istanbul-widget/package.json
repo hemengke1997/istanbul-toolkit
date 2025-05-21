@@ -1,6 +1,6 @@
 {
   "name": "istanbul-widget",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "收集 istanbul 代码覆盖率的web小组件",
   "type": "module",
   "keywords": [
@@ -86,7 +86,6 @@
     "class-variance-authority": "^0.7.1",
     "consola": "^3.4.2",
     "context-state": "^4.0.1",
-    "eventemitter3": "^5.0.1",
     "tw-clsx": "^1.0.0"
   },
   "devDependencies": {
@@ -99,6 +98,7 @@
     "ahooks": "^3.8.5",
     "autoprefixer": "^10.4.21",
     "es-toolkit": "^1.38.0",
+    "eventemitter3": "^5.0.1",
     "npm-run-all2": "^6.2.6",
     "postcss": "^8.5.3",
     "react": "^19.1.0",

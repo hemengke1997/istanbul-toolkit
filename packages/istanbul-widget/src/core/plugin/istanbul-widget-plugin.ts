@@ -1,4 +1,4 @@
-import { type FunctionComponentElement } from 'react'
+import { type ReactElement } from 'react'
 import { isFunction } from 'es-toolkit'
 import { uniqueId } from 'es-toolkit/compat'
 import { EventEmitter } from 'eventemitter3'
@@ -8,7 +8,7 @@ import { type IstanbulWidget } from '../core'
 type Events = {
   init: []
   ready: []
-  render: [callback: (res: { el: HTMLElement | FunctionComponentElement<any> | undefined }) => void | Promise<void>]
+  render: [callback: (res: { el: HTMLElement | ReactElement | undefined }) => void | Promise<void>]
 }
 
 export class IstanbulWidgetPlugin {

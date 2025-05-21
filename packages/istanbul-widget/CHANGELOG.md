@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.11.1
+### Patch Changes
+
+- fix: eventEmitter3
+
 ## 1.11.0
 ### Minor Changes
 

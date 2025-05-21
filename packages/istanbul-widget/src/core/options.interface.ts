@@ -1,4 +1,4 @@
-import { type FunctionComponentElement } from 'react'
+import { type ReactElement } from 'react'
 import { type ButtonProps } from '@/components/ui/button'
 
 export interface IstanbulWidgetOptions {
@@ -152,7 +152,7 @@ export type PluginType = {
   id: string
   name: string
   domID: string
-  El?: HTMLElement | FunctionComponentElement<any>
+  El?: HTMLElement | ReactElement
 }
 
 export type PluginName = Exclude<IstanbulWidgetOptions['defaultPlugins'], undefined>[number]
