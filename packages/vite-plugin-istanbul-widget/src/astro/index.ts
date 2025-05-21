@@ -6,7 +6,7 @@ import { checkPluginEnabled, ensureArray, resolveOptions, resolveWidgetScript } 
 import { debug } from '../utils/debug'
 
 export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
-  const { enabled, istanbulPluginConfig, istanbulWidgetConfig, checkProd, delay } = resolveOptions(opts)
+  const { enabled, istanbulPluginConfig, istanbulWidgetConfig, checkProd, autoInjectWidget } = resolveOptions(opts)
 
   if (!checkPluginEnabled(enabled, checkProd)) return
 
@@ -38,7 +38,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
                     if (id === 'astro:scripts/page.js') {
                       debug('istanbulWidget transform:', id)
 
-                      const widget = resolveWidgetScript(istanbulWidgetConfig, delay)
+                      const widget = resolveWidgetScript(istanbulWidgetConfig, autoInjectWidget)
 
                       code = /*js*/ `${widget}
                       \n${code}`

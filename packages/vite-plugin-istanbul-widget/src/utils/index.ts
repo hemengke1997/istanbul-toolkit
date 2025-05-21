@@ -20,7 +20,7 @@ export async function getCommitId() {
   }
 }
 
-export function resolveWidgetScript(config: IstanbulWidgetOptions, delay: number) {
+export function resolveWidgetScript(config: IstanbulWidgetOptions, autoInjectWidget: boolean) {
   const require = createRequire(import.meta.url)
 
   const istanbulWidgetPath = normalizePath(
@@ -31,9 +31,13 @@ export function resolveWidgetScript(config: IstanbulWidgetOptions, delay: number
 
   return /*js*/ `import { IstanbulWidget } from '${istanbulWidgetPath}'
   if (typeof window !== 'undefined') {
-    setTimeout(() => {
-      new IstanbulWidget(${serialize(config)})
-    }, ${delay})
+    if(${autoInjectWidget}) {
+      setTimeout(() => {
+        new IstanbulWidget(${serialize(config)})
+      }, 60)
+    } else {
+      window.__init_istanbul_widget__ = () => new IstanbulWidget(${serialize(config)}) 
+    }
   }
 `
 }
@@ -55,7 +59,7 @@ export function resolveOptions(opts: VitePluginIstanbulWidgetOptions) {
     istanbulPluginConfig: {},
     istanbulWidgetConfig: {},
     checkProd: true,
-    delay: 200,
+    autoInjectWidget: true,
   }
   return {
     ...defaultOptions,

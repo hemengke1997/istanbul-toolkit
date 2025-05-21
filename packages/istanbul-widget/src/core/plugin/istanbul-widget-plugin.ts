@@ -1,3 +1,4 @@
+import { type FunctionComponentElement } from 'react'
 import { isFunction } from 'es-toolkit'
 import { uniqueId } from 'es-toolkit/compat'
 import { EventEmitter } from 'eventemitter3'
@@ -7,7 +8,7 @@ import { type IstanbulWidget } from '../core'
 type Events = {
   init: []
   ready: []
-  render: [callback: (res: { htmlElement: HTMLElement | undefined }) => void | Promise<void>]
+  render: [callback: (res: { el: HTMLElement | FunctionComponentElement<any> | undefined }) => void | Promise<void>]
 }
 
 export class IstanbulWidgetPlugin {
@@ -98,7 +99,7 @@ export class IstanbulWidgetPlugin {
 
   public onRender() {
     this.on('render', async (callback) => {
-      await callback({ htmlElement: this.htmlElement })
+      await callback({ el: this.htmlElement })
     })
   }
 

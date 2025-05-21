@@ -19,6 +19,7 @@ function visualizer() {
 // https://vitejs.dev/config/
 export default defineConfig((env) => {
   return {
+    base: '/istanbul-widget/',
     plugins: [react(), visualizer()],
     resolve: {
       alias: [{ find: '@', replacement: path.resolve(__dirname, './src') }],

@@ -1,7 +1,4 @@
-import { reactdomRender, reactdomUnmount } from '../dom/react-render'
 import React from 'react'
-import { $ } from '@/utils/query'
-import { IstanbulWidget } from '../core'
 import { type PluginType } from '../options.interface'
 import { IstanbulWidgetPlugin } from './istanbul-widget-plugin'
 
@@ -34,35 +31,15 @@ export class IstanbulWidgetReactPlugin<
   }
 
   onRender() {
-    this.on('render', () => {
-      const el = document.createElement('div')
+    this.on('render', async (callback) => {
+      const el = React.createElement(this.Component, {
+        ...((this.initialProps || {}) as T),
+        id: this.id,
+        name: this.name,
+        domID: this.domID,
+      })
 
-      this._root = el
-
-      reactdomRender(
-        React.createElement(this.Component, {
-          ...((this.initialProps || {}) as T),
-          id: this.id,
-          name: this.name,
-          domID: this.domID,
-        }),
-        {
-          container: el,
-        },
-      )
-
-      const target = $.queryEl(`#${this.domID}`)
-      target.appendChild(el)
-
-      // react式插入dom，不需要回调
+      await callback({ el })
     })
-  }
-
-  destory() {
-    if (!this._root) {
-      IstanbulWidget.logger.warn('[istanbul-widget]: init component first')
-    } else {
-      reactdomUnmount(this._root)
-    }
   }
 }

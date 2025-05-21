@@ -12,15 +12,15 @@
   },
   "dependencies": {
     "astro": "3.1.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@astrojs/node": "6.0.0",
     "@astrojs/react": "3.0.2",
     "@minko-fe/tsconfig": "latest",
-    "@types/react": "^18.3.8",
-    "typescript": "^5.6.2",
+    "@types/react": "^18.3.21",
+    "typescript": "^5.8.3",
     "vite-plugin-istanbul-widget": "workspace:*"
   }
 }

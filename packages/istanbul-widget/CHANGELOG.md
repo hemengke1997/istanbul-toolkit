@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.11.0
+### Minor Changes
+
+- update
+
 ## 1.10.3
 ### Patch Changes
 

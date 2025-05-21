@@ -16,7 +16,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     istanbulWidgetConfig = {},
     checkProd,
     entry,
-    delay,
+    autoInjectWidget,
   } = resolveOptions(opts)
 
   if (!checkPluginEnabled(enabled, checkProd)) return
@@ -79,7 +79,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
           case resolvedVirtualModuleId(runtimeId): {
             if (istanbulWidgetConfig !== false) {
               return {
-                code: resolveWidgetScript(istanbulWidgetConfig || {}, delay),
+                code: resolveWidgetScript(istanbulWidgetConfig || {}, autoInjectWidget),
                 map: null,
               }
             }

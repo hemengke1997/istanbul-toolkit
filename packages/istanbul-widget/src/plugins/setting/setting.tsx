@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocalStorageState, useMemoizedFn, useSetState, useUpdateEffect } from 'ahooks'
 import { remove } from 'es-toolkit'
 import { isObject, toNumber } from 'es-toolkit/compat'
@@ -153,7 +153,7 @@ function Settings() {
     }
   }, [staticConfig])
 
-  const dialogOpenTimer = useRef<number>()
+  const dialogOpenTimer = useRef<number>(null as unknown as number)
   useUpdateEffect(() => {
     if (!dialogOpen) {
       dialogOpenTimer.current = window.setTimeout(() => {
@@ -278,4 +278,4 @@ function Settings() {
   )
 }
 
-export default memo(Settings)
+export default Settings

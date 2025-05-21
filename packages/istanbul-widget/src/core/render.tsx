@@ -20,6 +20,7 @@ export function render({
 } & InitialWidgetProps): Pick<CompInstance, 'destroy' | 'update'> {
   const container = document.createElement('div')
   container.id = ISTANBUL_WIDGET_ID
+
   target.appendChild(container)
 
   reactdomRender(

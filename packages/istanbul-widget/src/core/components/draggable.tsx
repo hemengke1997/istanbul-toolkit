@@ -1,5 +1,5 @@
 import { useDraggable } from '@neodrag/react'
-import { memo, type PropsWithChildren, useEffect, useRef } from 'react'
+import { type PropsWithChildren, useEffect, useRef } from 'react'
 import { useLocalStorageState, useMemoizedFn } from 'ahooks'
 import { max } from 'es-toolkit/compat'
 import { cn } from '@/components/utils'
@@ -25,8 +25,8 @@ function Draggable(props: DraggableProps) {
 
   const { defaultPosition, float } = Store.useStore(['defaultPosition', 'float'])
 
-  const handleRef = useRef<HTMLDivElement>(null)
-  const draggableRef = useRef<HTMLDivElement>(null)
+  const handleRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
+  const draggableRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
 
   const [position, setPosition] = useLocalStorageState(`${ISTANBUL_WIDGET_ID}_position`, {
     defaultValue: {
@@ -125,4 +125,4 @@ function Draggable(props: DraggableProps) {
   )
 }
 
-export default memo(Draggable)
+export default Draggable

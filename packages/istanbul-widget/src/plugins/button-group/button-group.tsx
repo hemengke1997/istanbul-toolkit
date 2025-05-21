@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 import { type ButtonGroupOptions } from '@/core/options.interface'
 import { Store } from '@/core/store'
@@ -33,4 +32,4 @@ function ButtonGroup(props: ButtonGroupProps) {
   )
 }
 
-export default memo(ButtonGroup)
+export default ButtonGroup

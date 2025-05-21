@@ -29,7 +29,7 @@ const lib = (option: Options): Options => ({
         },
       },
   outExtension: ({ format }) => ({ js: format === 'esm' ? '.js' : '.cjs' }),
-  noExternal: Object.keys(pkg.dependencies),
+  external: option.watch ? ['react', 'react-dom'] : [],
   splitting: false,
   minify: false,
   injectStyle: true,

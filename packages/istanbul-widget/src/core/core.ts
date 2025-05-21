@@ -216,9 +216,9 @@ export class IstanbulWidget {
         // start init
         plugin.emit('init')
         // render
-        plugin.emit('render', ({ htmlElement }) => {
-          if (htmlElement) {
-            this.compInstance.pluginList[plugin.id].htmlElement = htmlElement
+        plugin.emit('render', ({ el }) => {
+          if (el) {
+            this.compInstance.pluginList[plugin.id].El = el
             this.compInstance.update({ pluginList: this.compInstance.pluginList })
           }
         })

@@ -1,4 +1,4 @@
-import { memo, useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Toaster } from '@/components/ui/toaster'
 import { ISTANBUL_WIDGET_ID } from '@/utils/const'
@@ -55,8 +55,14 @@ function IstanbulWidgetComponent() {
                   <PopoverClose asChild key={plugin.id}>
                     <div
                       id={plugin.domID}
-                      ref={(el) => el && plugin.htmlElement && el.appendChild(plugin.htmlElement)}
-                    />
+                      ref={(el) => {
+                        if (el && plugin.El instanceof HTMLElement) {
+                          el.appendChild(plugin.El)
+                        }
+                      }}
+                    >
+                      {React.isValidElement(plugin.El) && plugin.El}
+                    </div>
                   </PopoverClose>
                 )
               })}
@@ -70,4 +76,4 @@ function IstanbulWidgetComponent() {
   )
 }
 
-export default memo(IstanbulWidgetComponent)
+export default IstanbulWidgetComponent

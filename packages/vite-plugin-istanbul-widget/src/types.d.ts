@@ -38,13 +38,13 @@ export type VitePluginIstanbulWidgetOptions = {
    */
   istanbulWidgetConfig?: IstanbulWidgetOptions | false
   /**
-   * istanbul-widget 初始化延迟 (ms)
-   *
-   * @default 200
+   * 是否自动注入 istanbul-widget 控件
+   * @default true
    */
-  delay?: number
+  autoInjectWidget?: boolean
 }
 
 declare global {
   var __GIT_COMMIT_ID__: string
+  var __init_istanbul_widget__: (() => void) | undefined
 }

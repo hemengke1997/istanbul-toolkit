@@ -35,6 +35,7 @@ export default defineConfig(() => ({
         },
       },
       fullReport: true,
+      autoInjectWidget: false,
     }),
   ],
   build: {

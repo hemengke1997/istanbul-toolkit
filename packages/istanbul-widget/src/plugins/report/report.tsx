@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Store } from '@/core/store'
 
@@ -18,4 +17,4 @@ function Report() {
   )
 }
 
-export default memo(Report)
+export default Report
