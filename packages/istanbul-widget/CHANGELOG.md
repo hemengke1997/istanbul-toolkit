@@ -1,5 +1,10 @@
 # istanbul-widget
 
+## 1.11.2
+### Patch Changes
+
+- fix wrong widget position
+
 ## 1.11.1
 ### Patch Changes
 

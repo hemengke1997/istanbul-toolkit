@@ -13,17 +13,17 @@ type DraggableProps = PropsWithChildren<{
 
 const IOS_SAFE_AREA = 20
 
-const bounds = {
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: IOS_SAFE_AREA,
-}
-
 function Draggable(props: DraggableProps) {
   const { children, className } = props
 
   const { defaultPosition, float } = Store.useStore(['defaultPosition', 'float'])
+
+  const bounds = {
+    top: IOS_SAFE_AREA,
+    left: float ? float.offsetX || 0 : 0,
+    right: float ? float.offsetX || 0 : 0,
+    bottom: IOS_SAFE_AREA,
+  }
 
   const handleRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
   const draggableRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
@@ -38,7 +38,6 @@ function Draggable(props: DraggableProps) {
   const { isDragging } = useDraggable(draggableRef, {
     position,
     handle: handleRef,
-
     onDrag: (data) => {
       const { offsetX, offsetY } = data
       setPosition({ x: offsetX, y: offsetY })
@@ -54,6 +53,7 @@ function Draggable(props: DraggableProps) {
       drag: false,
       dragEnd: true,
     },
+    transform: ({ offsetX, offsetY }) => `translate(${offsetX}px, ${offsetY}px)`,
   })
 
   const getDocSize = useMemoizedFn(() => {
@@ -70,15 +70,19 @@ function Draggable(props: DraggableProps) {
       float.offsetX ??= 0
       const { x, y } = position
       const { docWidth } = getDocSize()
-      const w = handleRef.current!.getBoundingClientRect().width
-      let newX = docWidth && x + w / 2 > docWidth / 2 ? docWidth - w - float.offsetX : float.offsetX
-      newX = max([newX, float.offsetX])!
+      const buttonWidth = handleRef.current!.getBoundingClientRect().width
+
+      let newX = x + buttonWidth / 2 <= docWidth / 2 ? float.offsetX : docWidth - buttonWidth - float.offsetX
+
+      newX = max([newX, bounds.left])!
+      newX = Math.min(newX, docWidth - buttonWidth - bounds.right)
+
       const newY = max([y, bounds.top])!
+
       return { x: newX, y: newY }
     }
     return position
   })
-
   const getButtonSafeAreaXY = useMemoizedFn((x: number, y: number) => {
     const { docWidth, docHeight } = getDocSize()
 
