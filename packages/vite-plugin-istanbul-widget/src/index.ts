@@ -30,9 +30,7 @@ export function istanbulWidget(opts: VitePluginIstanbulWidgetOptions): any {
     {
       name: 'vite:plugin-istanbul-widget:pre',
       enforce: 'pre',
-      async config(c) {
-        if (c.build?.ssr) return
-
+      async config() {
         return {
           define: {
             __GIT_COMMIT_ID__: JSON.stringify(await getCommitId()),

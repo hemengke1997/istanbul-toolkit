@@ -185,9 +185,6 @@ importers:
       context-state:
         specifier: ^4.0.1
         version: 4.0.1(react@19.1.0)
-      eventemitter3:
-        specifier: ^5.0.1
-        version: 5.0.1
       tw-clsx:
         specifier: ^1.0.0
         version: 1.0.0
@@ -219,6 +216,9 @@ importers:
       es-toolkit:
         specifier: ^1.38.0
         version: 1.38.0
+      eventemitter3:
+        specifier: ^5.0.1
+        version: 5.0.1
       npm-run-all2:
         specifier: ^6.2.6
         version: 6.2.6
