@@ -1,5 +1,10 @@
 # istanbul-server-middleware
 
+## 1.2.2
+### Patch Changes
+
+- esm模块打包
+
 ## 1.2.1
 ### Patch Changes
 
