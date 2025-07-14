@@ -11,4 +11,5 @@ export const tsup = defineConfig((option) => ({
   clean: !option.watch,
   minify: false,
   sourcemap: false,
+  noExternal: ['execa'],
 }))
